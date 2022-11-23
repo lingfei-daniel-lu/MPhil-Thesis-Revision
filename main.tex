@@ -1,0 +1,1183 @@
+\documentclass[12pt]{article}
+%\renewcommand{\baselinestretch}{1.15}
+\usepackage{natbib,amsmath,amsthm,booktabs,subfigure,anysize,hyperref,graphicx,float,bbm}
+\usepackage[margin=1in]{geometry}
+\bibliographystyle{aea}
+%\bibliographystyle{apalike}
+%\bibliographystyle{aernobold}
+%\bibliographystyle{economet}
+%\marginsize{2cm}{2cm}{2cm}{2cm}
+
+\usepackage{threeparttable}
+\usepackage{array} % for adding extra space between table columns
+\usepackage{booktabs} % for adding extra space between table columns
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{bm}
+\definecolor{dark-red}{rgb}{0.4,0.15,0.15}
+\definecolor{dark-blue}{rgb}{0.15,0.15,0.4}
+\definecolor{medium-blue}{rgb}{0,0,0.5}
+\definecolor{ChadBlue}{rgb}{.1,.1,.5}
+% Chad's colors:
+% See http://web.njit.edu/~kevin/rgb.txt.html for possibilities
+\definecolor{ChadDarkBlue}{rgb}{.1,0,.1}
+\definecolor{ChadBlue}{rgb}{.1,.1,.5}
+\definecolor{ChadRoyal}{rgb}{.2,.2,.8}
+%\definecolor{ChadGreen}{rgb}{0,.35,.1}
+%\definecolor{ChadGreen}{rgb}{0,.5,.25}  % Too bright
+%\definecolor{ChadGreen}{rgb}{0,.4,.2}    % Still too bright
+\definecolor{ChadGreen}{rgb}{0,.4,0}    % Dark Green
+%\definecolor{ChadRed}{rgb}{.8,.1,.2}    % Too bright
+\definecolor{ChadRed}{rgb}{.5,0,.5}  % purple
+\hypersetup{
+    colorlinks, linkcolor={ChadRed},
+    citecolor={ChadBlue}, urlcolor={ChadBlue}
+}
+\newcommand\posscite[1]{\citeauthor{#1}'s (\citeyear{#1})}
+\setlength{\parskip}{0.15cm}
+\newtheorem{proposition}{\color{ChadGreen} Proposition}
+\newtheorem{finding}{\color{ChadGreen} Finding}
+\newtheorem{SF}{\color{ChadGreen} Stylized fact}
+\newtheorem{hyp}{Hypothesis}
+\newtheorem{fact}{Fact}
+\newtheorem{prop}{Proposition}
+\usepackage{caption}
+%\usepackage[font=small,labelfont={color=ChadBlue,bf}]{caption}
+\usepackage[font=small,labelfont=bf]{caption}
+%\usepackage{subcaption}
+%\usepackage{subfloat}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{accents}
+\usepackage{color,soul}
+\usepackage{smartdiagram}
+\usepackage{rotating} % Rotating table
+\usepackage{lscape} % Rotating table
+\usepackage{diagbox}
+\usepackage{ntheorem}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{comment}
+\usepackage{float}
+
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{setspace}  %using this package conflits with footnote hyperlink jump. Using this package makes the footnote links inactive.
+\usepackage[all]{hypcap}        % needed to help hyperlinks direct correctly;
+%\renewcommand{\sfdefault}{ptm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{cor}[theorem]{Corollary}
+\renewcommand{\proof}{\noindent \textbf{Proof.\ }}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{example}{Example}
+\newtheorem{defn}{Definition}
+\renewcommand{\qed}{\hfill\rule{2.1mm}{2.1mm}}
+%\newtheorem{proposition}{\color{ChadGreen} Proposition}
+%\newtheorem{finding}{\color{ChadGreen} Finding}
+%\newtheorem{SF}{\color{ChadGreen} Stylized fact}
+% Fix title, sections, etc.
+\newcommand\fnote[1]{\captionsetup{font=small}\caption*{#1}}
+
+\let\LaTeXtitle\title
+%\renewcommand{\title}[1]{\LaTeXtitle{\color{ChadBlue}{\LARGE #1}}}
+%\renewcommand{\abstractname}{\color{ChadBlue}Abstract}
+%\renewcommand{\figurename}{\color{ChadBlue}Figure}
+%\renewcommand{\tablename}{\color{ChadBlue}Table}
+%\renewcommand{\arraystretch}{1.15} % space between rows
+
+\usepackage{sectsty}
+%\allsectionsfont{\color{blue}\itshape\underline}
+%\sectionfont{\color{ChadBlue}}
+%\subsectionfont{\color{ChadBlue}}
+%\subsubsectionfont{\color{ChadBlue}}
+\usepackage{lscape}
+\graphicspath{{figure/}}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+%\newcommand\YUGE{\fontsize{30}{40}\selectfont}
+
+\linespread{1.2}
+\geometry{a4paper,scale=0.75}
+\setlength{\parskip}{0.5em}
+
+% comments: 
+% add JEL; add Highlights (check JDE requirement)
+% Move literature review into introduction and make it shorter 
+% 
+
+%---------------------------------------------------------------------------------------
+
+\begin{document}
+
+\title{  \Large \textbf{Import Exchange Rate Pass-Through and Credit Constraints: Evidence from China}}
+
+% \author{\large \href{http://yaoli.people.ust.hk/}{Yao Amber Li}\thanks{Li: Department of Economics and Faculty Associate of the Institute for Emerging Market Studies (IEMS), Hong Kong University of Science and Technology,
+% Clear Water Bay, Kowloon, Hong Kong SAR-PRC. Email: \href{mailto:yaoli@ust.hk}{yaoli@ust.hk}.}\\ \large{HKUST}
+% \and  \large \href{https://sites.google.com/site/sryeaple/}{ Stephen R. Yeaple}\thanks{Yeaple: Department of Economics, the Pennsylvania State University, 520 Kern Building, University Park, PA 16801, USA.  Email: \href{mailto:sry3@psu.edu}{sry3@psu.edu}.  }\\ \large{PSU, NBER \& CESifo } 
+% \and \large \href{}{Tengyu Zhao}\thanks{Zhao: Department of Economics, Hong Kong University of Science and Technology, Clear Water Bay, Kowloon, Hong Kong SAR-PRC. Email: \href{mailto:}{tzhaoah@connect.ust.hk}.} \\ \large{HKUST}
+% }
+
+\date{\today }
+
+\maketitle
+
+\begin{abstract}
+Exchange rate fluctuations are a key factor affecting international trade prices. This paper shows the incomplete exchange rate pass-through patterns in China and its linkage with importers' credit constraints. Using Chinese firm-level information and customs transaction records from 2000 to 2007, we find that (1) the average import price pass-through in China is about 35\% to 40\%, far below the near complete 95\% export price pass-through; (2) for firms in financially more vulnerable industries, both import and export exchange rate pass-through tend to be more complete; (3) higher import source diversity of a firm can effectively reduce the import price pass-through and offset the effects of credit constraints.\\
+(\textit{JEL} F14, F31, F41)
+
+\end{abstract}
+
+\section{Introduction}
+
+Why do exchange rate fluctuations not result in price changes of the same magnitude? This is one of the core questions among a set of ``exchange rate disconnect'' puzzles (\cite{obstfeld2000}). As price signals in the international trade market, exchange rates appear less informative for firms than expected. Exchange rate pass-through (ERPT), which describes the elasticity of local price changes to exchange rate fluctuations, varies widely across countries, industries, and time. Existing studies have generated widely varying estimates of the exchange rate pass-through. It is of particular interest to researchers both in the fields of international trade and open macroeconomics to demystifying the ``exchange rate disconnect" puzzles. Understanding the pattern of exchange rate pass-through has important implications for formulating macro policy, including monetary policy, inflation targeting, and the balance of payments.
+
+In this paper, we focus on the role of importers in the determination of exchange rate pass-through and connect it with the importers' financial constraints. This paper tends to fill a gap in the literature by linking both sides of the trade relationship and provides a novel perspective to study the nature of exchange rate disconnect for emerging markets, where firms are more vulnerable to credit constraints due to immature financial markets. In contrast to the conventional framework of exchange rate pass-through where importers are mostly price takers, we contribute to the literature by identifying the importers' implicit sourcing power and comparing their heterogeneous capacity to absorb exchange rate shocks. Throughout the paper, we will compare firm-level import exchange rate pass-through with the export pass-through to reflect the similarities and differences between the two. Going a step further, if a country's export and import exchange rate pass-through patterns differ significantly, this may even affect terms of trade as well as current account imbalances. We believe that micro-evidence from import exchange rate pass-through provides a new perspective to study the "exchange rate disconnect" puzzle.
+
+We estimate the exchange rate pass-through as the price elasticity of import prices concerning real exchange rates using Chinese micro-level data. Specifically, we merge the Chinese Industrial Enterprises datasets with the transaction data from China’s customs and adopted fixed effects panel regressions with first-order differences to capture the changes in product prices and real exchange rates. The average import exchange rate pass-through is between 35\%-40\%, which is obviously less complete compared to the over 95\% export pass-through. Second, we identify the effects of credit constraints on importers' exchange rate pass-through. We use US measures of sectors’ financial vulnerability (\cite{manova-wei-zhang2015}) in our main empirical analysis while use Chinese measures of credit needs (\cite{fan-li-yeaple2015}) for robustness checks. In our baseline results, import prices for firms in sectors with higher financial constraints are more sensitive to exchange rate shocks. Third, we calculate the proxy for an importer's sourcing base and find that an importer with more alternative importing options can resist the effects of credit constraints and absorb exchange rate shocks better.
+
+In the discussion part, we control several potential factors which may affect the import pass-through other than credit constraints. We first estimate the firm-level markup estimated following \cite{dlw2012} and test how markups affect import ERPT. In addition, firms with different market shares also demonstrate heterogeneous price responses to exchange rate changes. We confirm that although firm heterogeneity in those aspects does affect exchange rate pass-through, credit constraints still play a role that cannot be ignored even after we control those firm characteristics. In robustness checks, we further use alternative measures of credit constraints and alternative subsamples. For alternative measures, we compare sector-level credit constraints variables calculated from China data with those from US data. For alternative samples, we divide our subjects into two subsets: two-way traders (simultaneous import and export) and one-way traders (either only import or only export). We check our results using only the two-way traders who account for the vast majority of trading firms and the vast majority of China's trade volume. These results are all significant and robust.
+
+We show that importers‘ credit constraints do influence price-setting patterns in international trade. We provide evidence for three key findings: (1) the average import exchange rate pass-through level in China is significantly less complete than the export one; (2) financial constraints will increase both of them to be more complete, and (3) importers who import a certain product from more sources have a less complete pass-through. In other words, financially constrained importers will absorb more price fluctuations caused by exchange rate changes, while financially constrained exporters pass through more exchange rate changes to prices, both compared to those unconstrained firms. This reflects that binding financial constraints will lead to not only narrow margins to adopt pricing-to-market strategies for the sellers but also limited sourcing power for the buyers. Importers with a wider sourcing base could get more access to alternative options and avoid bargaining disadvantages in exchange rate fluctuations to some extent.
+
+This paper contributes to three strands of literature. First, this paper contributes to a wide literature on exchange rate disconnect (\cite{obstfeld2000}), particularly on trade pricing response to exchange rate changes (\cite{campa2005}). Recently, more studies link the exchange rate pass-through to disaggregated firm-level characteristics. \cite{bmm2012} find that exporters with better performance react to a exchange rate shock by adjusting more their markup and less their export volume. \cite{aik2014} find that firms with higher import intensity and larger market share have less complete price pass-through. Many follow-up works find that exporters' productivity (\cite{lmx2015}) and product quality (\cite{chen2016};\cite{auer2018}), as well as their imported inputs (\cite{wang-yu2021}), market shares (\cite{auer2016}; \cite{devereux2017}) and information access (\cite{garetto2016}), will all affect the export exchange rate pass-through. 
+
+For Chinese exchange rate pass-through, \cite{lmx2015} find nearly complete exchange rate pass-through into RMB price for Chinese exporters, which means that their domestic currency price response is very weak. Yet the role of importers in determining exchange rate pass-through remains a novel field to study. Our contribution is to provides micro-level evidence of Chinese importers' heterogeneity in response to exchange rate shocks. This provides a novel perspective to study exchange rate disconnect in emerging economies, where firms are financially more vulnerable due to immature financial markets.
+
+Second, this paper relates to the literature on credit constraints and trade (\cite{kroszner2007}, \cite{manova2013}, \cite{chaney2016}, \cite{feenstra2015}, \cite{manova-wei-zhang2015}, \cite{fan-lai-li2015}). We study the influence of credit constraints on firms’ response in price setting to exchange rate fluctuations. The most relevant study to this paper is Strasser (2013), which discusses the relationship between exchange rate pass-through and credit constraints. Strasser (2013) first uses a firm-level survey to show that financially constrained exporters pass exchange rate shocks to prices more completely. Subject to variable markups, firms under borrowing constraints must keep the pricing-to-market (PTM) strategy to a limited extent because they have less space to adjust their profit margin. 
+
+Two recent articles provide Chinese evidence on credit constraints and exchange rate elasticity of trade (\cite{dai2021} and \cite{xu-guo2021}). Both studies verify the conclusion of \cite{strasser2013} that more financially constrained firms' exporting activities are more sensitive to exchange rate changes. \cite{dai2021} focus more on aggregate export behaviors rather than bilateral trade elasticity. \cite{xu-guo2021} imply that variable markups cannot fully explain the effect of credit constraints on exchange rate elasticity. In this paper, we contribute to this literature by focusing on how importers under varying degrees of credit constraints have heterogeneous capacity to absorb exchange rate shocks.
+
+Third, we contribute to the literature on import sourcing (?) 
+
+The remainder of the paper is organized as follows. Section 2 presents a more detailed literature review. Section 3 describes the data we used. Section 4 introduces our empirical strategy and measures of key variables. Section 5 shows the main empirical results about import exchange rate pass-through and credit constraints. Section 6 discusses other factors affecting import exchange rate pass-through and directions for future research. Section 7 examines the robustness of the results. Section 7 concludes.
+
+\section{Data}
+
+We conduct our empirical research using various data sources: (1) detailed transaction data provided by China’s General Administration of Customs, (2) the annual surveys from Chinese Industrial Enterprises provided by the National Bureau of Statistics of China, and (3) country-level macro data from Penn World Table 10.0. In this section, we will introduce the basic information of these datasets.
+
+\subsection{Customs Transaction Records}
+
+The first dataset we use is the transaction level records from the General Administration of Customs of China (GACC) as in \cite{manova-zhang2012}. The whole sample period ranges from 2000 to 2011. This dataset includes the most comprehensive information on all Chinese trade transactions including import and export values (denominated in US dollars), quantities, units, product names and codes, source and destination countries, and type of enterprises (e.g., state-owned, private, foreign-invested, and joint ventures), etc. Using these high-frequency trade records, we are able to compute firm–product unit values to study export or import price responses to exchange rate shocks. 
+
+We separate the full records into export and import parts. In our analysis, each unique transaction refers to a firm-product-country-year consolidation. The categories of products in China's customs trade records are coded according to the Harmonized Coding and Description System (Harmonized System or HS) from World Customs Organization (WCO). The original data is subject to HS 8-digit classification. Since there are two major revisions of the HS system in 2002 and 2007, we aggregate HS8 product-level information to the HS6 level and then use conversion tables from the United Nations Trade Statistics to convert HS 2007 and HS 2002 codes into the older version of HS 1996 as in \cite{fan-li-yeaple2015}.
+
+For later empirical studies, we drop unwanted observations referring to the standard of \cite{lmx2015}: (1) products with inconsistent missing information of unit or quantity; (2) special product categories such as arms (HS2=93), antiques (HS2=97), and special categories (HS2=98 and 99); (3) transactions existing for only one year without any change over time. Those outliers only make up a very small part of observations. We will refer to this sample as the "long sample" in subsequent analyses.
+
+\subsection{Chinese Firm-level Data}
+
+Our source of Chinese firm-level production and financial information is the Chinese Industrial Enterprises (CIE hereafter) database from the National Bureau of Statistics of China (NBSC). This database covers all state-owned enterprises and above-scale firms with annual sales of more than 5 million RMB. The dataset covers the period from 1999 to 2007. The number of firms each year ranges from about 130,000 in 1999 to 300,000 in 2007. The data provide details about firms’ identification code, ownership, industry type, and about 80 other variables in the balance sheet. The company information variables we use in this project include the number of employees, total wage payments, the value of fixed assets, sales income, total operation inputs, etc.
+
+To merge this firm-level survey data with customs records, we follow the standard procedure to match the identification codes based on the contact information of firms as in \cite{fan-li-yeaple2015}. Manufacturing firms participating in international trade in the matched sample are uniquely identified by the FRDM codes and year. We drop unsatisfactory observations following the criteria of \cite{bkl2021}. This merged sample contains the overlapping time of the two datasets, i.e. from 2000 to 2007, and all indicators are in annual terms. We will refer to this combined dataset as the "matched sample" in the rest of this paper.
+
+The summary statistics of the whole customs records, the firm information dataset, and the final matched sample are shown in panels A, B, and C in Table \ref{tab3.1}, respectively.
+
+\begin{table}[htbp]
+        \centering
+	\caption{Summary Statistics for Main Samples}
+	\label{tab3.1}
+	\resizebox{1.1\textwidth}{!}{
+	\begin{threeparttable}
+	\begin{tabular}{lcccccc}
+		\toprule
+            & \multicolumn{1}{l}{\#observations} & \multicolumn{1}{l}{Mean} & \multicolumn{1}{l}{Median} & \multicolumn{1}{l}{Std. dev} & \multicolumn{1}{l}{P10} & \multicolumn{1}{l}{P90} \\
+		\textbf{Panel A: Customs records} &       &       &       &       &       &  \\
+		Export Value (USD) & 18,581,221 & 424868 & 21692 & 1.04E+07 & 888   & 423436 \\
+		Export Price (RMB) & 18,581,221 & 22007.45 & 30.10417 & 2229173 & 4.564519 & 556.4724 \\
+		Annual Export Price Change & 11,400,795 & 0.025908 & 0.005982 & 0.665267 & -0.50011 & 0.5709025 \\
+		Import Value (USD) & 14,172,315 & 439283 & 7721  & 1.98E+07 & 214   & 292720 \\
+		Import Price (RMB) & 14,172,315 & 49519.78 & 111.0406 & 1411944 & 5.159389 & 10247.12 \\
+		Annual Import Price Change  & 8,580,234 & 0.023625 & -0.00207 & 1.017117 & -0.8523061 & 0.9388119 \\
+		&       &       &       &       &       &  \\
+		\midrule
+		\textbf{Panel B: Firm information} &       &       &       &       &       &  \\
+		Sales Income (thousand RMB) & 1,745,511 & 78826.33 & 17630 & 714350.5 & 5318  & 111319 \\
+		Employment & 1,745,511 & 262.9454 & 108   & 964.6382 & 30    & 500 \\
+		Fixed Asset (thousand RMB) & 1,745,511 & 27437.2 & 4043  & 312024.8 & 573   & 36968 \\
+		Operation Input (thousand RMB) & 1,745,511 & 61682.99 & 13971 & 562923.1 & 4035  & 168810 \\
+		Current wage payable (thousand RMB) & 1,745,511 & 3730.157 & 1121  & 28699.16 & 266   & 6300 \\
+		&       &       &       &       &       &  \\
+		\midrule
+		\textbf{Panel C: Matched sample} &       &       &       &       &       &  \\
+		Export Value (USD) & 3,168,876 & 880187.2 & 33693 & 4.66E+07 & 1376  & 712735 \\
+		Export Price (RMB) & 3,168,876 & 18326.68 & 28.31701 & 1893237 & 4.995613 & 398.6719 \\
+		Annual Export Price Change & 1,829,966 & 0.023539 & 0.006083 & 0.682097 & -0.48284 & 0.550056 \\
+		Import Value (USD) & 3,280,928 & 1120261 & 11139 & 2.36E+07 & 266   & 529584 \\
+		Import Price (RMB) & 3,280,928 & 29955.95 & 76.56041 & 525990.1 & 4.966081 & 5614.432 \\
+		Annual Import Price Change  & 1,827,983 & -0.08694 & -0.00105 & 1.34694 & -1.20575 & 1.013989 \\
+		\bottomrule
+	\end{tabular}
+	\begin{tablenotes}
+		\footnotesize
+		\item[*] This table shows the summary statistics of some important variables in our three major datasets. Panel A and panel C describe the total annual values, annual average prices, and price changes for the whole customs records and the matched sample, respectively. The observations in panel A and panel C are at the firm-product-country-year level. The trade values in panel A and panel C are in US dollars while prices are in RMB. Panel B describes sales and costs information of Chinese manufacturing firms during 2000-2007. The money values in panel B are in thousands of RMB. The observations in panel B are at the firm-year level.
+	\end{tablenotes}
+	\end{threeparttable}
+        }
+\end{table}
+
+A notable point is that for all variables involved in the amount of money in the table, the mean is much larger than the median, and the mean of some variables is even larger than its 90\% quantile. This means that the distribution of trade value is very uneven, with a few large transactions accounting for the majority of trade volume.
+
+\subsection{Country-level Macro Data}
+
+We obtain bilateral nominal exchange rates and price level of household consumption from the newest Penn World Table (PWT 10.0) (referring to \cite{feenstra2015}). From the whole table, we keep 183 countries (or districts) using 136 different fiat currencies, which have full records of exchange rates during the period from 1999 to 2011. 
+
+The bilateral nominal exchange rate is defined as the number of home currency units that can purchase a unit of foreign currency. An increase in $NER_{ct}$ means a nominal depreciation of the Chinese RMB against this currency from country $c$. Following LMX \cite{lmx2015}, the CPI-based real exchange rate ($RER_{ct}$) is defined as the nominal exchange rate multiplied by the foreign consumer price index (CPI) and divided by the Chinese consumer price index (CPI) at the same year, which is
+
+$$
+RER_{ct}=NER_{ct} \cdot \frac{CPI_{ct}}{CPI_{CHN,t}}.
+$$
+
+Again, an increase in $RER_{ct}$ means a real depreciation of the Chinese RMB against the foreign country's c currency. In later specifications, we mainly use the first difference of the logarithm of the real exchange rate to represent exchange rate changes.
+
+We saw substantial variations in RMB exchange rate fluctuations against different countries including its major trading partners during the period. We could observe that the real exchange rate against the US dollar did not change a lot in 2000-2004 due to the nominal pegging scheme of RMB to US dollars. In July 2005, the peg was lifted to a slight appreciation of RMB against US dollars as a result of the evolution of exchange policy. The currency exchange rates of China's other major trading partners also fluctuated to varying degrees during this period. Changes in nominal and real exchange rates for these countries (level in 1999 as base value 100) are shown in figures \ref{fig3.1} and \ref{fig3.2}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{figure/figure1.eps}
+	\caption{Nominal exchange rates of China's major trading partners (1999-2011)}
+	\label{fig3.1}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{figure/figure2.eps}
+	\caption{Real exchange rates of China's major trading partners (1999-2011)}
+	\label{fig3.2}
+\end{figure}
+
+In addition to nominal and real exchange rates, we also use the real GDP of the destination countries from PWT 10.0. The real GDP is computed with national-accounts growth rates. The controls of real GDP changes of the destination country, $\Delta RGDP_{ct}$, help us exclude the effect of economic growth on price movements. All macro variables including exchange rates and real GDPs are in annual terms to match the firm information survey.
+
+\section{Empirical Framework}
+This section describes our econometric specifications and measurements of key variables of interest.
+
+\subsection{Estimating Equations}
+
+\subsubsection{Baseline estimations of exchange rate pass-through}
+
+Since exchange rate pass-through is not an indicator that can be directly measured, we need to use panel data regression to estimate it. The first step goal is to estimate exchange rate pass-through as the elasticity of unit values changes to exchange rate changes using the firm-product-country details. Our strategy is based on the fixed effects regression. Specifically, we run a regression of import price changes on the bilateral real exchange rate changes between China and the source country, controlling the change of real GDP in the source country. The baseline equation refers to AIK\cite{aik2014} and LMX\cite{lmx2015} as below:
+
+\begin{equation}
+	\Delta \ln P^{D}_{i j c t}=\alpha+\beta^D \Delta \ln R E R_{c t}+\gamma \Delta \ln R G D P_{c t}+\xi_{i j c}+\tau_{t}+\varepsilon_{i j c t}
+	\label{eq4.1}
+\end{equation}
+
+where $P_{ijct}$ represents the trade price of the product $i$ bought (sold) by firm $j$ from (to) country $c$ during year $t$.  $D \in$ \{Import, Export\} denotes the trade direction. Therefore, this equation could be used to estimate both import and export exchange rate pass-through with different values of D. $R E R_{c t}$ is the bilateral real exchange rate between Chinese RMB and currency in the country $c$. $RGDP_{ct}$ represents the real GDP of the source country deflated to the constant price level, which proxy for market demand. $\xi_{ijc}$ denotes the firm-product-country level fixed effects to capture any time-invariant unobserved factors for a combination of firm, product, and destination. These multi-dimensional fixed effects restrict unit value changes to price adjustments, rather than other changes in corporate trade decisions. $\tau_t$, the year dummies, control for macro-shocks that are common to all firms. We will alter the fixed effects setting in robustness checks.
+
+To deal with possible non-stationarity of the panel, we use the first difference of the logarithms for prices $\Delta \ln P^{D}_{i j c t}$, real exchange rates $\Delta \ln R E R_{c t}$ and real GDP $\Delta \ln R G D P_{c t}$ to represent their annual rates of change. In this way, we transform the dynamic panel into a fixed effects regression. Therefore, using import price changes, the estimated coefficient of interest $\beta$ is the elasticity of price changes to exchange rate changes, i.e. import exchange rate pass-through. We also provide estimations for export exchange rate pass-through which is more common in past literature, where import prices are now replaced by export prices and the information of sources is replaced by which of destination markets. 
+
+The real prices for export and import $P^{Import}_{i j c t}$ and $P^{Export}_{i j c t}$ are both denominated by the Chinese RMB in this paper. Using RMB as the denomination currency will make the coefficients on the import side and export side have different meanings. The level of coefficient $\beta^{D=Import}$ measures the completeness of import exchange rate pass-through, i.e. a higher $\beta$ means Chinese importers face more volatile import RMB prices during exchange rate shocks. However, for the export side,  $\beta^{D=Export}$ means the "incompleteness" of the export pass-through because a higher $\beta$ means Chinese exporters pass less exchange rate change to the destination market while having more volatile domestic currency prices. To be noticed, a majority of firms in our sample are both importers and exporters so they will appear in estimations of both exchange rate pass-through.
+
+\subsubsection{Estimations with credit constraints}\label{seq-4.1.2}
+
+Since our main focus is how firms' credit constraints affect exchange rate pass-through, we then include an interaction term of sectors’ financial vulnerability into the estimation function. Intuitively, firms operating in those financially vulnerable industries tend to have less access to enough funds to support their international trade activities, that is, they are subject to tighter credit constraints.
+
+Therefore, we study the credit constraint effects on exchange rate pass-through across sectors with the following panel regression:
+
+\begin{equation}
+	\Delta \ln P^{D}_{ijct}=\alpha+\beta^D_{1} \Delta \ln RER_{ct}+\beta^D_{2} \Delta \ln RER_{ct} \cdot FV_{j}+\gamma \Delta \ln RGDP_{ct}+\xi_{ijc}+\tau_{t} +\varepsilon_{ijct}
+	\label{eq4.2}
+\end{equation}
+
+where the variable $FV_{j}$ represents the financial vulnerability of the sector to which the firm $j$ belongs and the rest are the same as those in the baseline equation. The interaction coefficient $\beta_2$ represents the effect of credit constraints on exchange rate pass-through. A positive $\beta^{Import}_2$ for importers implies more credit-constrained importers have a more complete import exchange rate pass-through, while a positive $\beta^{Export}_2$ implies more credit-constrained exporters have a less complete exchange rate pass-through. The overall import ERPT for an importer $j$ is given by $\beta^D_{1} +\beta^{Import}_{2} FV_j$ and the export ERPT for an exporter $j$ is  $\beta^D_{1} +\beta^{Export}_{2} FV_j$.
+
+Through this estimation strategy, we hope to scrutinize how the pricing behavior of Chinese importers in response to the exchange rate is affected by credit constraints and compare it with that of exporters. Although the functional forms for export and import pass-through are similar, the underlying mechanism could be different, which is one of our key innovation points. While credit-constrained exporters’ pricing decisions to deal with exchange rate shocks are mainly related to production and profit margin, the penetration effect of credit constraints on import prices is through a more direct channel, as the shortage of funds directly affects purchasing choices and bargaining.
+
+\subsubsection{Estimations with additional factors}
+
+After estimating exchange rate pass-through at the firm level and the impact of credit constraints on it, we need to go a step further to explore why. Through what channels will credit constraints affect the ability of importers to cope with exchange rate shocks? What other factors would exacerbate or diminish this effect? Are the effects of credit constraints fully explained by these controls?
+
+In this part, we explore additional factors that affect firm-level import exchange rate pass-through. To do so, we introduce a vector $\mathbb{Z}_{jt}$ (or its lagged form $\mathbb{Z}_{jt-1}$) to include those additional factors and apply it to both control terms and interaction terms with real exchange rate changes: 
+
+\begin{equation}
+	\Delta \ln P^{D}_{ijct}=\alpha+[\beta^D_{1}+ \beta^D_{2} \cdot FV_{j}+\beta^D_{3} \cdot {\mathbb{Z}^{D}_{jt-1}}'] \Delta \ln RER_{ct} +\gamma \Delta \ln RGDP_{ct}+ {\mathbb{Z}^{D}_{jt}}' \eta+\xi_{ijc}+\tau_{t} +\varepsilon_{ijct}.
+	\label{eq4.3}
+\end{equation}
+
+\begin{equation}
+	\begin{aligned}
+		\Delta \ln P^{D}_{ijct}=&\alpha+[\beta^D_{1}+ \beta^D_{2} \cdot FV_{j}+\beta^D_{3} \cdot {\mathbb{Z}^{D}_{jt-1}}'+\beta^D_{4} \cdot FV_{j} \cdot {\mathbb{Z}^{D}_{jt-1}}'] \Delta \ln RER_{ct} \\ &+\gamma \Delta \ln RGDP_{ct}+ {\mathbb{Z}^{D}_{jt}}' \eta+\xi_{ijc}+\tau_{t} +\varepsilon_{ijct}.
+	\end{aligned}	
+	\label{eq4.4}
+\end{equation}
+
+We will then use the estimation strategy of the form \ref{eq4.3} and \ref{eq4.4} to take into account various factors that may directly or indirectly affect exchange rate pass-through. We want to verify whether the effects of credit constraints are fully explained by some of these channels. Our firm-level data has the merit of containing information on its production, so we could connect the exchange rate pass-through with estimated firm-specific markup. We will also include trading partners later to measure the flexibility to choose alternative import sources. The coefficient of the interaction term between additional factors and real exchange rate movement $\beta_3$ represents the direct effects of those factors on the exchange rate pass-through other than through financial constraints. In equation \ref{eq4.4}, the triple interaction coefficient represents the indirect effects of those factors on the exchange rate pass-through through financial constraints. The same sign of $\beta_2$ and $\beta_4$ means that the factor enhances the effect of credit constraints, while the opposite sign means that it alleviates credit constraints.
+
+Market share is another popular proxies for firm size or market power. For example, AIK (2014)\cite{aik2014} uses destination-specific market shares proxying for markup elasticity. When using market share as the additional factor, equation \ref{eq4.3} becomes the derivative form as below:
+
+\begin{equation}
+	\begin{aligned}
+	\Delta \ln P^{D}_{ijct}=&\alpha+[\beta^D_{1}+ \beta^D_{2} \cdot FV_{j}+\beta^D_{3} \cdot S^{D}_{ijct}+\beta^D_4 \cdot {S^{D}_{ijct}}^2] \Delta \ln RER_{ct} \\
+	&+\gamma \Delta \ln RGDP_{ct}+ \eta S^{D}_{ijct}+\xi_{ijc}+\tau_{t} +\varepsilon_{ijct}.
+	\end{aligned}
+	\label{eq4.5}
+\end{equation}
+
+The quadratic term for market share is used to test whether there is a non-monotonic relationship between exchange rate pass-through and market shares, such as the U-shape relationship documented by \cite{garetto2016} and \cite{devereux2017}. In addition to this, controlling for market share improves our estimation accuracy of the effect of credit constraints on exchange rate pass-through.
+
+\subsection{Measurements}
+
+\subsubsection{Unit value as trade price}
+
+The customs records contain disaggregated trade values (denominated by US dollars) and quantities for each HS6 product $i$, each firm $j$, from (or to) each country $c$, in each year $t$, $V_{ijct}$, and $Q_{ijct}$. We first convert the value of the goods into RMB using the average exchange rate for the year. Then, the import and export prices we use are computed as unit values, defined as 
+
+$$
+P^{D}_{ijct}=\frac{V^{D}_{ijct}\cdot NER_{US,t}}{Q^{D}_{ijct}}
+$$
+
+where $D \in$ \{Import, Export\} and $NER_{US,t}$ is the annualized nominal exchange rate of US dollars in terms of RMB in year $t$. Because product categories are highly subdivided, we believe that the unit value is an ideal proxy for the transaction price.
+
+Similar to real exchange rates, we take the first difference of the logarithm to represent price changes of a certain product across years. We will exclude observations with the annual growth rate of unit value in the top or bottom 1 percentile in the distribution, by HS2 product category and year, to avoid results being affected by extreme idiosyncratic factors other than some exchange rate adjustments.
+
+\subsubsection{Credit constraints}
+
+One of the most critical issues in our empirical strategy is to measure the extent of financial constraints. To deal with potential concurrent endogeneity, our measures of credit constraints are applied to each firm across the whole period. Following a widely recognized literature on the role of credit constraints in international trade (\cite{kroszner2007}; \cite{manova-wei-zhang2015}; \cite{fan-lai-li2015}), we use multiple financial vulnerability measures at the sector level to proxy for credit needs (demand for outside capital) and ability to resist financial risks. These measures are designed to reflect the nature of each industry which should be regarded as exogenous for each firm. If a firm is in a more financially vulnerable industry, it tends to face a tighter credit constraint, regardless of its operating conditions.
+
+The first measure we use is external finance dependence ($ExtFin_j$), the share of capital expenditures not financed by operational cash flows. If external finance dependence is high, the industry is more financially vulnerable and firms in this industry are more credit constrained. The second measure is asset tangibility ($Tang_j$), which describes the share of the net value of tangible assets that firms can pledge as collateral to raise external finance, in its total book value. The third measure is the inventory-to-sales ratio ($Invent_j$), which measures the production cycle duration and the necessary working capital to maintain inventories and meet demand.  
+
+To utilize the U.S. industry-level credit measures in the literature, we match the CIC industry code system used in China to the International Standard Industrial Classification (ISIC) system. We first convert the older ISIC Revision 2 3-digit and 4-digit industries from \cite{manova-wei-zhang2015} to match the newest ISIC Revision 3 codes; then we link the ISIC Revision 3 codes to the adjusted CIC codes in CIE datasets. Finally, we could match firms in the merged sample to those sector-level financial vulnerability measures. One-to-many situations may occur in the process of encoding matching. In this case, we construct the target variable for the new industry by averaging its source industries.
+
+Although we construct three measures of credit constraints as in the literature, we will focus on the external finance dependence and tangibility in our later analysis. One important reason is that their interpretation can be linked to firms' exposure and resistance to financial frictions directly. In contrast, the inventory ratio may be connected to inventory management efficiency rather than liquidity and financial reasons. Following \cite{manova-wei-zhang2015}, we also construct the first principal component of external finance dependence and asset tangibility $FPC_j$, which increases with the former and falls with the latter. An industry with a higher $FPC_j$ is more financially sensitive if firms in it require more outside funds but own less collateralizable assets. Therefore, we could use $FPC_j$ as an aggregate measure to combine information about financial vulnerability from $ExtFin_j$ and $Tang_j$.
+
+We have two major reasons why we use credit constraint measures based on US data in our main regressions. First, we want to remove the distortion by the limited credit supply in China and focus on the credit demand associated with sectoral characteristics. Second, the U.S. patterns of sectoral credit demand are proved persistent in a cross-country setting in the literature (\cite{kroszner2007}; \cite{manova-wei-zhang2015}; \cite{fan-lai-li2015}), especially when the industry classification is broadly defined. Intuitively, the financial needs of an industry may differ in level across countries, but the relative ranking between industries is supposed to be the same across countries, due to technical reasons specific to the industry itself.
+
+Alternatively, we also compute credit needs based on Chinese firm-level information from CIE data. In addition to the already mentioned three measures, external finance dependence ($ExtFin_j$), asset tangibility ($Tang_j$), and inventory ratio ($Invent_j$), we include the fourth measure is R\&D intensity ($RD_j$), defined as the ratio of research and development expenditure to the total sales. Usually, R\&D activities are capital-intensive so it requires firms to pay a large fixed cost before production and sales. Therefore, firms in an R\&D-intensive industry should be more financially vulnerable. However, since we only have the information on firms' R\&D expenditure in and after 2005, which narrows the range of available samples, we will only use R\&D intensity as an auxiliary proxy variable. 
+
+We adopt the measure of external finance dependence used by \cite{fan-lai-li2015}. Then we calculate the inventory ratio as the value of inventory over sales income, the asset tangibility as the value of fixed assets over total assets, and the R\&D intensity as R\&D spending over total sales income. To avoid credit constraints being endogenously affected by other corporate factors, we take the median of the firm-level credit constraint measure in the same CIC 2-digit industry as the industry-level credit constraint measure. Since the R\&D investment of a considerable number of companies is equal to 0, we choose to take the average rather than the median when calculating the R\&D intensity of the industry. The regression results using the Chinese industry measures are provided as robustness checks.
+
+The summary statistics of the credit constraints measures in the firm-level data are shown in panels A and B in Table \ref{tab4.1}, respectively.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Summary Statistics of Credit Constrains Measures}
+	\label{tab4.1}
+	\resizebox{1.05\textwidth}{32mm}{
+		\begin{threeparttable}
+			\begin{tabular}{lcccccc}
+				\toprule
+				& \multicolumn{1}{l}{\#observations} & \multicolumn{1}{l}{Mean} & \multicolumn{1}{l}{Median} & \multicolumn{1}{l}{Std. dev} & \multicolumn{1}{l}{P10} & \multicolumn{1}{l}{P90} \\
+				\textbf{Panel A: US Measures} &       &       &       &       &       &  \\
+				$FPC_{j}$ &  1,745,511 & -7.12e-09 & -0.2706642 & 1 & -1.071394   & 1.072687 \\
+				$ExtFin_{j}$ & 1,745,511 & -.0036698 & -0.05 & 0.3112002 & -0.25 & 0.28 \\
+				$Tang_{j}$ & 1,745,511 & 0.3106788 & 0.32 & 0.0944181 & 0.1866667 & 0.43 \\
+				$Invent_{j}$ & 1,745,511 & 0.1594069 & 0.1633333  & 0.0292352 & 0.115   & 0.1933333 \\
+				\midrule
+				& \multicolumn{1}{l}{\#observations} & \multicolumn{1}{l}{Mean} & \multicolumn{1}{l}{Median} & \multicolumn{1}{l}{Std. dev} & \multicolumn{1}{l}{P10} & \multicolumn{1}{l}{P90} \\
+				\textbf{Panel B: Chinese Measures} &       &       &       &       &       &  \\
+				$ExtFin_{j}$ & 1,745,511 & -0.6479498 & -0.47 & 0.6746751 & -1.32 & -0.1  \\
+				$Tang_{j}$ & 1,745,511 & 0.3332769 & 0.3268749 & 0.0648019 & 0.2390799 & 0.4317028 \\
+				$Invent_{j}$ & 1,745,511 & 0.1102537 & 0.1030875  & 0.0274747 & 0.0778921   & 0.1348336 \\
+				$R\&D_{j}$ & 1,745,511 & 0.0168278 & 0.012111 & 0.0142106 & 0.0053125  & 0.0281532 \\
+				\bottomrule
+			\end{tabular}
+			\begin{tablenotes}
+				\footnotesize
+				\item[*] This table shows the summary statistics of credit constraint measures. Panel A describes the measures calculated using US data while panel B shows the alternative Chinese version. All variables are unitless, the numerical size only means relative rank.
+			\end{tablenotes}
+		\end{threeparttable}
+	}
+\end{table}
+
+\subsubsection{Import sources and export markets}
+Following the literature about import sourcing, an importer's sourcing diversity could increase its bargaining power in import prices in addition to its production characteristics. We want to test how importers' sourcing diversity affects exchange rate pass-through. We provide a simple measure for the firm-product level sourcing diversity $Source_{ijt}$ as the number of source countries from which an importer $j$ imports a certain HS6 product type $i$ in year $t$. 
+
+Similarly, for exporters, we count the number of destination countries to which an exporter exports a certain HS6 product type $i$ as the firm-product-level selling measure, $Market_{ijt}$. Controlling other variables, the number of export markets for the same product can measure its export network diversity. In a robustness test, we use the firm-year fixed effect to control for differences in import and export diversity caused by firm size.
+
+\subsubsection{Firm-level markup}
+
+In the discussion, we argue that credit constraints will affect the "absorptive capacity" of exchange rate shocks other than the firm's attributes in sales. In the following work, we will control markup to test the conjectures concretely. Referring to \cite{bkl2021}, even without direct measures of prices and marginal cost, we can still estimate the firm-level markup, using the structural assumptions of \cite{dlw2012} (DLW hereafter) and GMM estimation method.
+
+Simply put, DLW (2012)\cite{dlw2012} derives the firm-specific markup as the ratio of an input factor's output elasticity to its firm-specific factor payment share $\mu_{t}=\theta_{t}^{X}\left(\alpha_{t}^{X}\right)^{-1}$, where $\alpha_{t}^{X}$ is the share of expenditures on input X in total sales and $\theta^X_t$ denotes the output elasticity on an input X. The major difficulty is calculating the firm-specific output elasticity concerning materials, which requires estimating firm-specific production functions. We apply the methodology of \cite{acf2015} to address the endogeneity of inputs, assuming a 3rd-order translog gross output production function in capital, labor, and material inputs:
+
+$$
+\begin{aligned}
+y_{t}= &\beta_{k} k_{t}+\beta_{l} l_{t}+\beta_{i} m_{t}+\beta_{k 2} k_{t}^{2}+\beta_{l 2} l_{t}^{2}+\beta_{m 2} m_{t}^{2}+\beta_{k l} k_{ t} l_{t}+\beta_{k m} k_{t} m_{t}+\beta_{l m} l_{t} m_{t}+\beta_{k 3} k_{t}^{3}\\
+&+\cdots+\omega_{t}+\epsilon_{t}.
+\end{aligned}
+$$
+
+In practice, we need to construct four production variables in log form: real output value $y_t$, persons engaged $l_t$, real fixed assets at current value $k_t$, and real material inputs $m_t$. Real output values are deflated by output deflators, while real fixed assets and real material inputs are deflated by investment deflators and input deflators, respectively. The deflators are constructed as in \cite{brandt2012}.
+
+\subsubsection{Market share}
+
+In addition to the extensive diversity measured by the number of import sources or export markets, we also use a firm's share in a specific import or export market to describe its intensive competitiveness.
+
+Following AIK\cite{aik2014} and \cite{devereux2017}, we define import market share as a firm’s value share in the import market, within a given HS6 product category. Therefore, a single firm can have multiple import market shares for multiple products. Our definition of import market share is also year specific, and so a firm’s import market share can vary over time. 
+
+$$
+S^{D}_{ijct} \equiv \frac{v^{D}_{ijct}}{\sum_{j^{\prime} \in J_{ict}} v^{D}_{ij^{\prime}ct}}
+$$
+
+where $D \in$ \{Import, Export\}. The capital letter $J$ denotes the set of potential competitors in the same product-specific market. 
+
+The destination-specific export market share proxy is similarly defined as the value share of a firm relative to all Chinese exporters in our sample who export the same product to the same market. Since we only have data from China Customs, our export market share $S^{D}_{ijct}$ is relative to other Chinese firms. The external competitive stance in a particular sector-destination pair is also common for all Chinese exporters in that country and hence our measure captures all relevant variation in market share between firms in our sample.
+
+\section{Empirical Results}
+In this chapter, we will present our major empirical results using the samples and strategies described above. First, we show the estimated import exchange rate pass-through is rather incomplete while the export exchange rate pass-through is very close to complete. Second, we show that both importers and exporters with tighter credit constraints have more complete pass-throughs. Finally, we present the results with firm heterogeneity to explore factors affecting importers' capacity to absorb exchange rates and the role of credit constraints among them.
+
+\subsection{Import Pass-through vs Export Pass-through}
+
+Past literature on firm-level evidence of exchange rate pass-through mainly focuses on exporters' price-setting behaviors. Importers are likely to be more than simple price takers, which gives us a new perspective on exchange rate pass-through. Now we take a closer look at how real exchange rate fluctuations affect import prices and export prices differently in China. The results for import exchange rate pass-through versus export exchange rate pass-through are shown in Table \ref{tab5.1} using different samples.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Baseline Estimations of Exchange Rate Pass-Through}
+	\begin{threeparttable}
+	\begin{tabular}{lcccc}
+		\toprule
+		& (1)   & (2)   & (3)   & (4) \\
+		\midrule
+		Panel A & \multicolumn{4}{c}{Import} \\
+		& Whole & Matched & Top 50 & Top 20 \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.179*** & 0.357*** & 0.354*** & 0.344*** \\
+		& (0.003) & (0.015) & (0.015) & (0.016) \\
+		$\Delta \ln RGDR_{ct}$ & -0.133*** & 0.263*** & 0.282*** & 0.333*** \\
+		& (0.026) & (0.090) & (0.091) & (0.097) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes \\
+		Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+		Observations & 8409682 & 1792020 & 1781948 & 1684798 \\
+		\midrule
+		Panel B & \multicolumn{4}{c}{Export} \\
+		& Whole & Matched & Top 50 & Top 20 \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.050*** & 0.031*** & 0.039*** & 0.065*** \\
+		& (0.002) & (0.005) & (0.006) & (0.009) \\
+		$\Delta \ln RGDR_{ct}$ & -0.102*** & -0.083** & -0.118*** & -0.082 \\
+		& (0.010) & (0.037) & (0.042) & (0.056) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes \\
+		Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+		Observations & 11173463 & 1793974 & 1611410 & 1251147 \\
+		\bottomrule
+	\end{tabular}
+	\begin{tablenotes}
+		\footnotesize
+		\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Column (1) uses the long sample from 2000 to 2011. Column (2) uses the matched sample from 2000 to 2007. Columns (3) and (4) use finer sub-samples with only top 50 and top 20 partners ranked by total trade value. Panel A shows the results of import ERPT while panel B shows the results of export ERPT. All regressions include firm-product-country fixed effects and year fixed effects. 
+	\end{tablenotes}
+	\end{threeparttable}
+	\label{tab5.1}
+\end{table}
+
+We report the baseline estimates of import exchange rate pass-through in panel A. Column (1) shows the import exchange rate pass-through using equation (1) for the long sample from 2000 to 2011, including all companies that appear at least once in customs records, whether or not they are registered in the CIE database. Column (2) shows the results for import exchange rate pass-through for the matched sample (importers registered in the CIE database from 2000 to 2007). The pass-through coefficient in column (2) is larger than the one in column (1), yet both are incomplete. The average import exchange rate pass-through for China in the long sample is around 18\%, while in the matched sample about 39\%. The latter ERPT means that the import prices denominated in RMB will increase by about 3.9\% during a 10\% real depreciation and decrease by the same amount during a 10\% appreciation. Column (3) and column (4) report the import pass-through among a subset of the matched sample including only the top 50 and top 20 trading partners by import value. The results in those subsamples of top partners are slightly less complete than those in column (2), yet the levels are of similar magnitude. Import price fluctuations will reflect nearly one-third of exchange rate fluctuations, with the remainder absorbed by foreign currency price fluctuations. These results imply that Chinese importers have to bear less than half but still considerable cost fluctuations due to exchange rate shocks. 
+
+Accordingly, estimates of export exchange rate pass-through are recorded in panel B. Similar to which in panel A for imports, column (1) and column (2) in panel B show the export exchange pass-through using the long sample and the matched sample. Column (3) and column (4), in turn, show the export price pass-through to major export destinations. The estimated export pass-through in each column equals one minus the coefficient at the row of $\Delta lnRER_{ct}$. The export pass-through ranges from 93.3\% for the top 20 countries to 96.6\% for the matched sample, which is near complete. Specifically, 95\% export ERPT means that a 10\% real appreciation of RMB concerning a destination market is associated with a 0.5\% decrease in the RMB price while a 9.5\% increase in foreign currency price. That is to say, export price in RMB adjusts very little with exchange rate fluctuations.
+
+The strikingly almost complete ERPT into RMB export price echoes the finding of LMX\cite{lmx2015}. One explanation could be that most Chinese exporters are at the lower end of the value chain, where high ERPT exposes their low profit margins, leaving no room for pricing-to-market strategy. Most Chinese exporters have no choice but to pass all exchange rate swings to their destination prices, regardless of potential better monopolistic competition strategies. In addition, since RMB is pegged to the dollar until 2005, the complete pass-through to price in destination currency is consistent with a rigid price model with the US dollar as the invoice currency, at least in those countries with freely floating exchange rates relative to the U.S. dollar. We will later provide results using samples excluding the US and other countries whose currency is pegged to the US dollar.
+
+From the comparison, it can be seen that the exchange rate-price pass-through on China's import side is much less complete than that on the export side. That is to say, for Chinese firms, when the RMB depreciates against the currencies of major trading partners, export prices denominated in RMB will not rise significantly, but their import costs will rise sharply; on the contrary; when the real exchange rate of RMB appreciates, export prices in RMB will decrease only to a limited extent, and their import costs will increase dramatically drop. If we consider a typical two-way trader in China who simultaneously imports and exports from two groups of countries with strong correlations in exchange rate fluctuations, a devaluation of the local currency will reduce his unit profits, while an appreciation of the local currency will widen his profit margins. We call this phenomenon the asymmetry of the import and export exchange rate pass-through, which exposes Chinese trading companies to two-way exchange rate risks.
+
+\subsection{Effects of Credit Constraints}
+
+Another goal of our paper is to assess how importers with varying degrees of financial vulnerability absorb exchange rate fluctuations when the home currency depreciates or appreciates. We evaluate the consequences of credit constraints on the firms' price responses to exchange rate shocks using equation \ref{eq4.2} in section \ref{seq-4.1.2}. Table \ref{tab5.2} presents differences in exchange rate pass-through into import prices and export resulting from the industry-level credit demand heterogeneity. Panel A reports the results for credit constraints and import pass-through and panel B reports the comparing results for the export side. 
+
+\begin{table}[htbp]
+	\centering
+	\caption{Effects of Credit Constraints on Exchange Rate Pass-Through}
+	\begin{threeparttable}	
+	\begin{tabular}{lcccc}
+		\toprule
+		& (1)   & (2)   & (3)   & (4) \\
+		\midrule
+		Panel A & \multicolumn{4}{c}{Import} \\
+		& FPC   & External Finance & Tangibility & Inventory \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.123*** & 0.218*** & 1.175*** & -0.739*** \\
+		& (0.016) & (0.016) & (0.033) & (0.069) \\
+		$\Delta \ln RGDR_{ct}$ & 0.314*** & 0.323*** & 0.283*** & 0.273*** \\
+		& (0.090) & (0.090) & (0.090) & (0.090) \\
+		$\Delta \ln RER_{ct}*FPC_{j}$ & 0.379*** &       &       &  \\
+		& (0.010) &       &       &  \\
+		$\Delta \ln RER_{ct}*ExtFin_{j}$ &       & 1.159*** &       &  \\
+		&       & (0.029) &       &  \\
+              		$\Delta \ln RER_{ct}*Tang_{j}$ &       &       & -3.305*** &  \\
+		&       &       & (0.117) &  \\
+		$\Delta \ln RER_{ct}*Invent_{j}$ &       &       &       & 6.305*** \\
+		&       &       &       & (0.389) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes \\
+		Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+		Observations & 1792020 & 1792020 & 1792020 & 1792020 \\
+		\midrule
+		Panel B & \multicolumn{4}{c}{Export} \\
+		& FPC   & External Finance & Tangibility & Inventory \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.039*** & 0.034*** & -0.030** & 0.102*** \\
+		& (0.006) & (0.005) & (0.015) & (0.030) \\
+		$\Delta \ln RGDR_{ct}$ & -0.084** & -0.083** & -0.084** & -0.083** \\
+		& (0.037) & (0.037) & (0.037) & (0.037) \\
+		$\Delta \ln RER_{ct}*FPC_{j}$ & -0.019*** &       &       &  \\
+		& (0.004) &       &       &  \\
+		$\Delta \ln RER_{ct}*ExtFin_{j}$ &       & -0.045*** &       &  \\
+		&       & (0.013) &       &  \\
+		$\Delta \ln RER_{ct}*Tang_{j}$ &       &       & 0.230*** &  \\
+		&       &       & (0.053) &  \\
+		$\Delta \ln RER_{ct}*Invent_{j}$ &       &       &       & -0.412** \\
+		&       &       &       & (0.171) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes \\
+		Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+		Observations & 1793974 & 1793974 & 1793974 & 1793974 \\
+		\bottomrule
+	\end{tabular}
+	\label{tab5.2}
+	\begin{tablenotes}
+		\footnotesize
+		\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using U.S. data. Panel A shows the results of import ERPT while panel B shows the results of export ERPT. All regressions include firm-product-country fixed effects and year fixed effects.
+	\end{tablenotes}
+	\end{threeparttable}
+\end{table}
+
+We are particularly interested in the coefficients of the interaction terms. Note that a larger elasticity coefficient on the import side implies a more complete exchange rate-price pass-through, and similarly a positive cross-term coefficient implies that the magnitude of this variable is positively related to exchange rate pass-through. Using the first principal component of external finance dependence and asset tangibility $FPC_j$ to measure financial vulnerability $FV_j$, we see that import exchange rate pass-through is more complete in financially more vulnerable sectors, relative to financially less vulnerable sectors (column 1, row 3). Columns (2) and (3) separately show the effects of external finance dependence and asset tangibility on importers' exchange rate pass-through. Consistent with the definition that higher external finance dependence implies tighter credit constraints faced by firms while higher asset tangibility can alleviate them, we observe a positive coefficient for the former (row 5) and a negative coefficient for the latter (row 6). When we use the auxiliary measure $Invent_j$, we further observe that the effect on exchange rate pass-through is positive (column 4). Overall, the coefficient $\beta^{Import}_2$ of the interaction term $\Delta \ln RER_{ct} \cdot FV_{j}$ is positive and significant at the 1\% level. Our evidence supports the intuition that exchange rate fluctuations are more likely to be reflected in unstable import costs for importers in more financially vulnerable industries because they have weak bargaining power in the international market. External financing dependence, internal collateral capacity, and inventory turnover all act jointly and separately on the exchange rate pass-through of importers.
+
+It is worth noting that the exchange rate pass-through here is estimated by the at-the-dock import price in our specification. This excludes any impact of credit constraints on post-landing costs, such as local distribution and logistics costs. In other words, credit constraints imposed on Chinese importers can affect home import costs by directly affecting the supplier's pricing behavior. Intuitively, firms in more credit-constrained industries may have weaker import bargaining power, and products are more likely to be pegged to the dollar or the currency of the exporting country (less pricing-to-market), so at-the-dock prices are more affected by exchange rate fluctuations, regardless of any domestic market factor.
+
+By substituting the superscript D in equation \ref{eq4.2} to export, we obtain a comparative result of the effect of credit constraints on export price pass-through. Estimates in columns (1), (2), and (4) all show significantly negative coefficients on interaction terms while column (3) shows a negative significant coefficient. The estimates suggest that financial constraints lead export exchange rate pass-through to a more complete degree, although the original result is already close to complete. These results verified the conclusion of \cite{strasser2013} who argues that financially constrained firms have higher export price pass-through compared to unconstrained firms. That is to say, credit constraints restrict exporters from absorbing exchange rate shocks, potentially because firms need external finance to apply pricing-to-market strategies in foreign markets.
+
+Comparing panel A and panel B, although the import ERPT is still less complete than the export ERPT, we can reach a consistent conclusion that credit constraints steer both of them toward a more complete direction. Following the our analysis, credit constraints expose Chinese manufacturing firms to greater exchange rate risk in international trade. Exporters with more vulnerable credit are forced to lower destination prices when RMB depreciates compared to those with unrestricted credit, while RMB income remained relatively unchanged, and importers’ costs rose more significantly; in contrast, when RMB appreciates, restricted exporters will increase destination prices more, even if it means losing their competitive advantages, and importers' costs will be reduced at this time. For credit-constrained two-way traders, given import sources and export markets cannot be adjusted quickly, the unit profit margin is more sensitive to exchange rate fluctuations.
+
+Nonetheless, the direction in which credit constraints affect the exchange rate pass-through on the export side and the import side is the same, the underlying channels may work differently. Following \cite{strasser2013}, a higher external finance premium causes higher marginal costs. Thus, firms with binding financial constraints have no choice but set higher prices and face a higher price elasticity of demand. When there is an exchange rate shock, the optimal choice is to adjust their markups but credit-constrained firms can do so only to a limited extent because they have narrower profit margins. However, for import ERPT, credit constraints affect how buyers pay in the transactions. Adequate credit or cash reserves give importers a better bargaining chip, for example, by allowing them to negotiate longer-term purchase agreements, where exchange rate fluctuations will be more borne by international sellers. In contrast, a credit-strapped importer may not have the buffers to transfer risk, so it must accept current exchange rate settlements, although that means taking on more volatile prices.
+
+\subsection{Sourcing Diversity and Credit Constraints}
+
+In this section, we further study the factors that directly affect the purchasing side. As emerged in an intuitive guess, a potential mechanism through which financial constraints affect an importer's bargaining power with foreign suppliers is its outside sourcing options. Companies with more trading partners can flexibly adjust the weight of imports from different countries. Firms with heterogeneous sourcing capacity may thus be affected by credit constraints to a different extent. 
+
+Therefore, we employ equation \ref{eq4.4} to include the number of import sources. The estimation results are reported in the below Table \ref{tab5.3} and confirm the empirical relevance of differences in sourcing diversity across firms. Similarly, results for sales destination diversity on the export side are provided in panel B \ref{tabA.1} as a comparison.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Import Sources and Effects of Credit Constraints on Import Exchange Rate Pass-Through}
+	\begin{threeparttable}
+	\begin{tabular}{lcccc}
+		\toprule
+		& (1)   & (2)   & (3)   & (4)    \\
+		\midrule
+		Panel A & \multicolumn{4}{c}{Import} \\
+		 & \#Sources & \#Sources+ & \#Sources+ & \#Sources+	 \\
+		&       & FPC &External & Tangibility \\
+		&       & &Finance &			\\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.433*** & 0.177*** & 0.274*** & 1.386*** \\
+		& (0.017) & (0.019) & (0.018) & (0.040) \\
+		$\Delta \ln RGDR_{ct}$ & 0.250*** & 0.292*** & 0.297*** & 0.267*** \\
+		& (0.090) & (0.090) & (0.090) & (0.090) \\
+		$\#Source_{ijt}$ & -0.021*** & -0.016*** & -0.016*** & -0.050*** \\
+		& (0.002) & (0.003) & (0.003) & (0.006) \\
+		$\Delta \ln RER_{ct}*FPC_{j}*\#Source_{ijt}$ &       & -0.014*** &       &  \\
+		&       & (0.002) &       &  \\
+		$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.443*** &       &  \\
+		&       & (0.012) &       &  \\
+		$\Delta \ln RER_{ct}*ExtFin_{j}*\#Source_{ijt}$ &       &       & -0.054*** &  \\
+		&       &       & (0.006) &  \\
+		$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 1.410*** &  \\
+		&       &       & (0.037) &  \\
+		$\Delta \ln RER_{ct}*Tang_{j}*\#Source_{ijt}$ &       &       &       & 0.104*** \\
+		&       &       &       & (0.026) \\
+		$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -3.790*** \\
+		&       &       &       & (0.148) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes \\
+		Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+		Observations & 1792020 & 1792020 & 1792020 & 1792020 \\
+		\bottomrule
+	\end{tabular}
+	\begin{tablenotes}
+	\footnotesize
+	\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A shows the results of import ERPT while panel B shows the results of export ERPT. Panel B is shown in Appendix \ref{tabA.1}. All regressions include firm-product-country fixed effects and year fixed effects.
+	\end{tablenotes}
+	\end{threeparttable}
+	\label{tab5.3}
+\end{table}
+
+The estimates for intersection terms between import sources and real exchange rate changes are displayed in column (1). We find that importers who import a certain product from more sources will have a less complete pass-through. This is consistent with our hypothesis that importers with more alternative sourcing options will have less complete pass-through. Interestingly, exporters who export to more destinations (both for a certain product or in total) will have a slightly more complete pass-through. In other words, the diversity of import sources for the same product can significantly enhance the stability of import prices, but the diversity of export markets does not.
+
+In columns (2)-(4), after adding interactions, we find the effects of credit constraints still exist while the triple interaction terms with the number of sources have the opposite and significant coefficients. That means a wider sourcing base will mitigate the effects of credit constraints, in addition to its effect on pass-through. We continue to observe that this triple interaction effect only works for the import side in panel A but not for the export side in panel B (attached in appendix \ref{tabA.1}). The opposing effects of credit constraints and purchasing diversity on exchange rate pass-through confirm our conjecture about the bargaining power of importers. If a firm can import the same product from more sources, it has more flexibility in the face of bilateral exchange rate shocks in individual markets. In other words, constrained firms with more import sources have more ways to escape the unfavorable exchange rate risk. A more diverse importer can either switch from one source to another to reduce costs (trade diversion effect) or make a more credible threat to negotiate a more stable price. 
+
+\section{Robustness}\label{sec-6.robustness}
+
+In this chapter, we further check the robustness of our main results with alternative measures and sub-samples.
+
+\subsection{Alternative Measures of Credit Constraints}
+
+As the first robustness test to verify our baseline results, we use alternative credit constraint measures from CIE database. The purpose is to avoid potential bias from differences in the attributes of industry credit demand in different countries. The details of constructing these Chinese variables are discussed in in section \ref{sec-4.2.2}. Although Chinese financial market is less mature than that of the US, the rankings of industries in credit constraints are comparable. Thus, the results based on the credit constraints measures from Chinese data are expected be consistent with our main findings. Our results are reported in Table \ref{tab7.1} which can be easily compared with the results using US measures.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Alternative Estimations with Chinese Measures of Credit Constraints}
+	\begin{threeparttable}
+	\begin{tabular}{lcccc}
+		\toprule
+		& (1)   & (2)   & (3)   & (4) \\
+		\midrule
+		Panel A & \multicolumn{4}{c}{Import} \\
+		& External Finance & Tangibility & Inventory & R\&D Intensity \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.502*** & 2.032*** & -0.752*** & 0.043** \\
+		& (0.018) & (0.053) & (0.043) & (0.019) \\
+		$\Delta \ln RGDP_{ct}$ & 0.249*** & 0.240*** & 0.333*** & 0.304*** \\
+		& (0.090) & (0.090) & (0.090) & (0.090) \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ & 0.223*** &       &       &  \\
+		& (0.014) &       &       &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       & -5.776*** &       &  \\
+		&       & (0.176) &       &  \\
+		$\Delta \ln RER_{ct}*Invent_{j}$ &       &       & 9.797*** &  \\
+		&       &       & (0.352) &  \\
+		$\Delta \ln RER_{ct}*R\&D_{j}$ &       &       &       & 16.398*** \\
+		&       &       &       & (0.573) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes \\
+		Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+		Observations & 1792020 & 1792020 & 1792020 & 1792020 \\
+		\midrule
+		Panel B & \multicolumn{4}{c}{Export} \\
+		& External Finance & Tangibility & Inventory & R\&D Intensity \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.016** & -0.135*** & 0.086*** & 0.043*** \\
+		& (0.007) & (0.023) & (0.019) & (0.007) \\
+		$\Delta \ln RGDP_{ct}$ & -0.081** & -0.082** & -0.081** & -0.082** \\
+		& (0.037) & (0.037) & (0.037) & (0.037) \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ & -0.021*** &       &       &  \\
+		& (0.007) &       &       &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       & 0.557*** &       &  \\
+		&       & (0.074) &       &  \\
+		$\Delta \ln RER_{ct}*Invent_{j}$ &       &       & -0.504*** &  \\
+		&       &       & (0.165) &  \\
+		$\Delta \ln RER_{ct}*R\&D_{j}$ &       &       &       & -0.627*** \\
+		&       &       &       & (0.243) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes \\
+		Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+		Observations & 1793974 & 1793974 & 1793974 & 1793974 \\
+		\bottomrule
+	\end{tabular}
+	\label{tab6.1}
+	\begin{tablenotes}
+		\footnotesize
+		\item[*]  Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using Chinese data. Panel A shows the results of import ERPT while panel B shows the results of expor,t ERPT. All regressions include firm-product-country fixed effects and year fixed effects.
+	\end{tablenotes}
+	\end{threeparttable}
+\end{table}
+
+Columns 1-4 of panel A of table \ref{tab6.1} present the import-side results for external finance dependence, tangibility, inventory ratio, and R\&D intensity, respectively. Panel B reports the export-side results with the same variables. All regressions include firm-product-country fixed effects and year fixed effects as before. Nevertheless, most of the interaction term coefficients exhibit the same signs as above, confirming the validity of our baseline findings of the effects of credit constraints on exchange rate pass-through. We can still conclude that financially more constrained firms (both importers and exporters) have more complete exchange rate pass-through than those less constrained, even with Chinese measures.
+
+\subsection{Sub-sample Test: Two-way traders}
+
+Since most of China's imports go through two-way traders, who conduct both export and import simultaneously, import exchange rate pass-through is likely to be related to export behaviors. Specifically, importers who also export may pass part of the price fluctuations of imported intermediate goods caused by exchange rate shocks to their export destination to buffer the impact of exchange rate risks. To test whether the pattern of China's import pass-through still holds for two-way traders, we use the sub-sample consisting only of two-way traders for a robustness check. Table \ref{tab6.2} presents the results for this restricted sample.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Alternative Estimations with Two-way Traders}
+	\begin{threeparttable}
+	\begin{tabular}{lcccc}
+		\toprule
+		& (1)   & (2)   & (3)   & (4) \\
+		\midrule
+		Panel A & \multicolumn{4}{c}{Import (Two-way traders)} \\
+		& Baseline & FPC   & External Finance & Tangibility \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.394*** & 0.136*** & 0.231*** & 1.158*** \\
+		& (0.015) & (0.016) & (0.015) & (0.031) \\
+		$\Delta \ln RGDP_{ct}$ & 0.406*** & 0.459*** & 0.469*** & 0.427*** \\
+		& (0.086) & (0.086) & (0.086) & (0.086) \\
+		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.388*** &       &  \\
+		&       & (0.009) &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.246*** &  \\
+		&       &       & (0.028) &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.138*** \\
+		&       &       &       & (0.112) \\
+		Year FE  &       & Yes   & Yes   & Yes \\
+		Firm-product-country FE &       & Yes   & Yes   & Yes \\
+		Observations & 1712289 & 1712289 & 1712289 & 1712289 \\
+		\midrule
+		Panel B & \multicolumn{4}{c}{Export (Two-way traders)} \\
+		& Baseline & FPC   & External Finance & Tangibility \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.040*** & 0.051*** & 0.044*** & -0.034** \\
+		& (0.006) & (0.006) & (0.006) & (0.016) \\
+		$\Delta \ln RGDP_{ct}$ & -0.144*** & -0.145*** & -0.144*** & -0.147*** \\
+		& (0.041) & (0.041) & (0.041) & (0.041) \\
+		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & -0.022*** &       &  \\
+		&       & (0.005) &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & -0.048*** &  \\
+		&       &       & (0.015) &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & 0.284*** \\
+		&       &       &       & (0.059) \\
+		Year FE  &       & Yes   & Yes   & Yes \\
+		Firm-product-country FE &       & Yes   & Yes   & Yes \\
+		Observations & 1415415 & 1415415 & 1415415 & 1415415 \\
+		\bottomrule
+	\end{tabular}
+	\label{tab6.2}
+	\begin{tablenotes}
+		\footnotesize
+		\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. We only include those firms that both import and export during the same year. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A shows the results of import ERPT while panel B shows the results of export ERPT. All regressions include firm-product-country fixed effects and year fixed effects.
+	\end{tablenotes}
+	\end{threeparttable}
+\end{table}
+
+Table \ref{tab6.2} shows that the results for the subset of two-way traders are highly similar to the results for the entire matched sample, indicating that the exchange rate pass-through pattern of two-way traders dominates China’s imports and exports. The results from the sample of two-way traders are still typical, whether estimating the exchange rate pass-through of imports and exports or examining the role of credit constraints. Combined with our discussion later, the nature of two-way traders should be the focus of future research on import-export connections.
+
+\subsection{Sub-sample Test: Excluding US Dollar Peg}
+
+Due to China's exchange rate peg to the US dollar until July 2005, we observed very weak movements in the exchange rate of RMB against the US dollar and other currencies pegged to the US dollar as shown in \ref{fig3.1} and \ref{fig3.2}. Therefore, in this test, we exclude the US and other countries that use the US dollar as their official currency or whose currency is pegged to the US dollar from our baseline matched sample. \footnote{The excluded countries and regions are Belize, Liberia, Qatar, Ecuador, Djibouti, Saint Lucia, Saint Kitts and Nevis, St. Vincent and the Grenadines, Dominica, Antigua and Barbuda, Palestine, Bahamas, Barbados, Panama, Bahrain, Curaçao, Grenada, Saudi Arabia, Zimbabwe, Macao SAR of China, Turks and Caicos Islands, Bermuda, Jordan, United States, British Virgin Islands, Dutch Sint Maarten, El Salvador, Montserrat, United Arab Emirates, Oman, Aruba, Hong Kong SAR of China, Maldives, Lebanon.}. We examine whether the previous main results are robust after excluding those countries whose currencies are denominated in or pegged to the US dollar.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Alternative Estimations Excluding US Dollar-pegged countries}
+	\begin{threeparttable}
+	\begin{tabular}{lllll}
+		\toprule
+		& (1)   & (2)   & (3)   & (4) \\
+		\midrule
+		Panel A & \multicolumn{4}{c}{Import (Excluding US Dollar Peg)} \\
+		& Baseline & FPC   & External Finance & Tangibility \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.382*** & 0.164*** & 0.256*** & 1.173*** \\
+		& (0.017) & (0.018) & (0.018) & (0.035) \\
+		$\Delta \ln RGDP_{ct}$ & 0.709*** & 0.778*** & 0.797*** & 0.730*** \\
+		& (0.106) & (0.106) & (0.106) & (0.106) \\
+		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.362*** &       &  \\
+		&       & (0.010) &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.103*** &  \\
+		&       &       & (0.030) &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.186*** \\
+		&       &       &       & (0.121) \\
+		Year FE  &       & Yes   & Yes   & Yes \\
+		Firm-product-country FE &       & Yes   & Yes   & Yes \\
+		Observations & 1489984 & 1489984 & 1489984 & 1489984 \\
+		\midrule
+		Panel B & \multicolumn{4}{c}{Export (Excluding US Dollar Peg)} \\
+		& Baseline & FPC   & External Finance & Tangibility \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.031*** & 0.038*** & 0.034*** & -0.021 \\
+		& (0.006) & (0.006) & (0.006) & (0.016) \\
+		$\Delta \ln RGDP_{ct}$ & -0.023 & -0.024 & -0.023 & -0.025 \\
+		& (0.049) & (0.049) & (0.049) & (0.049) \\
+		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & -0.016*** &       &  \\
+		&       & (0.005) &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & -0.039*** &  \\
+		&       &       & (0.014) &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & 0.196*** \\
+		&       &       &       & (0.055) \\
+		Year FE  &       & Yes   & Yes   & Yes \\
+		Firm-product-country FE &       & Yes   & Yes   & Yes \\
+		Observations & 1371760 & 1371760 & 1371760 & 1371760 \\
+		\bottomrule
+	\end{tabular}
+		\label{tab6.3}
+	\begin{tablenotes}
+		\footnotesize
+		\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. We do not include countries that use the U.S. dollar or currencies pegged to the U.S. dollar. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A shows the results of import ERPT while panel B shows the results of export ERPT. All regressions include firm-product-country fixed effects and year fixed effects.
+	\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Table \ref{tab6.3} demonstrates that the results without the U.S. and those pegged countries are not overturned. The estimated import ERPT for this subsample is 38.2\%, which is slightly more complete than 35.7\% in the matched sample shown in Table \ref{tab5.1}. In turn, the estimated export ERPT for this subsample is 96.0\%, which is less complete than 96.9\% in the matched sample. All coefficients on interaction terms remain robust and significant, suggesting that higher external finance dependence makes exchange rate pass-through more complete while higher asset tangibility plays an opposite role. Therefore, the peg of RMB to the dollar before 2005 did not interfere with the main conclusions of this paper.
+
+\section{More Discussions}\label{sec-7.discussion}
+
+\subsection{Firm Heterogeneity in Markup}
+
+Given that credit constraints play an important role in China's import exchange rate pass-through, we proceed to analyze how different factors participate in determining import exchange rate pass-through, and whether they can replace credit constraints or not. One major argument in the literature is that firms with different sales markup may have heterogeneous responses to exchange rate shocks as suggested by \cite{bmm2012} and \cite{lmx2015}. The same logic could also apply to import exchange rate pass-through. Besides, \cite{llz2018} provide microeconomic evidence that both internal finance and external credit supply significantly promote firms' sales growth rates. Following the empirical framework in section \ref{sec-4.1.3}, we add estimated firm-level markup into interactions, and the results are shown in Table \ref{tab7.1}.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Heterogeneous Markup and Effects of Credit Constraints on Import Exchange Rate Pass-through}
+	\begin{threeparttable}
+		\begin{tabular}{lcccc}
+			\midrule          & (1)   & (2)   & (3)   & (4)     \\
+			\midrule
+			Panel A & \multicolumn{4}{c}{Import} \\
+			& Markup & Markup+& Markup+ & Markup+      \\
+			&       &FPC& External & Tangibility        \\
+			&       & & Finance &  	          \\
+			\midrule
+			$\Delta \ln RER_{ct}$ & 0.459*** & 0.310*** & 0.431*** & 1.419***   \\
+			& (0.045) & (0.045) & (0.045) & (0.058) \\
+			$\Delta \ln RGDP_{ct}$ & 0.329*** & 0.376*** & 0.389*** & 0.343*** \\
+			& (0.106) & (0.106) & (0.106) & (0.106)  \\
+			$\Delta \ln RER_{ct}$*$Markup_{jt-1}$ & -0.073** & -0.157*** & -0.163*** & -0.112*** \\
+			& (0.030) & (0.030) & (0.031) & (0.030) \\
+			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.414*** &       &  \\
+			&       & (0.011) &       &   \\
+			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.232*** &  \\
+			&       &       & (0.034) &   \\
+			$\Delta \ln RER_{ct}$*$Tang_{j}$  &       &       &       & -3.692*** \\
+			&       &       &       & (0.139) \\
+			$Markup_{jt-1}$ & 0.013** & 0.009 & 0.007 & 0.012**  \\
+			& (0.006) & (0.006) & (0.006) & (0.006)  \\
+			Year FE  & Yes   & Yes   & Yes   & Yes       \\
+			Firm-product-country FE & Yes   & Yes   & Yes   & Yes       \\
+			Observations & 1411106 & 1411106 & 1411106 & 1411106  \\
+			\bottomrule
+		\end{tabular}
+		\begin{tablenotes}
+			\footnotesize
+			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\%. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A shows the effects of markup and credit constraints on import ERPT while panel B shows their effects on export ERPT. Panel B is shown in Appendix \ref{tabA.2}. All regressions include firm-product-country fixed effects and year fixed effects.
+		\end{tablenotes}
+	\end{threeparttable}
+	\label{tab7.1}
+\end{table}
+
+Panel A shows how markup affects import ERPT in addition to credit constraints and panel B (attached in \ref{tabA.2}) shows the comparison results for export ERPT. Column (1) shows the direct effects of firm-level markup on exchange rate pass-through. Columns (2) to (4) add the first principal component, external finance dependence, and asset tangibility to the regression respectively. All columns control for the lag term of markup.
+
+From the coefficients of interaction terms in panel A, firms with higher markup have less complete import pass-through while firms. The effects of financial constraints are still significant and robust as in section \ref{sec-5.2} after controlling for markup. The coefficients in panel B \ref{tabA.2} imply a similar conclusion. Exporters with higher markup have less complete export pass-through. In other words, higher markup on the exchange rate pass-through work in the opposite direction with tighter credit constraints. However, the coefficients in rows (4)-(6) are significant respectively, indicating that markup cannot fully explain the effect of credit constraints, which is consistent with \cite{xu-guo2021}.
+
+The explanation for import price absorptive capacity seems more complicated than which for export ERPT. BMM\cite{bmm2012} documents that more productive firms react to depreciation (or appreciation) by adjusting more markup and less export volume, keeping local market prices relatively stable, which means a less complete pass-through. This explanation hinges on endogenous markup over marginal costs where less elastic demand allows them to adjust markups more extensively during currency fluctuations. However, on the import side, other factors influence the sourcing capacity upon exchange rate movements. In any case, the effects of credit constraints are not offset or replaced by the sales factors, so the conclusions in section \ref{sec-5.2} about credit constraints remain valid.
+
+\subsection{Firm Heterogeneity in Market Share}
+
+In this section, we first provide the regression results of equation \ref{eq4.5} with the market share and its square term constructed in section \ref{sec-4.2.5}. The results are presented in Table \ref{tab7.2}. The coefficient estimates for $\beta_3$ and $\beta_4$ can be used to map out the ERPT–import market share relationship.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Market Share and Effects of Credit Constraints on Import Exchange Rate Pass-through}
+	\begin{threeparttable}
+		\begin{tabular}{lccccc}
+			\toprule
+			& (1)   & (2)   & (3)   & (4) & (5)\\
+			\midrule
+			Panel A & \multicolumn{5}{c}{Import} \\
+			& MS    & $MS^2$ & FPC   & External & Tangibility \\
+			&       &       &       & Finance &  \\
+			\midrule
+			$\Delta \ln RER_{ct}$ & 0.392*** & 0.381*** & 0.119*** & 0.220*** & 1.175*** \\
+			& (0.016) & (0.016) & (0.018) & (0.017) & (0.033) \\
+			$\Delta \ln RGDP_{ct}$ & 0.247*** & 0.251*** & 0.314*** & 0.321*** & 0.280*** \\
+			& (0.090) & (0.090) & (0.090) & (0.090) & (0.090) \\
+			$\Delta \ln RGDP_{ct}*MS_{ijct}$ & -0.305*** & 0.155 & 0.677*** & 0.556*** & 0.546*** \\
+			& (0.042) & (0.156) & (0.156) & (0.156) & (0.156) \\
+			$\Delta \ln RGDP_{ct}*MS^2_{ijct}$ &       & -0.531*** & -0.941*** & -0.837*** & -0.846*** \\
+			&       & (0.173) & (0.173) & (0.173) & (0.173) \\
+			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       &       & 0.379*** &       &  \\
+			&       &       & (0.010) &       &  \\
+			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       &       & 1.156*** &  \\
+			&       &       &       & (0.029) &  \\
+			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       &       & -3.290*** \\
+			&       &       &       &       & (0.118) \\
+			$MS_{ijpt}$    & -0.012 & -0.009 & -0.002 & -0.004 & -0.003 \\
+			& (0.012) & (0.012) & (0.012) & (0.012) & (0.012) \\
+			Year FE  & Yes   & Yes   & Yes   & Yes   & Yes \\
+			Firm-product-country FE & Yes   & Yes   & Yes   & Yes   & Yes \\
+			Observations & 1792020 & 1792020 & 1792020 & 1792020 & 1792020 \\
+			\bottomrule
+		\end{tabular}
+		\begin{tablenotes}
+			\footnotesize
+			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\%. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (3)-(5) use different measures of credit constraints calculated using U.S. data. Panel A shows the effects of market share and credit constraints on import ERPT while panel B shows their effects on export ERPT. Panel B is shown in Appendix \ref{tabA.3}. All regressions include firm-product-country fixed effects and year fixed effects.
+		\end{tablenotes}
+	\end{threeparttable}
+	\label{tab7.2}
+\end{table}
+
+In columns (1) and (2), we add the primary and quadratic terms of market share to the baseline estimation of ERPT in turn. In columns (3)-(4), we further include the effects of external finance dependence and asset tangibility on top of column (2). Panel B shows the results for the export side. We find that there is evidence of a negative relationship between import pass-through and market share; however, the coefficient for the linear interaction term is positive, while the strong negative effect lies on the squared interaction term, suggesting some curvature in this relationship. The effect of market share on export ERPT is not significant. 
+
+In addition, we also perform group regressions by market share quartile and report the results in Table \ref{tab7.2}. Columns (1)-(4) show the import exchange rate pass-through for importers within each quartile of the market share distribution (0-25\%, 25\%-50\%, 50\%-75\%, 75\%-100\%), respectively. Panel B in turn shows the results for exporters within different quartiles in the market share distribution. Results for each quartile group with interaction terms of credit constraints are not provided here but are available upon request. Roughly speaking, the import exchange rate pass-through and market share show a hump-shaped (inverted U-shaped) relationship, and the export exchange rate pass-through coefficient (weakly) decreases with the market share (towards complete price pass-through in upper quartiles).
+
+\begin{table}[htbp]
+	\centering
+	\caption{Estimations of Exchange Rate Pass-Through by Market Share Quartile}
+	\begin{threeparttable}
+		\begin{tabular}{lcccc}
+			\toprule
+			& (1)   & (2)   & (3)   & (4) \\
+			\midrule
+			Panel A & \multicolumn{4}{c}{Import} \\
+			& 1st   & 2nd   & 3rd   & 4th \\
+			\midrule
+			$\Delta \ln RER_{ct}$ & 0.222*** & 0.378*** & 0.404*** & 0.242*** \\
+			& (0.056) & (0.042) & (0.032) & (0.020) \\
+			$\Delta \ln RGDP_{ct}$ & -0.371 & 0.444* & 0.314* & -0.054 \\
+			& (0.324) & (0.241) & (0.179) & (0.129) \\
+			Year FE  & Yes   & Yes   & Yes   & Yes \\
+			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+			Observations & 372447 & 450728 & 492016 & 476829 \\
+			\midrule
+			Panel B & \multicolumn{4}{c}{Export} \\
+			& 1st   & 2nd   & 3rd   & 4th \\
+			\midrule
+			$\Delta \ln RER_{ct}$ & 0.101*** & 0.096*** & 0.032*** & 0.007 \\
+			& (0.023) & (0.014) & (0.010) & (0.008) \\
+			$\Delta \ln RGDP_{ct}$ & -0.099 & 0.082 & -0.062 & -0.054 \\
+			& (0.188) & (0.104) & (0.070) & (0.052) \\
+			Year FE  & Yes   & Yes   & Yes   & Yes \\
+			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+			Observations & 367524 & 464827 & 508742 & 452881 \\
+			\bottomrule
+		\end{tabular}
+		\begin{tablenotes}
+			\footnotesize
+			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Results for each quartile group with interaction terms of credit constraints are not provided here but are available upon request. All regressions include firm-product-country fixed effects and year fixed effects.
+		\end{tablenotes}
+	\end{threeparttable}
+	\label{tab7.3}
+\end{table}
+
+Compared with the literature, \cite{auer2016} suggest that the direct response of prices to an exchange rate shock is U-shaped in exporter market share while \cite{devereux2017} supplement it by arguing that the market share of the importing firm is negatively correlated with pass-through and positively with local currency pricing (LCP). The insignificant relationship we find between export exchange rate pass-through and market share may be because China's original export exchange rate pass-through is nearly complete. Yet, the hump-shaped relationship between Chinese importers is interesting and worthy of further discussion.
+
+\subsection{Firm Heterogeneity in Ownership} \label{sec-7.3}
+
+An important feature of the financing environment in China is that links to the government and ease of access to credit are highly correlated. Therefore, ownership may be another potential factor affecting credit constraints, as state-owned enterprises (SOEs), domestic private firms, foreign-owned firms and joint ventures in China have different credit features in addition to their heterogeneous credit demand at the industry level. In this section, we check different types of firms and see whether their ownership types would affect the current main results. First, we provide baseline estimations of exchange rate pass-through for those firms with different ownership. Next, we check whether credit needs have effects with the same direction on exchange rate pass-through among all those firms.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Estimations with Importers of Different Ownership Types}
+	\label{tab7.4}
+	\resizebox{1.1\linewidth}{!}{
+		\begin{threeparttable}
+			\begin{tabular}{lllllllll}
+				\toprule
+				& (1)   & (2)   & (3)   & (4)   & (5)   & (6)   & (7)   & (8) \\
+				\midrule
+				Panel A-1 & \multicolumn{4}{c}{State-owned Enterprises} & \multicolumn{4}{c}{Domestic Private Enterprises} \\
+				& Baseline & FPC   & External  & Tangibility & Baseline & FPC   & External  & Tangibility \\
+				&  &   & Finance &  &  &   &  Finance &  \\
+				\midrule
+				$\Delta \ln RER_{ct}$ & 0.620*** & 0.462** & 0.488*** & 1.339*** & 0.146** & 0.053 & 0.100 & 0.682*** \\
+				& (0.177) & (0.186) & (0.184) & (0.360) & (0.074) & (0.078) & (0.075) & (0.169) \\
+				$\Delta \ln RGDP_{ct}$ & -1.675 & -1.846 & -1.893 & -1.747 & 0.195 & 0.212 & 0.189 & 0.236 \\
+				& (1.257) & (1.258) & (1.259) & (1.257) & (0.525) & (0.525) & (0.525) & (0.525) \\
+				$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.252*** &       &       &       & 0.181*** &       &  \\
+				&       & (0.095) &       &       &       & (0.049) &       &  \\
+				$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 0.786*** &       &       &       & 0.448*** &  \\
+				&       &       & (0.299) &       &       &       & (0.145) &  \\
+				$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -2.761** &       &       &       & -2.069*** \\
+				&       &       &       & (1.205) &       &       &       & (0.588) \\
+				Year FE  & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes \\
+				Firm-product & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes \\
+				-country FE &&&&&&&& \\
+				Observations     & 17537 & 17537 & 17537 & 17537 & 88729 & 88729 & 88729 & 88729 \\
+				\midrule
+				Panel A-2 & \multicolumn{4}{c}{Multinational Enterprises} & \multicolumn{4}{c}{Joint Ventures} \\
+				& Baseline & FPC   & External  & Tangibility & Baseline & FPC & External  & Tangibility \\
+				&  &   & Finance &  &  &   &  Finance &  \\
+				\midrule
+				$\Delta \ln RER_{ct}$ & 0.316*** & 0.008 & 0.121*** & 1.342*** & 0.402*** & 0.256*** & 0.322*** & 0.919*** \\
+				& (0.021) & (0.022) & (0.021) & (0.044) & (0.024) & (0.026) & (0.024) & (0.051) \\
+				$\Delta \ln RGDP_{ct}$ & 0.516*** & 0.511*** & 0.504*** & 0.519*** & 0.086 & 0.167 & 0.189 & 0.107 \\
+				& (0.117) & (0.117) & (0.117) & (0.117) & (0.150) & (0.150) & (0.150) & (0.150) \\
+				$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.501*** &       &       &       & 0.232*** &       &  \\
+				&       & (0.013) &       &       &       & (0.015) &       &  \\
+				$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.625*** &       &       &       & 0.671*** &  \\
+				&       &       & (0.041) &       &       &       & (0.044) &  \\
+				$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -4.138*** &       &       &       & -2.102*** \\
+				&       &       &       & (0.157) &       &       &       & (0.185) \\
+				Year FE  & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes \\
+				Firm-product & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes \\
+				-country FE &&&&&&&& \\
+				Observations     & 1067958 & 1067958 & 1067958 & 1067958 & 617796 & 617796 & 617796 & 617796 \\
+				\bottomrule
+			\end{tabular}
+			\begin{tablenotes}
+				\footnotesize
+				\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A-1 and panel A-2 show results of import ERPT for state-owned enterprises, domestic private enterprises, multinational enterprises, and joint venture firms, respectively. Panel B-1 and panel B-2 show the results of export ERPT for those firms.  Panel B is shown in Appendix \ref{tabA.4}. All regressions include firm-product-country fixed effects and year fixed effects.
+			\end{tablenotes}
+		\end{threeparttable}
+	}
+\end{table}
+
+Table \ref{tab7.4} shows the results for importers of different ownership types and Table \ref{tabA.4} shows the results for exporters. From the baseline coefficients in columns (1) and (5) in both panels of Table \ref{tab7.4}, we find that state-owned enterprises (SOEs) have the most complete import exchange rate pass-through around 62\%, while domestic private enterprises have the most incomplete import pass-through at about 14.6\%. Firms with foreign capital (including multinational enterprises and joint ventures) perform in the middle, with 31.6\% and 40.2\% import ERPT respectively. As for the impact of industry-level credit demand constraints on exchange rate pass-through (columns (2)-(4) and (6)-(8) in both panels), the signs and significance of regression coefficients for all types of firms are the same as in the previous main results. This suggests that although ownership type itself can cause differences among firms, the effect of credit constraints on exchange rate pass-through cannot be ignored in all types of firms.
+
+\subsection{Discussion on Import-export Linkage} \label{sec-7.4}
+
+Following the analysis of two-way traders, we briefly discuss the potential relationship between import and export pass-through of exchange rate shocks here. On the one hand, for two-way traders, export exchange rate pass-through could act as a "pressure-reducing valve" for import price pass-through. When a firm has the ability to pass more exchange rate fluctuations to destination prices, it has more room to absorb price fluctuations of imported inputs. In other words, the firm-level export pass-through will have a positive effect on all product-level import pass-throughs of the same firm.
+
+On the other hand, big importers are also big exporters (AIK\cite{aik2014}). Therefore, advantages in some firm characteristics, either explicit ones such as size, market share, or productivity, or implicit ones like foreign networks may lead them to have greater bargaining power on both the import side and the export side and thus cause less complete export and import price pass-through at the same time. 
+
+To study whether and how those two channels affect the import exchange rate pass-through, ideally we need to control export price pass-through when calculating import price pass-through for all two-way traders. However, it is not available to estimate the price pass-through of each individual firm. We could only check potential influential factors individually using current strategies. However, this provides a future direction for studies to determine the factors of import pass-through.
+
+\subsection{Discussion on the Trend of China’s Exchange Rate Pass-through}
+
+This article focuses on the horizontal comparison of import and export exchange rate pass-through and its causes. In the future, we can extend our methodology to reveal the time-series trend by varying periods. Actually, in our preliminary research, we found that China's export exchange rate pass-through has shown an overall downward trend (to be more incomplete) during the 2000s while the trend of China's import pass-through is vague. However, a more detailed investigation requires a longer panel covering recent years.
+
+\cite{devereux2017} attempt to study how changes in import market shares over time may be related to changes in aggregate exchange rate pass-through over time. They run weighted rolling regressions on 12-month windows moving up by month covering 70 months. Although they find no perfect coincidence between the increase in import market share of large importers and the decrease in pass-through, the general trend does show that the aggregate pass-through is incomplete when the import market share of large importers is large. Therefore, we have reason to suspect that the evolution in China's exchange rate pass-through over time may also be due to the concentration of market share, that is, large exporters and importers occupy more market shares and may thus have stronger bargaining power.
+
+To further ask whether the trend of exchange rate pass-through could be at least partially affected by credit constraints, there are two possible channels to discuss. First, the credit constraints on Chinese exporters are gradually loosening. It may be because of the decreasing credit needs of Chinese exporters or the improvement of the immature financial market in China. Second, China's exports switch from more credit-constrained to less-constrained industries. Credit-constrained firms find it harder to survive in export markets (extensive margin) or export less in value (intensive margin).
+
+\section{Conclusion}\label{sec-conclusion}
+
+In this paper, we provide evidence at a highly disaggregated level for the incomplete import exchange rate pass-through in China. Our research contributes to the literature by revealing how importers' characteristics, especially the degree of financial constraints that they face, affect exchange rate price pass-through patterns. Utilizing unit value information from Chinese Customs and comparing imports with exports, we find that (1) the average import price pass-through in China is around 35-40\%, far below the 95\% export price pass-through; (2) for firms in industries with more stringent credit constraints, both import and export exchange rate pass-through tend to be more complete; (3) import source diversity can effectively reduce import price pass-through and offset the effects of credit constraints. The main novelty of our empirical strategy is to focus on the role of importers. We believe that micro import price pass-through measures China's ability to withstand risks in the international trade market from a new perspective.
+
+There are several directions for future improvement. First, we need to explore the underlying mechanism by which credit constraints affect exchange rate pass-through. We only verify this effect based on a reduced-form approach at this stage. Even after controlling for some potential channels claimed by literature, we are not yet clear about how the remaining effects of credit constraints work. Future work should build a structural model to identify the detailed channels. Second, we could study how a firm's import and export behaviors influence each other. The dominance of two-way traders in China's international trade volume is a key fact that we cannot ignore. Adjustments on the import side and export side are two sides of the same coin for companies to face exchange rate shocks. Third, we should pay attention to the trend of China's exchange rate pass-through over time. The trend may reflect changing market power of Chinese firms and their patterns of pricing to market behaviors. Ideally, we expect to distinguish the contribution of each factor to the trend in exchange rate pass-through. 
+
+\newpage 
+\bibliography{ref}
+
+\appendix{Extra Tables}\label{sec-appendix}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Export Markets and Effects of Credit Constraints on Export Exchange Rate Pass-Through}
+	\begin{threeparttable}
+		\begin{tabular}{lcccc}
+			\toprule
+			& (1)   & (2)   & (3)   & (4)    \\
+			\midrule
+			Panel B & \multicolumn{4}{c}{Export} \\
+			& \#Markets & \#Markets+ & \#Markets+ & \#Markets+	 \\
+			&       & FPC &External & Tangibility \\
+			&       & &Finance &			\\
+			\midrule
+			$\Delta \ln RER_{ct}$ & 0.055*** & 0.058*** & 0.056*** & 0.028 \\
+			& (0.007) & (0.008) & (0.007) & (0.021) \\
+			$\Delta \ln RGDR_{ct}$ & -0.079** & -0.080** & -0.079** & -0.081** \\
+			& (0.037) & (0.037) & (0.037) & (0.037) \\
+			$\#Market_{ijt}$ & -0.001*** & -0.001*** & -0.001*** & -0.003*** \\
+			& (0.000) & (0.000) & (0.000) & (0.001) \\
+			$\Delta \ln RER_{ct}*FPC_{j}*\#Market_{ijt}$ &       & -0.000* &       &  \\
+			&       & (0.000) &       &  \\
+			$\Delta \ln RER_{ct}*FPC_{j}$ &       & -0.009 &       &  \\
+			&       & (0.007) &       &  \\
+			$\Delta \ln RER_{ct}*ExtFin_{j}*\#Market_{ijt}$ &       &       & -0.001 &  \\
+			&       &       & (0.001) &  \\
+			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & -0.019 &  \\
+			&       &       & (0.020) &  \\
+			$\Delta \ln RER_{ct}*Tang_{j}*\#Market_{ijt}$ &       &       &       & 0.006** \\
+			&       &       &       & (0.003) \\
+			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & 0.102 \\
+			&       &       &       & (0.075) \\
+			Year FE  & Yes   & Yes   & Yes   & Yes \\
+			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
+			Observations & 1793974 & 1793974 & 1793974 & 1793974 \\
+			\bottomrule
+		\end{tabular}
+		\begin{tablenotes}
+			\footnotesize
+			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A is shown in Table \ref{tab5.3}. All regressions include firm-product-country fixed effects and year fixed effects
+		\end{tablenotes}
+	\end{threeparttable}
+	\label{tabA.1}
+\end{table}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Heterogeneous Markup and Effects of Credit Constraints on Export Exchange Rate Pass-through}
+	\begin{threeparttable}
+		\begin{tabular}{lcccc}
+			\midrule          & (1)   & (2)   & (3)   & (4)     \\
+			\midrule
+			Panel B & \multicolumn{4}{c}{Export} \\
+			& Markup & Markup+& Markup+ & Markup+      \\
+			&       &FPC& External & Tangibility        \\
+			&       & & Finance &  	          \\
+			\midrule
+			$\Delta \ln RER_{ct}$ & -0.046** & -0.042** & -0.048** & -0.112***  \\
+			& (0.021) & (0.021) & (0.021) & (0.027)  \\
+			$\Delta \ln RGDP_{ct}$ & -0.074* & -0.076* &-0.075* & -0.076* \\
+			& (0.043) & (0.043) & (0.043) & (0.043)  \\
+			$\Delta \ln RER_{ct}$*$Markup_{jt-1}$ & 0.061*** & 0.066*** & 0.067*** & 0.063*** \\
+			& (0.016) & (0.016) & (0.016) & (0.016) \\
+			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & -0.023*** &       &  \\
+			&       & (0.005) &       &   \\
+			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & -0.061*** &   \\
+			&       &       & (0.016) &   \\
+			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & 0.243***  \\
+			&       &       &       & (0.062)  \\
+			$Markup_{jt-1}$ & -0.005* & -0.005 & -0.004 & -0.005*  \\
+			& (0.003) & (0.003) & (0.003) & (0.003) \\
+			Year FE  & Yes   & Yes   & Yes   & Yes       \\
+			Firm-product-country FE & Yes   & Yes   & Yes   & Yes       \\
+			Observations & 1411116 & 1411116 & 1411116 & 1411116  \\
+			\bottomrule
+		\end{tabular}
+		\begin{tablenotes}
+			\footnotesize
+			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A is shown in Table \ref{tab7.1}. All regressions include firm-product-country fixed effects and year fixed effects.
+		\end{tablenotes}
+	\end{threeparttable}
+	\label{tabA.2}
+\end{table}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Market Share and Effects of Credit Constraints on Import Exchange Rate Pass-through}
+	\begin{threeparttable}
+	\begin{tabular}{lccccc}
+		\toprule
+		& (1)   & (2)   & (3)   & (4) & (5)\\
+		\midrule
+		Panel B & \multicolumn{5}{c}{Export} \\
+		& MS    & $MS^2$ &FPC& External & Tangibility \\
+		&       &       && Finance &  \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.035*** & 0.037*** & 0.045*** & 0.039*** & -0.022 \\
+		& (0.006) & (0.007) & (0.007) & (0.007) & (0.015) \\
+		$\Delta \ln RGDP_{ct}$ & -0.079** & -0.079** & -0.080** & -0.079** & -0.080** \\
+		& (0.037) & (0.037) & (0.037) & (0.037) & (0.037) \\
+		$\Delta \ln RGDP_{ct}*MS_{ijct}$ & -0.008 & -0.040 & -0.043 & -0.036 & -0.051 \\
+		& (0.012) & (0.049) & (0.049) & (0.049) & (0.049) \\
+		$\Delta \ln RGDP_{ct}*MS^2_{ijct}$ &       & 0.035 & 0.037 & 0.033 & 0.041 \\
+		&       & (0.050) & (0.050) & (0.050) & (0.050) \\
+		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       &       & -0.019*** &       &  \\
+		&       &       & (0.004) &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       &       & -0.045*** &  \\
+		&       &       &       & (0.013) &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       &       & 0.229*** \\
+		&       &       &       &       & (0.053) \\
+		$MS_{ijpt}$    & 0.070*** & 0.070*** & 0.070*** & 0.070*** & 0.070*** \\
+		& (0.004) & (0.004) & (0.004) & (0.004) & (0.004) \\
+		Year FE  & Yes   & Yes   &   Yes    & Yes   & Yes \\
+		Firm-product-country FE & Yes   & Yes   &   Yes    & Yes   & Yes \\
+		Observations & 1793974 & 1793974 & 1793974 & 1793974 & 1793974 \\
+		\bottomrule
+	    \end{tabular}
+    \begin{tablenotes}
+    	\footnotesize
+    	\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (3)-(5) use different measures of credit constraints calculated using U.S. data. Panel A is shown in Table \ref{tab7.2}. All regressions include firm-product-country fixed effects and year fixed effects.
+    \end{tablenotes}
+	\end{threeparttable}
+	\label{tabA.3}
+\end{table}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Estimations with Exporters of Different Ownership Types}
+	\label{tabA.4}
+	\resizebox{1.1\linewidth}{!}{
+	\begin{threeparttable}
+	\begin{tabular}{lllllllll}
+		\toprule
+		& (1)   & (2)   & (3)   & (4)   & (5)   & (6)   & (7)   & (8) \\
+		\midrule
+		Panel B-1 & \multicolumn{4}{c}{State-owned Enterprises} & \multicolumn{4}{c}{Domestic Private Enterprises} \\
+		& Baseline & FPC   & External  & Tangibility & Baseline & FPC   & External  & Tangibility \\
+		&  &   & Finance &  &  &   &  Finance &  \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & -0.012 & -0.032 & -0.034 & 0.028 & 0.031*** & 0.032*** & 0.030*** & -0.008 \\
+		& (0.034) & (0.036) & (0.035) & (0.089) & (0.011) & (0.011) & (0.011) & (0.032) \\
+		$\Delta \ln RGDP_{ct}$ & 0.310 & 0.301 & 0.298 & 0.308 & 0.079 & 0.079 & 0.079 & 0.078 \\
+		& (0.225) & (0.225) & (0.225) & (0.225) & (0.076) & (0.076) & (0.076) & (0.076) \\
+		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.034 &       &       &       & -0.004 &       &  \\
+		&       & (0.021) &       &       &       & (0.009) &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 0.116** &       &       &       & 0.008 &  \\
+		&       &       & (0.058) &       &       &       & (0.026) &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -0.146 &       &       &       & 0.143 \\
+		&       &       &       & (0.304) &       &       &       & (0.109) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes \\
+		Firm-product & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes \\
+		-country FE &&&&&&&& \\
+		Observations     & 26894 & 26894 & 26894 & 26894 & 484522 & 484522 & 484522 & 484522 \\
+		\midrule
+		Panel B-2 & \multicolumn{4}{c}{Multinational Enterprises} & \multicolumn{4}{c}{Joint Ventures} \\
+		& Baseline & FPC   & External  & Tangibility & Baseline & FPC   & External  & Tangibility \\
+		&  &   & Finance &  &  &   &  Finance &  \\
+		\midrule
+		$\Delta \ln RER_{ct}$ & 0.032*** & 0.045*** & 0.038*** & -0.048** & 0.031*** & 0.042*** & 0.036*** & -0.026 \\
+		& (0.009) & (0.009) & (0.009) & (0.024) & (0.009) & (0.010) & (0.009) & (0.025) \\
+		$\Delta \ln RGDP_{ct}$ & -0.183*** & -0.187*** & -0.185*** & -0.188*** & -0.080 & -0.079 & -0.078 & -0.080 \\
+		& (0.059) & (0.059) & (0.059) & (0.059) & (0.062) & (0.062) & (0.062) & (0.062) \\
+		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & -0.028*** &       &       &       & -0.026*** &       &  \\
+		&       & (0.007) &       &       &       & (0.007) &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & -0.072*** &       &       &       & -0.078*** &  \\
+		&       &       & (0.023) &       &       &       & (0.022) &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & 0.308*** &       &       &       & 0.218** \\
+		&       &       &       & (0.086) &       &       &       & (0.089) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes \\
+		Firm-product & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes   & Yes \\
+		-country FE &&&&&&&& \\
+		Observations     & 711685 & 711685 & 711685 & 711685 & 570873 & 570873 & 570873 & 570873 \\
+		\bottomrule
+	\end{tabular}
+	\begin{tablenotes}
+		\footnotesize
+		\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A-1 and A-2 are shown in Table \ref{tab7.4}. All regressions include firm-product-country fixed effects and year fixed effects.
+	\end{tablenotes}
+\end{threeparttable}
+}
+\end{table}
+
+
+\end{document}
