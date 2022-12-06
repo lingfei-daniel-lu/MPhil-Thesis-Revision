@@ -38,3 +38,22 @@ Suggested changes to the main content:
    2. using sourcing diversity (value-weighted measure of import sources, firm-year level) 
    3. using trade distance (between China and import sources, country level)
    4. using new importer indicator (dummy variable, firm-year level or firm-country-year level)
+
+# 2022.11.24
+
+Two specifications with market share and credit constraints:
+
+1. $$
+   \Delta \ln p_{ijct}=\alpha+\beta_{1} \Delta \ln RER_{ct}+\beta_{2} \Delta \ln RER_{ct} * Credit_{j}+\beta_{3} \Delta \ln RER_{ct} * Credit_{j}*MS_{ijct}+...
+   $$
+
+2. $$
+   \Delta \ln p_{ijct}=\alpha+\beta_{1} \Delta \ln RER_{ct}+\beta_{2} \Delta \ln RER_{ct} * MS_{ijct}+\beta_{3} \Delta \ln RER_{ct} * Credit_{j}*MS_{ijct}+...
+   $$
+
+Three more tests to explain how credit constraints affect importers' sourcing power:
+
+1. long-run vs short-run relationship: import duration
+2. scale effect: market share
+3. diversity of network: number of sources, concentration ratio
+4. distance effect: geographical distance from CEPII
