@@ -136,6 +136,13 @@ use ".\customs_00-11.dta",clear
 customs_country_clean
 save customs_country_name,replace
 
+use customs_country_name,clear
+drop coun_aim
+rename country_adj coun_aim
+duplicates drop 
+save customs_country_code,replace
+
+
 cd "D:\Project C"
 use ".\customs data\customs_00-11.dta",clear
 bys party_id: egen EN_adj=mode(EN),maxmode
@@ -226,7 +233,7 @@ use "D:\Project A\customs merged\cust.matched.all.dta",clear
 bys FRDM: egen EN_adj=mode(EN),maxmode
 drop EN
 rename EN_adj EN
-merge n:1 coun_aim using "D:\Project A\customs merged\cust_country",nogen keep(matched)
+merge n:1 coun_aim using "D:\Project C\customs data\customs_country_name",nogen keep(matched)
 drop coun_aim
 rename country_adj coun_aim
 drop if coun_aim==""|coun_aim=="中华人民共和国"
@@ -456,12 +463,23 @@ label var rs2 "fraction of inputs not sold on exchange"
 save CIC_contract,replace
 
 *-------------------------------------------------------------------------------
+* Distance from CEPII Gravity
+cd "D:\Project C\gravity"
+use Gravity_CHN_d,clear
+keep year iso3_o distw_harmonic
+keep if year>=1999 & year<=2007
+rename (iso3_o distw_harmonic) (countrycode distance)
+drop if distance==.
+merge n:1 countrycode using "D:\Project C\customs data\customs_country_code",nogen keep(matched)
+save distance_CHN,replace
+
+*-------------------------------------------------------------------------------
 * Trading partner base
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
 keep FRDM year exp_imp HS6
 duplicates drop
-bys FRDM year exp_imp: egen product_n=count(HS6)
+bys FRDM year exp_imp: egen product_count=count(HS6)
 drop HS6
 duplicates drop
 save customs_matched_product,replace
@@ -469,7 +487,7 @@ save customs_matched_product,replace
 use customs_matched,clear
 keep FRDM year exp_imp coun_aim
 duplicates drop
-bys FRDM year exp_imp: egen country_n=count(coun_aim)
+bys FRDM year exp_imp: egen country_count=count(coun_aim)
 drop coun_aim
 duplicates drop
 save customs_matched_country,replace
@@ -484,15 +502,14 @@ duplicates drop
 save customs_matched_product_country,replace
 
 *-------------------------------------------------------------------------------
-* New entrant indicator
+* Duration
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
-keep FRDM exp_imp coun_aim year
+keep FRDM year exp_imp coun_aim
 duplicates drop
 sort FRDM exp_imp coun_aim year
-bys FRDM exp_imp coun_aim: gen new_entrant=1 if _n==1
-replace new_entrant=0 if new_entrant==.
-save customs_matched_new_entrant,replace
+by FRDM exp_imp coun_aim: gen duration=_n
+save customs_matched_duration,replace
 
 *-------------------------------------------------------------------------------
 * Check two-way traders
@@ -513,8 +530,8 @@ save customs_twoway,replace
 * Merge customs data with CIE data to construct export sample
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
+merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
 merge n:1 FRDM year coun_aim HS6 exp_imp using customs_matched_product_country,nogen keep(matched)
-merge n:1 FRDM year coun_aim exp_imp using customs_matched_new_entrant,nogen keep(matched)
 keep if exp_imp =="exp"
 drop exp_imp
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope peg_USD)
@@ -526,9 +543,6 @@ foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口
 	drop if strmatch(EN, "*`key'*") 
 }
 bys HS6 coun_aim year: egen MS=pc(value_year),prop
-xtile MS_xt4=MS,nq(4)
-gen MS_d=0 if MS_xt4<=2
-replace MS_d=1 if MS_xt4>=3
 gen MS_sqr=MS^2
 sort FRDM HS6 coun_aim year
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
@@ -538,7 +552,7 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 Cash_cic2 Liquid_cic2 Levg_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope country_scope"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope country_scope"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
@@ -549,11 +563,11 @@ save sample_matched_exp,replace
 * Use the same method to construct import sample
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
+merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
 merge n:1 FRDM year coun_aim HS6 exp_imp using customs_matched_product_country,nogen keep(matched)
-merge n:1 FRDM year coun_aim exp_imp using customs_matched_new_entrant,nogen keep(matched)
 keep if exp_imp =="imp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope new_entrant peg_USD)
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope peg_USD duration)
 gen price_RMB=value_year*NER_US/quant_year
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
@@ -562,9 +576,6 @@ foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口
 	drop if strmatch(EN, "*`key'*") 
 }
 bys HS6 coun_aim year: egen MS=pc(value_year),prop
-xtile MS_xt4=MS,nq(4)
-gen MS_d=0 if MS_xt4<=2
-replace MS_d=1 if MS_xt4>=3
 gen MS_sqr=MS^2
 sort FRDM HS6 coun_aim year
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
@@ -574,7 +585,7 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 Cash_cic2 Liquid_cic2 Levg_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope country_scope"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope country_scope"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }

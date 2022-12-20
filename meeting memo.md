@@ -53,7 +53,16 @@ Two specifications with market share and credit constraints:
 
 Three more tests to explain how credit constraints affect importers' sourcing power:
 
-1. long-run vs short-run relationship: import duration
-2. scale effect: market share
-3. diversity of network: number of sources, concentration ratio
-4. distance effect: geographical distance from CEPII
+1. long-run vs short-run relationship: import duration (tenure) --- yes
+2. scale effect: market share --- yes
+3. diversity of network: number of sources ---yes, concentration ratio --- no
+4. distance effect: geographical distance from CEPII --- no
+
+# 2022.12.16
+
+Suggestions about improving the test on the effects of alternative sources on ERPT:
+
+1. use exogenous measure of sources: maximum, initial or average
+2. use distance as alternative measure of sources
+
+Together we need a wide table for robustness check.
