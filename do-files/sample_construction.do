@@ -465,12 +465,17 @@ save CIC_contract,replace
 *-------------------------------------------------------------------------------
 * Distance from CEPII Gravity
 cd "D:\Project C\gravity"
+use Gravity_V202211,clear
+keep if country_id_d=="CHN"
+save Gravity_CHN_d,replace
+
 use Gravity_CHN_d,clear
 keep year iso3_o distw_harmonic
 keep if year>=1999 & year<=2007
 rename (iso3_o distw_harmonic) (countrycode distance)
 drop if distance==.
 merge n:1 countrycode using "D:\Project C\customs data\customs_country_code",nogen keep(matched)
+collapse (mean) distance, by (countrycode coun_aim)
 save distance_CHN,replace
 
 *-------------------------------------------------------------------------------
@@ -534,11 +539,15 @@ merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(m
 merge n:1 FRDM year coun_aim HS6 exp_imp using customs_matched_product_country,nogen keep(matched)
 keep if exp_imp =="exp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope peg_USD)
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope peg_USD duration)
+bys FRDM HS6: egen destination=mean(country_scope)
 gen price_RMB=value_year*NER_US/quant_year
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
 merge n:1 coun_aim using ".\customs_matched_top_partners",nogen keep(matched)
+merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
+bys FRDM HS6: egen dist=mean(distance)
+replace dist=dist/1000
 foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
 	drop if strmatch(EN, "*`key'*") 
 }
@@ -552,7 +561,7 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope country_scope"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope destination dist"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
@@ -568,10 +577,14 @@ merge n:1 FRDM year coun_aim HS6 exp_imp using customs_matched_product_country,n
 keep if exp_imp =="imp"
 drop exp_imp
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope peg_USD duration)
+bys FRDM HS6: egen source=mean(country_scope)
 gen price_RMB=value_year*NER_US/quant_year
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
 merge n:1 coun_aim using ".\customs_matched_top_partners",nogen keep(matched)
+merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
+bys FRDM HS6: egen dist=mean(distance)
+replace dist=dist/1000
 foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
 	drop if strmatch(EN, "*`key'*") 
 }
@@ -585,7 +598,7 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope country_scope"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope source dist"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }

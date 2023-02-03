@@ -157,20 +157,40 @@ areg dlnprice_tr dlnRER x_twoway_trade x_Tang_US x_Tang_US_twoway dlnrgdp i.year
 cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
 
-eststo imp_source: areg dlnprice_tr dlnRER x_country_scope dlnrgdp i.year, a(group_id)
+eststo imp_source: areg dlnprice_tr dlnRER x_source dlnrgdp i.year, a(group_id)
 
-gen x_FPC_US_source=x_FPC_US*country_scope
-gen x_ExtFin_US_source=x_ExtFin_US*country_scope
-gen x_Tang_US_source=x_Tang_US*country_scope
-gen x_Invent_US_source=x_Invent_US*country_scope
+gen x_FPC_US_source=x_FPC_US*source
+gen x_ExtFin_US_source=x_ExtFin_US*source
+gen x_Tang_US_source=x_Tang_US*source
+gen x_Invent_US_source=x_Invent_US*source
 
-eststo imp_FPC_US_source: areg dlnprice_tr dlnRER x_country_scope x_FPC_US_source x_FPC_US dlnrgdp i.year, a(group_id)
-eststo imp_ExtFin_US_source: areg dlnprice_tr dlnRER x_country_scope x_ExtFin_US_source x_ExtFin_US dlnrgdp i.year, a(group_id)
-eststo imp_Tang_US_source: areg dlnprice_tr dlnRER x_country_scope x_Tang_US_source x_Tang_US dlnrgdp i.year, a(group_id)
-eststo imp_Invent_US_source: areg dlnprice_tr dlnRER x_country_scope x_Invent_US_source x_Invent_US dlnrgdp i.year, a(group_id)
+eststo imp_FPC_US_source: areg dlnprice_tr dlnRER x_source x_FPC_US_source x_FPC_US dlnrgdp i.year, a(group_id)
+eststo imp_ExtFin_US_source: areg dlnprice_tr dlnRER x_source x_ExtFin_US_source x_ExtFin_US dlnrgdp i.year, a(group_id)
+eststo imp_Tang_US_source: areg dlnprice_tr dlnRER x_source x_Tang_US_source x_Tang_US dlnrgdp i.year, a(group_id)
+eststo imp_Invent_US_source: areg dlnprice_tr dlnRER x_source x_Invent_US_source x_Invent_US dlnrgdp i.year, a(group_id)
 
 estfe imp_source imp_FPC_US_source imp_ExtFin_US_source imp_Tang_US_source imp_Invent_US_source, labels(group_id "Firm-product-country FE")
 esttab imp_source imp_FPC_US_source imp_ExtFin_US_source imp_Tang_US_source imp_Invent_US_source using "D:\Project C\tables\matched\table_imp_source.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
+
+*-------------------------------------------------------------------------------
+* Distance
+cd "D:\Project C\sample_matched"
+use sample_matched_imp,clear
+
+eststo imp_dist: areg dlnprice_tr dlnRER x_dist dlnrgdp i.year, a(group_id)
+
+gen x_FPC_US_dist=x_FPC_US*dist
+gen x_ExtFin_US_dist=x_ExtFin_US*dist
+gen x_Tang_US_dist=x_Tang_US*dist
+gen x_Invent_US_dist=x_Invent_US*dist
+
+eststo imp_FPC_US_dist: areg dlnprice_tr dlnRER x_dist x_FPC_US_dist x_FPC_US dlnrgdp i.year, a(group_id)
+eststo imp_ExtFin_US_dist: areg dlnprice_tr dlnRER x_dist x_ExtFin_US_dist x_ExtFin_US dlnrgdp i.year, a(group_id)
+eststo imp_Tang_US_dist: areg dlnprice_tr dlnRER x_dist x_Tang_US_dist x_Tang_US dlnrgdp i.year, a(group_id)
+eststo imp_Invent_US_dist: areg dlnprice_tr dlnRER x_dist x_Invent_US_dist x_Invent_US dlnrgdp i.year, a(group_id)
+
+estfe imp_dist imp_FPC_US_dist imp_ExtFin_US_dist imp_Tang_US_dist imp_Invent_US_dist, labels(group_id "Firm-product-country FE")
+esttab imp_dist imp_FPC_US_dist imp_ExtFin_US_dist imp_Tang_US_dist imp_Invent_US_dist using "D:\Project C\tables\matched\table_imp_dist.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
 
 *-------------------------------------------------------------------------------
 * Duration
