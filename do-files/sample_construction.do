@@ -506,6 +506,20 @@ merge n:1 FRDM year exp_imp using customs_matched_country,nogen
 duplicates drop
 save customs_matched_product_country,replace
 
+use customs_matched_product_country,clear
+keep if exp_imp=="imp"
+rename country_scope source
+keep FRDM year HS6 source
+duplicates drop
+save customs_matched_source,replace
+
+use customs_matched_product_country,clear
+keep if exp_imp=="exp"
+rename country_scope destination
+keep FRDM year HS6 destination
+duplicates drop
+save customs_matched_destination,replace
+
 *-------------------------------------------------------------------------------
 * Duration
 cd "D:\Project C\sample_matched"
@@ -536,9 +550,9 @@ save customs_twoway,replace
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
 merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
-merge n:1 FRDM year coun_aim HS6 exp_imp using customs_matched_product_country,nogen keep(matched)
 keep if exp_imp =="exp"
 drop exp_imp
+<<<<<<< Updated upstream
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope peg_USD duration)
 bys FRDM HS6: egen destination=mean(country_scope)
 gen price_RMB=value_year*NER_US/quant_year
@@ -548,6 +562,14 @@ merge n:1 coun_aim using ".\customs_matched_top_partners",nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
 bys FRDM HS6: egen dist=mean(distance)
 replace dist=dist/1000
+=======
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 peg_USD)
+gen price_RMB=value_year*NER_US/quant_year
+merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
+merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
+merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
+merge n:1 FRDM year HS6 using customs_matched_destination,nogen keep(matched)
+>>>>>>> Stashed changes
 foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
 	drop if strmatch(EN, "*`key'*") 
 }
@@ -561,7 +583,11 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
+<<<<<<< Updated upstream
 local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope destination dist"
+=======
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade destination"
+>>>>>>> Stashed changes
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
@@ -573,9 +599,9 @@ save sample_matched_exp,replace
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
 merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
-merge n:1 FRDM year coun_aim HS6 exp_imp using customs_matched_product_country,nogen keep(matched)
 keep if exp_imp =="imp"
 drop exp_imp
+<<<<<<< Updated upstream
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope peg_USD duration)
 bys FRDM HS6: egen source=mean(country_scope)
 gen price_RMB=value_year*NER_US/quant_year
@@ -585,6 +611,14 @@ merge n:1 coun_aim using ".\customs_matched_top_partners",nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
 bys FRDM HS6: egen dist=mean(distance)
 replace dist=dist/1000
+=======
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 peg_USD duration)
+gen price_RMB=value_year*NER_US/quant_year
+merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
+merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
+merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
+merge n:1 FRDM year HS6 using customs_matched_source,nogen keep(matched)
+>>>>>>> Stashed changes
 foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
 	drop if strmatch(EN, "*`key'*") 
 }
@@ -598,7 +632,11 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
+<<<<<<< Updated upstream
 local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope source dist"
+=======
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade source"
+>>>>>>> Stashed changes
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
