@@ -506,6 +506,29 @@ merge n:1 FRDM year exp_imp using customs_matched_country,nogen
 duplicates drop
 save customs_matched_product_country,replace
 
+cd "D:\Project C\sample_matched"
+use customs_matched_product_country,clear
+keep if exp_imp=="exp"
+keep FRDM year HS6 country_scope
+rename country_scope destination
+duplicates drop
+sort FRDM HS6 year
+by FRDM HS6: gen destination_first=destination[1]
+by FRDM HS6: egen destination_max=max(destination)
+by FRDM HS6: egen destination_mean=mean(destination)
+save customs_matched_destination,replace
+
+use customs_matched_product_country,clear
+keep if exp_imp=="imp"
+keep FRDM year HS6 country_scope
+rename country_scope source
+duplicates drop
+sort FRDM HS6 year
+by FRDM HS6: gen source_first=source[1]
+by FRDM HS6: egen source_max=max(source)
+by FRDM HS6: egen source_mean=mean(source)
+save customs_matched_source,replace
+
 *-------------------------------------------------------------------------------
 * Duration
 cd "D:\Project C\sample_matched"
@@ -536,15 +559,14 @@ save customs_twoway,replace
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
 merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
-merge n:1 FRDM year coun_aim HS6 exp_imp using customs_matched_product_country,nogen keep(matched)
 keep if exp_imp =="exp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope peg_USD duration)
-bys FRDM HS6: egen destination=mean(country_scope)
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 peg_USD duration)
 gen price_RMB=value_year*NER_US/quant_year
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
-merge n:1 coun_aim using ".\customs_matched_top_partners",nogen keep(matched)
+merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
+merge n:1 FRDM year HS6 using customs_matched_destination,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
 bys FRDM HS6: egen dist=mean(distance)
 replace dist=dist/1000
@@ -561,7 +583,7 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope destination dist"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade destination destination_first destination_mean destination_max dist"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
@@ -573,15 +595,14 @@ save sample_matched_exp,replace
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
 merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
-merge n:1 FRDM year coun_aim HS6 exp_imp using customs_matched_product_country,nogen keep(matched)
 keep if exp_imp =="imp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 *_scope peg_USD duration)
-bys FRDM HS6: egen source=mean(country_scope)
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 peg_USD duration)
 gen price_RMB=value_year*NER_US/quant_year
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
-merge n:1 coun_aim using ".\customs_matched_top_partners",nogen keep(matched)
+merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
+merge n:1 FRDM year HS6 using customs_matched_source,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
 bys FRDM HS6: egen dist=mean(distance)
 replace dist=dist/1000
@@ -598,7 +619,7 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade product_scope source dist"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade source source_first source_max source_mean dist"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
