@@ -66,3 +66,51 @@ Suggestions about improving the test on the effects of alternative sources on ER
 2. use distance as alternative measure of sources
 
 Together we need a wide table for robustness check.
+
+# 2023.2.15
+
+The revised plan of tables and figures:
+
+Data and Measurements:
+
+Figure 1 & 2: nominal and real exchange rate for USD and EURO
+
+Table 1: Summary statistics of main samples
+
+Table 2: Summary statistics of credit constraints measures
+
+Main Results:
+
+Table 3: Baseline estimations of import exchange rate pass-through
+
+Table 4: Importers' credit constraints and exchange rate pass-through
+
+Table 5: Import sources, credit constraints, and exchange rate pass-through
+
+Export versions of Table 3 and 4 are placed in the Appendix (A1 and A2)
+
+Use distance as an alternative measure of import sources is placed in Appendix. (A3)
+
+Robustness check:
+
+Table 6: Robustness: alternative credit constraints measures based on Chinese data
+
+Table A4: Robustness: two-way traders vs pure importers
+
+Table A5: Robustness: ordinary trade vs processing trade
+
+Table A6: Robustness: excluding USD-pegged countries and alternative time period (2009 or later)
+
+Table A7: Robustness: alternative fixed effects
+
+Table A8: Robustness: cross-sectional estimation (FLL 7.1)
+
+Discussion:
+
+Table 7: Heterogeneous markup, credit constraints, and exchange rate pass-through 
+
+- big sellers are also big buyers/ import-export linkage
+
+Table A9: Heterogeneous market share, credit constraints, and exchange rate pass-through
+
+Table 8: Ownership, credit constraints, and exchange rate pass-through (to be finished)
