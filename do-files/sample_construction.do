@@ -30,6 +30,23 @@ eststo reg_index_imp_`i': reg dlnprice_imp dlnREER dlnpcost dlnrgdp if period==`
 }
 
 *-------------------------------------------------------------------------------
+* IMF CPI data
+cd "D:\Project C\IMF CPI"
+import excel International_Financial_Statistics_CPI, firstrow clear
+rename (A B C D E F G H I J K L M N) (country cpi1999 cpi2000 cpi2001 cpi2002 cpi2003 cpi2004 cpi2005 cpi2006 cpi2007 cpi2008 cpi2009 cpi2010 cpi2011)
+reshape long cpi, i(country) j(year)
+bys country: egen year_count=count(cpi)
+keep if year_count==13
+drop year_count
+save CPI_99_11,replace
+
+cd "D:\Project C\IMF CPI"
+import excel "D:\Project C\IMF CPI\IFS_country_name.xls", sheet("Sheet1") firstrow clear
+drop if countrycode==""
+merge 1:n country using CPI_99_11,nogen keep(matched)
+save CPI_99_11_code,replace
+
+*-------------------------------------------------------------------------------
 * Construct exchange rate from PWT10.0
 cd "D:\Project C\PWT10.0"
 use PWT100,clear
@@ -47,13 +64,15 @@ replace coun_aim="特克斯和凯科斯群岛" if countrycode=="TCA"
 replace coun_aim="土库曼斯坦" if countrycode=="TKM"
 replace coun_aim="英属维尔京群岛" if countrycode=="VGB"
 replace coun_aim="刚果民主共和国" if countrycode=="COD"
-save country_name,replace
+save pwt_country_name,replace
 
 cd "D:\Project C\PWT10.0"
 use PWT100,clear
 keep if year>=1999 & year<=2011 
-keep countrycode country currency_unit year xr pl_c rgdpna
-merge n:1 countrycode country currency_unit using country_name,nogen
+keep countrycode country currency_unit year xr rgdpna
+merge n:1 countrycode country currency_unit using pwt_country_name,nogen
+merge n:1 countrycode year using "D:\Project C\IMF CPI\CPI_99_11_code",nogen
+drop if xr==.
 * Bilateral nominal exchange rate relative to RMB at the same year
 gen NER=1/(xr/8.27825) if year==1999
 replace NER=8.2785042/xr if year==2000
@@ -70,19 +89,19 @@ replace NER=6.770269/xr if year==2010
 replace NER=6.4614613/xr if year==2011
 label var NER "Nominal exchange rate in terms of RMB at the same year"
 * Bilateral real exchange rate = NER*foreign CPI/Chinese CPI
-gen RER=NER*pl_c/.2097405 if year==1999
-replace RER=NER*pl_c/.2201256 if year==2000
-replace RER=NER*pl_c/.2265737 if year==2001
-replace RER=NER*pl_c/.2242131 if year==2002
-replace RER=NER*pl_c/.2326131 if year==2003
-replace RER=NER*pl_c/.2451899 if year==2004
-replace RER=NER*pl_c/.25580388 if year==2005
-replace RER=NER*pl_c/.2772298 if year==2006
-replace RER=NER*pl_c/.33112419 if year==2007
-replace RER=NER*pl_c/.4083561 if year==2008
-replace RER=NER*pl_c/.4175323 if year==2009
-replace RER=NER*pl_c/.439816 if year==2010
-replace RER=NER*pl_c/.49505907 if year==2011
+gen RER=NER*cpi/80.69 if year==1999
+replace RER=NER*cpi/80.97 if year==2000
+replace RER=NER*cpi/81.55 if year==2001
+replace RER=NER*cpi/80.96 if year==2002
+replace RER=NER*cpi/81.87 if year==2003
+replace RER=NER*cpi/85.00 if year==2004
+replace RER=NER*cpi/86.51 if year==2005
+replace RER=NER*cpi/87.94 if year==2006
+replace RER=NER*cpi/92.17 if year==2007
+replace RER=NER*cpi/97.63 if year==2008
+replace RER=NER*cpi/96.92 if year==2009
+replace RER=NER*cpi/100.00 if year==2010
+replace RER=NER*cpi/105.55 if year==2011
 label var RER "Real exchange rate to China price at the same year"
 sort coun_aim year
 by coun_aim: gen dlnRER= ln(RER)-ln(RER[_n-1]) if year==year[_n-1]+1
@@ -90,23 +109,6 @@ by coun_aim: gen dlnrgdp=ln(rgdpna)-ln(rgdpna[_n-1]) if year==year[_n-1]+1
 gen peg_USD=1 if countrycode=="ABW" | countrycode=="BHS" | countrycode=="PAN" | countrycode=="BHR"  | countrycode=="BRB" | countrycode=="BLZ" | countrycode=="BMU" | currency_unit =="East Caribbean Dollar" | currency_unit =="Netherlands Antillian Guilder"| currency_unit =="US Dollar" | countrycode=="DJI" | countrycode=="HKG" | countrycode=="JOR" | countrycode=="LBN" | countrycode=="MAC" | countrycode=="MDV" | countrycode=="OMN" | countrycode=="PAN" | countrycode=="QAT" | countrycode=="SAU" | countrycode=="ARE" | xr==1
 replace peg_USD=0 if peg_USD==.
 save RER_99_11.dta,replace
-
-cd "D:\Project C\PWT10.0"
-use RER_99_11,clear
-keep if countrycode=="USA"
-keep year NER coun_aim
-rename NER NER_US
-save US_NER_99_11.dta,replace
-
-cd "D:\Project C\PWT10.0"
-use RER_99_11,clear
-keep if countrycode=="USA" | countrycode=="KOR" | countrycode=="JPN" | countrycode=="GBR" |countrycode=="TWN"
-gen NER_sd=100 if year==1999
-replace NER_sd=NER*100/NER[_n-1] if year>=2000
-gen RER_sd=100 if year==1999
-replace RER_sd=RER*100/RER[_n-1] if year>=2000
-keep currency_unit year NER_sd RER_sd
-save RER_99_11_figure.dta,replace
 
 *-------------------------------------------------------------------------------
 * Use custom full data
@@ -142,7 +144,6 @@ rename country_adj coun_aim
 duplicates drop 
 save customs_country_code,replace
 
-
 cd "D:\Project C"
 use ".\customs data\customs_00-11.dta",clear
 bys party_id: egen EN_adj=mode(EN),maxmode
@@ -160,7 +161,6 @@ replace HS1996=substr(HS8,1,6) if year<2002
 rename HS1996 HS6
 drop if HS6=="" | party_id==""
 collapse (sum) value quant, by (party_id EN exp_imp HS6 coun_aim year)
-order party_id EN exp_imp HS6 coun_aim year
 format EN %30s
 format coun_aim %15s
 cd "D:\Project C\sample_all"
@@ -188,16 +188,15 @@ foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口
 	drop if strmatch(EN, "*`key'*") 
 }
 merge n:1 coun_aim using "D:\Project C\sample_all\customs_all_top_partners",nogen keep(matched)
-sort party_id HS6 coun_aim year
-gen HS2=substr(HS6,1,2)
-drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
 merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp)
 sort party_id HS6 coun_aim year
 gen price_RMB=value*NER_US/quant
 by party_id HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
 by party_id HS6 coun_aim: egen year_count=count(year)
-drop if year_count<=1
+drop if dlnRER==. | dlnprice==.
+gen HS2=substr(HS6,1,2)
+drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 winsor2 dlnprice, trim by(HS2 year)
 egen group_id=group(party_id HS6 coun_aim)
 save sample_all_exp,replace
@@ -212,16 +211,15 @@ foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口
 	drop if strmatch(EN, "*`key'*") 
 }
 merge n:1 coun_aim using "D:\Project C\sample_all\customs_all_top_partners",nogen keep(matched)
-sort party_id HS6 coun_aim year
-gen HS2=substr(HS6,1,2)
-drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
 merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp)
 sort party_id HS6 coun_aim year
 gen price_RMB=value*NER_US/quant
 by party_id HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
 by party_id HS6 coun_aim: egen year_count=count(year)
-drop if year_count<=1
+drop if dlnRER==. | dlnprice==.
+gen HS2=substr(HS6,1,2)
+drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 winsor2 dlnprice, trim by(HS2 year)
 egen group_id=group(party_id HS6 coun_aim)
 save sample_all_imp,replace
@@ -248,9 +246,6 @@ replace HS1996=substr(HS8,1,6) if year<2002
 rename HS1996 HS6
 drop if HS6=="" | FRDM=="" | quant_year==0 | value_year==0
 collapse (sum) value_year quant_year, by (FRDM EN exp_imp HS6 coun_aim year shipment)
-merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
-merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
-drop if dlnRER==.
 sort FRDM HS6 coun_aim year
 format EN %30s
 format coun_aim %20s
@@ -513,9 +508,9 @@ keep FRDM year HS6 country_scope
 rename country_scope destination
 duplicates drop
 sort FRDM HS6 year
-by FRDM HS6: gen destination_first=destination[1]
-by FRDM HS6: egen destination_max=max(destination)
-by FRDM HS6: egen destination_mean=mean(destination)
+by FRDM HS6: gen destin_first=destination[1]
+by FRDM HS6: egen destin_max=max(destination)
+by FRDM HS6: egen destin_mean=mean(destination)
 save customs_matched_destination,replace
 
 use customs_matched_product_country,clear
@@ -561,10 +556,10 @@ use customs_matched,clear
 merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
 keep if exp_imp =="exp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 peg_USD duration)
-gen price_RMB=value_year*NER_US/quant_year
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 duration)
+
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
-merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
+merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc *_cic2 *_US)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_destination,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
@@ -574,16 +569,18 @@ foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口
 	drop if strmatch(EN, "*`key'*") 
 }
 bys HS6 coun_aim year: egen MS=pc(value_year),prop
-gen MS_sqr=MS^2
+merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
+merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
 sort FRDM HS6 coun_aim year
+gen price_RMB=value_year*NER_US/quant_year
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: egen year_count=count(year)
-drop if year_count<=1
+drop if dlnRER==. | dlnprice==.
 gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade destination destination_first destination_mean destination_max dist"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS Markup_DLWTLD tfp_tld Markup_lag tfp_lag twoway_trade destination destin_first destin_mean destin_max dist"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
@@ -597,8 +594,7 @@ use customs_matched,clear
 merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
 keep if exp_imp =="imp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS6 peg_USD duration)
-gen price_RMB=value_year*NER_US/quant_year
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 duration)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
@@ -610,16 +606,18 @@ foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口
 	drop if strmatch(EN, "*`key'*") 
 }
 bys HS6 coun_aim year: egen MS=pc(value_year),prop
-gen MS_sqr=MS^2
+merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
+merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
 sort FRDM HS6 coun_aim year
+gen price_RMB=value_year*NER_US/quant_year
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: egen year_count=count(year)
-drop if year_count<=1
+drop if dlnRER==. | dlnprice==.
 gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS MS_sqr Markup_DLWTLD tfp_tld Markup_lag tfp_lag scratio scratio_lag twoway_trade source source_first source_max source_mean dist"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 MS Markup_DLWTLD tfp_tld Markup_lag tfp_lag twoway_trade source source_first source_max source_mean dist"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
@@ -636,18 +634,21 @@ gen shipment_type = 1 if shipment=="一般贸易" | shipment==""
 replace shipment_type = 2 if shipment=="进料加工贸易"
 replace shipment_type = 3 if shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
 replace shipment_type= 0 if shipment_type==.
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim NER NER_US RER dlnRER dlnrgdp HS2 HS6 shipment_type)
-gen price_RMB=value_year*NER_US/quant_year
-merge n:1 FRDM year using ".\customs_twoway_list",nogen keep(matched) keepus(twoway_trade)
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 shipment_type)
+merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched)
 merge n:1 coun_aim using ".\customs_matched_top_partners",nogen keep(matched)
 foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
 	drop if strmatch(EN, "*`key'*") 
 }
+merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
+merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
 sort FRDM HS6 coun_aim year
+gen price_RMB=value_year*NER_US/quant_year
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: egen year_count=count(year)
-drop if year_count<=1
+drop if dlnRER==. | dlnprice==.
+gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)

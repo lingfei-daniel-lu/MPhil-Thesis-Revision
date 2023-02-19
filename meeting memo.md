@@ -73,7 +73,7 @@ The revised plan of tables and figures:
 
 Data and Measurements:
 
-Figure 1 & 2: nominal and real exchange rate for USD and EURO
+Figure 1 & 2: nominal and real exchange rate for USD and EUR
 
 Table 1: Summary statistics of main samples
 
