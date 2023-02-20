@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 %\renewcommand{\baselinestretch}{1.15}
-\usepackage{natbib,amsmath,amsthm,booktabs,subfigure,anysize,hyperref,graphicx,float,bbm}
+\usepackage{natbib,amsmath,amsthm,booktabs,subfigure,anysize,hyperref,graphicx,float,bbm,epstopdf}
 \usepackage[margin=1in]{geometry}
 \bibliographystyle{aea}
 %\bibliographystyle{apalike}
@@ -177,9 +177,9 @@ The summary statistics of the whole customs records, the firm information datase
 		\toprule
             & \multicolumn{1}{l}{\#observations} & \multicolumn{1}{l}{Mean} & \multicolumn{1}{l}{Median} & \multicolumn{1}{l}{Std. dev} & \multicolumn{1}{l}{P10} & \multicolumn{1}{l}{P90} \\
 		\textbf{Panel A: Customs records} &       &       &       &       &       &  \\
-		Export Price (RMB) & 18,581,221 & 22007.45 & 30.1042 & 2229173 & 4.5645 & 556.4724 \\
+		Export Price (RMB/unit) & 18,581,221 & 22007.45 & 30.1042 & 2229173 & 4.5645 & 556.4724 \\
 		Annual Export Price Change & 11,400,795 & 0.0259 & 0.0060 & 0.6653 & -0.5001 & 0.5709 \\
-		Import Price (RMB) & 14,172,315 & 49519.78 & 111.0406 & 1411944 & 5.1594 & 10247.12 \\
+		Import Price (RMB/unit) & 14,172,315 & 49519.78 & 111.0406 & 1411944 & 5.1594 & 10247.12 \\
 		Annual Import Price Change  & 8,580,234 & 0.0236 & -0.0021 & 1.0171 & -0.8523 & 0.9388 \\
 		\midrule
 		\textbf{Panel B: Firm information} &       &       &       &       &       &  \\
@@ -206,9 +206,9 @@ The summary statistics of the whole customs records, the firm information datase
 
 \subsubsection{Country-level macro data} \label{Data-Macro}
 
-We obtain bilateral nominal exchange rates and price level of household consumption from the newest version of Penn World Table (PWT 10.0) referring to \cite{feenstra2015}. From the PWT, we keep 183 countries (or districts) using 136 different fiat currencies who keep full records of exchange rates during the period from 1999 to 2011. Those countries account for about 98 \% of Chinese imports and exports (\cite{xu-guo2021}).
+We obtain bilateral nominal exchange rates from the newest version of Penn World Table (PWT 10.0) referring to \cite{feenstra2015}, and consumer price indices (CPI) from the International Financial Statistics. We keep all China's trade partners who keep full records of exchange rates and CPI from 1999 to 2011, resulting in 154 countries. Those major countries account for more than 95 \% of Chinese imports and exports.
 
-Following the convention, the bilateral nominal exchange rate is defined as the number of home currency units that can purchase a unit of foreign currency. By this definition, an increase in $NER_{ct}$ means a nominal depreciation of the Chinese RMB against this currency from country $c$. Following \cite{lmx2015}, the CPI-based real exchange rate ($RER_{ct}$) is defined as the nominal exchange rate multiplied by the foreign consumer price index (CPI) and divided by the Chinese consumer price index (CPI) at the same year, which is
+Following the convention, the bilateral nominal exchange rate is defined as the number of home currency units that can purchase a unit of foreign currency. By this definition, an increase in $NER_{ct}$ means a nominal depreciation of the Chinese RMB against this currency from country $c$. Following \cite{lmx2015}, the CPI-based real exchange rate ($RER_{ct}$) is defined as the nominal exchange rate multiplied by the foreign consumer price index and divided by the Chinese consumer price index at the same year, which is
 
 $$
 RER_{ct}=NER_{ct} \cdot \frac{CPI_{ct}}{CPI_{CHN,t}}.
@@ -216,17 +216,31 @@ $$
 
 Similarly, an increase in $RER_{ct}$ means a real depreciation of the Chinese RMB against the foreign country's c currency. In later specifications, we mainly use the first difference of the logarithm of the real exchange rate to represent exchange rate changes.
 
-We saw substantial variations in RMB exchange rate fluctuations against different countries including its major trading partners during the period. We could observe that the real exchange rate against the US dollar was relatively stable in 2000-2004 due to the nominal pegging scheme of RMB to US dollars. In July 2005, the peg was lifted to a slight appreciation of RMB against US dollars as a result of this exchange policy evolution. However, exchange rates of China's other major trading partners fluctuated to varying degrees during this period. Changes in nominal and real exchange rates for the U.S. dollar and the euro relative to Chinese RMB (level in 1999 as base value 100) are shown in figures \ref{fig.USD} and \ref{fig.EUR}.
+Changes in nominal and real exchange rates for the U.S. dollar and the euro relative to Chinese RMB (level in 1999 as base value 100) are shown in figures \ref{fig.USD} and \ref{fig.EUR}. We could observe that the real exchange rates against the US dollar were relatively stable in 2000-2004 due to the nominal pegging scheme of RMB to US dollars. In July 2005, the peg was lifted to a slight appreciation of RMB against US dollars as a result of this exchange policy evolution. However, exchange rates of RMB against Eurozone fluctuated up and down during this period. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{R/USD.eps}
+	\caption{Nominal exchange rates of China's major trading partners (1999-2011)}
+	\label{fig.USD}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{R/EUR.eps}
+	\caption{Real exchange rates of China's major trading partners (1999-2011)}
+	\label{fig.EUR}
+\end{figure}
 
 In addition to nominal and real exchange rates, we also use the real GDP of foreign countries from PWT 10.0. The real GDP is computed with national-accounts growth rates. The controls of real GDP changes of the destination country, $\Delta RGDP_{ct}$, help us exclude the effect of differential economic growth on price movements. All macro variables including exchange rates and real GDPs are in annual terms to match the firm information.
 
 \subsection{Measurements of Credit constraints} \label{Credit Constraints}
 
-Another critical issue in our empirical study is to measure the extent of financial constraints. To deal with potential concurrent endogeneity, our measures of credit constraints are applied to each firm across the whole period. Following a widely recognized literature on the role of credit constraints in international trade (\cite{kroszner2007}; \cite{manova-wei-zhang2015}; \cite{fan-lai-li2015}), we use multiple financial vulnerability measures at the sector level to proxy for credit needs (demand for outside capital) and ability to resist financial risks. These measures are designed to reflect the nature of each industry which should be regarded as exogenous for each firm. If a firm is in a more financially vulnerable industry, it tends to face a tighter credit constraint, regardless of its operating conditions.
+Another critical issue in our empirical strategy is to measure the extent of financial constraints. To deal with potential concurrent endogeneity, our measures of credit constraints are applied to each firm across the whole period. Following a widely recognized literature on the role of credit constraints in international trade (\cite{kroszner2007}; \cite{manova-wei-zhang2015}; \cite{fan-lai-li2015}), we use multiple financial vulnerability measures at the sector level to proxy for credit needs (demand for outside capital) and ability to resist financial risks. These measures are designed to reflect the nature of each industry which should be regarded as exogenous for each firm. If a firm is in a more financially vulnerable industry, it tends to face a tighter credit constraint, regardless of its operating conditions.
 
 The first measure we use is external finance dependence ($ExtFin_j$), the share of capital expenditures not financed by operational cash flows. If external finance dependence is high, the industry is more financially vulnerable and firms in this industry are more credit constrained. The second measure is asset tangibility ($Tang_j$), which describes the share of the net value of tangible assets that firms can pledge as collateral to raise external finance, in its total book value. The third measure is the inventory-to-sales ratio ($Invent_j$), which measures the production cycle duration and the necessary working capital to maintain inventories and meet demand.  
 
-To utilize the U.S. industry-level credit measures in the literature, we match the CIC industry code system used in China to the International Standard Industrial Classification (ISIC) system. We first convert the older ISIC Revision 2 3-digit and 4-digit industries from \cite{manova-wei-zhang2015} to match the newest ISIC Revision 3 codes; then we link the ISIC Revision 3 codes to the adjusted CIC codes in CIE datasets. Finally, we could match firms in the merged sample to those sector-level financial vulnerability measures. One-to-many situations may occur in the process of encoding matching. In this case, we construct the target variable for the new industry by averaging its source industries.
+To utilize the U.S. industry-level credit measures in the literature, we match the CIC industry code system used in China to the International Standard Industrial Classification (ISIC) system. We first convert 3-digit and 4-digit industries in the older ISIC Revision 2 from \cite{manova-wei-zhang2015} to match the newest ISIC Revision 3 codes; then we link the ISIC Revision 3 codes to the adjusted CIC codes in CIE datasets. Finally, we match firms in the merged sample to those sector-level financial vulnerability measures. Sometimes there will be a many-to-one situation in the matching of industry types. In this case, we construct the target variable for the new industry by averaging its source industries.
 
 Although we construct three measures of credit constraints as in the literature, we will focus on the external finance dependence and tangibility in our later analysis. One important reason is that their interpretation can be linked to firms' exposure and resistance to financial frictions directly. In contrast, the inventory ratio may be connected to inventory management efficiency rather than liquidity and financial reasons. Following \cite{manova-wei-zhang2015}, we also construct the first principal component of external finance dependence and asset tangibility $FPC_j$, which increases with the former and falls with the latter. An industry with a higher $FPC_j$ is more financially sensitive if firms in it require more outside funds but own less collateralizable assets. Therefore, we could use $FPC_j$ as an aggregate measure to combine information about financial vulnerability from $ExtFin_j$ and $Tang_j$.
 
@@ -242,7 +256,7 @@ The summary statistics of the credit constraints measures in the firm-level data
 	\centering
 	\caption{Summary Statistics of Credit Constrains Measures}
 	\label{tab.summary.credit}
-	\resizebox{1.05\textwidth}{32mm}{
+	\resizebox{1.05\textwidth}{30mm}{
 		\begin{threeparttable}
 			\begin{tabular}{lcccccc}
 				\toprule
@@ -270,18 +284,18 @@ The summary statistics of the credit constraints measures in the firm-level data
 \end{table}
 
 \section{Empirical Analysis} \label{Empirical}
-This section describes our empirical specifications. We start from the baseline estimations of exchange rate pass-through and then analyze how importers' credit constraints and other factors will affect the pass-through. 
+This section describes our empirical specifications and shows the corresponding results at the firm–product–country level. We start from the baseline estimations of exchange rate pass-through and then analyze how importers' credit constraints will affect the pass-through. In the end, we will show how more diverse sources of imports can affect exchange rate pass-through directly, and also indirectly through the interaction effect of credit constraints.
 
 \subsection{Baseline estimations of exchange rate pass-through}
 
-Since exchange rate pass-through is not an indicator that can be directly measured, we need to use panel data regression to estimate it. The first step goal is to estimate exchange rate pass-through as the elasticity of unit values changes to exchange rate changes using the firm-product-country details. Our strategy is based on the fixed effects regression. Specifically, we run a regression of import price changes on the bilateral real exchange rate changes between China and the source country, controlling the change of real GDP in the source country. The baseline equation refers to \cite{aik2014} and \cite{lmx2015} as below:
+Since exchange rate pass-through is not an index that can be directly observed, we need to use a panel regression to estimate it empirically. The first-step goal is to estimate exchange rate pass-through as the elasticity of unit values changes to exchange rate changes using the firm-product-country details. Our strategy is based on the fixed effects model. Specifically, we run a regression of import price changes on the bilateral real exchange rate changes between China and the source country, controlling the change of real GDP in the source country and multiple fixed effects. The baseline equation refers to \cite{aik2014} and \cite{lmx2015} and is shown as below:
 
 \begin{equation}
-	\Delta \ln P^{D}_{i j c t}=\alpha+\beta^D \Delta \ln R E R_{c t}+\gamma \Delta \ln R G D P_{c t}+\xi_{i j c}+\tau_{t}+\varepsilon_{i j c t}
+	\Delta \ln P_{i j c t}=\alpha+\beta \Delta \ln R E R_{c t}+\gamma \Delta \ln R G D P_{c t}+\xi_{i j c}+\tau_{t}+\varepsilon_{i j c t}
 	\label{eq.baseline}
 \end{equation}
 
-where $P_{ijct}$ represents the trade price of the product $i$ bought (sold) by firm $j$ from (to) country $c$ during year $t$.  $D \in$ \{Import, Export\} denotes the trade direction. Therefore, this equation could be used to estimate both import and export exchange rate pass-through with different values of D. $R E R_{c t}$ is the bilateral real exchange rate between Chinese RMB and currency in the country $c$. $RGDP_{ct}$ represents the real GDP of the source country deflated to the constant price level, which proxy for market demand. $\xi_{ijc}$ denotes the firm-product-country level fixed effects to capture any time-invariant unobserved factors for a combination of firm, product, and destination. These multi-dimensional fixed effects restrict unit value changes to price adjustments, rather than other changes in corporate trade decisions. $\tau_t$, the year dummies, control for macro-shocks that are common to all firms. We will alter the fixed effects setting in robustness checks.
+where $P_{ijct}$ represents the trade price of the product $i$ bought (sold) by firm $j$ from (to) country $c$ during year $t$. The same equation could be used to estimate both import and export exchange rate pass-through with different values of D. $R E R_{c t}$ is the bilateral real exchange rate between Chinese RMB and currency in the country $c$. $RGDP_{ct}$ represents the real GDP of the source country deflated to the constant price level, which proxy for market demand. $\xi_{ijc}$ denotes the firm-product-country level fixed effects to capture any time-invariant unobserved factors for a combination of firm, product, and destination. These multi-dimensional fixed effects restrict unit value changes to price adjustments, rather than other changes in corporate trade decisions. $\tau_t$, the year dummies, control for macro-shocks that are common to all firms. We will alter the fixed effects setting in robustness checks.
 
 To deal with possible non-stationarity of the panel, we use the first difference of the logarithms for prices $\Delta \ln P^{D}_{i j c t}$, real exchange rates $\Delta \ln R E R_{c t}$ and real GDP $\Delta \ln R G D P_{c t}$ to represent their annual rates of change. In this way, we transform the dynamic panel into a fixed effects regression. Therefore, using import price changes, the estimated coefficient of interest $\beta$ is the elasticity of price changes to exchange rate changes, i.e. import exchange rate pass-through. We also provide estimations for export exchange rate pass-through which is more common in past literature, where import prices are now replaced by export prices and the information of sources is replaced by which of destination markets. 
 
