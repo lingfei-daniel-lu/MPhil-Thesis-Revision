@@ -103,7 +103,7 @@ Table A6: Robustness: excluding USD-pegged countries and alternative time period
 
 Table A7: Robustness: alternative fixed effects
 
-Table A8: Robustness: cross-sectional estimation (FLL 7.1)
+Table A8: Robustness: cross-sectional estimation (FLL 7.1) (to be finished)
 
 Discussion:
 

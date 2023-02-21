@@ -63,27 +63,12 @@ cd "D:\Project C\sample_matched"
 use sample_matched_exp,clear
 
 eststo exp_MS: areg dlnprice_tr dlnRER x_MS dlnrgdp MS i.year, a(group_id)
-eststo exp_MS_sqr: areg dlnprice_tr dlnRER x_MS x_MS_sqr dlnrgdp MS i.year, a(group_id)
-eststo exp_MS_sqr_FPC_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_FPC_US dlnrgdp MS i.year, a(group_id)
-eststo exp_MS_sqr_ExtFin_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_ExtFin_US dlnrgdp MS i.year, a(group_id)
-eststo exp_MS_sqr_Tang_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_Tang_US dlnrgdp MS i.year, a(group_id)
+eststo exp_MS_FPC_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_FPC_US dlnrgdp MS i.year, a(group_id)
+eststo exp_MS_ExtFin_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_ExtFin_US dlnrgdp MS i.year, a(group_id)
+eststo exp_MS_Tang_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_Tang_US dlnrgdp MS i.year, a(group_id)
 
-estfe exp_MS exp_MS_sqr exp_MS_sqr_FPC_US exp_MS_sqr_ExtFin_US exp_MS_sqr_Tang_US, labels(group_id "Firm-product-country FE")
-esttab exp_MS exp_MS_sqr exp_MS_sqr_FPC_US exp_MS_sqr_ExtFin_US exp_MS_sqr_Tang_US using "D:\Project C\tables\matched\table_exp_MS.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("MS" "MS^2" "Add FPC" "Add ExtFin" "Add Tangibility") order(dlnRER dlnrgdp x_*)
-
-forv i=1/4{
-	eststo exp_MS4_`i': areg dlnprice_tr dlnRER dlnrgdp i.year if MS_xt4==`i', a(group_id)
-	
-}
-estfe exp_MS4_*, labels(group_id "Firm-product-country FE")
-esttab exp_MS4_* using "D:\Project C\tables\matched\table_exp_MS_xt4.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles( "1st" "2nd" "3rd" "4th")
-
-forv i=1/4{
-	eststo exp_MS4_`i'_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if MS_xt4==`i', a(group_id)
-	eststo exp_MS4_`i'_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if MS_xt4==`i', a(group_id)
-}
-estfe exp_MS4_1_* exp_MS4_2_* exp_MS4_3_* exp_MS4_4_*, labels(group_id "Firm-product-country FE")
-esttab exp_MS4_1* exp_MS4_2* exp_MS4_3* exp_MS4_4* using "D:\Project C\tables\matched\table_exp_MS_xt4_fin_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles( "1st" "1st" "2nd" "2nd" "3rd" "3rd" "4th" "4th") order(dlnRER dlnrgdp x_*)
+estfe exp_MS exp_MS_FPC_US exp_MS_ExtFin_US exp_MS_Tang_US, labels(group_id "Firm-product-country FE")
+esttab exp_MS exp_MS_FPC_US exp_MS_ExtFin_US exp_MS_Tang_US using "D:\Project C\tables\matched\table_exp_MS.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("MS" "Add FPC" "Add ExtFin" "Add Tangibility") order(dlnRER dlnrgdp x_*)
 
 gen x_FPC_US_MS_d=x_FPC_US*MS_d
 gen x_ExtFin_US_MS_d=x_ExtFin_US*MS_d

@@ -63,36 +63,19 @@ cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
 
 eststo imp_MS: areg dlnprice_tr dlnRER x_MS dlnrgdp MS i.year, a(group_id)
+eststo imp_MS_FPC_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_FPC_US dlnrgdp MS i.year, a(group_id)
+eststo imp_MS_ExtFin_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_ExtFin_US dlnrgdp MS i.year, a(group_id)
+eststo imp_MS_Tang_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_Tang_US dlnrgdp MS i.year, a(group_id)
 
-eststo imp_MS_sqr: areg dlnprice_tr dlnRER x_MS x_MS_sqr dlnrgdp MS i.year, a(group_id)
-eststo imp_MS_sqr_FPC_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_FPC_US dlnrgdp MS i.year, a(group_id)
-eststo imp_MS_sqr_ExtFin_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_ExtFin_US dlnrgdp MS i.year, a(group_id)
-eststo imp_MS_sqr_Tang_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_Tang_US dlnrgdp MS i.year, a(group_id)
-
-estfe imp_MS imp_MS_sqr imp_MS_sqr_FPC_US imp_MS_sqr_ExtFin_US imp_MS_sqr_Tang_US, labels(group_id "Firm-product-country FE")
-esttab imp_MS imp_MS_sqr imp_MS_sqr_FPC_US imp_MS_sqr_ExtFin_US imp_MS_sqr_Tang_US using "D:\Project C\tables\matched\table_imp_MS.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("MS" "MS^2" "Add FPC" "Add ExtFin" "Add Tangibility") order(dlnRER dlnrgdp x_*)
-
-xtile MS_xt5=MS,nq(5)
-forv i=1/5{
-	eststo imp_MS5_`i': areg dlnprice_tr dlnRER dlnrgdp i.year if MS_xt5==`i', a(group_id)	
-}
-estfe imp_MS5_*, labels(group_id "Firm-product-country FE")
-esttab imp_MS5_* using "D:\Project C\tables\matched\table_imp_MS_xt5.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles( "1st" "2nd" "3rd" "4th" "5th")
-
-forv i=1/5{
-	eststo imp_MS5_`i'_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if MS_xt5==`i', a(group_id)
-	eststo imp_MS5_`i'_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if MS_xt5==`i', a(group_id)
-	eststo imp_MS5_`i'_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if MS_xt5==`i', a(group_id)
-}
-estfe imp_MS5_1_* imp_MS5_2_* imp_MS5_3_* imp_MS5_4_* imp_MS5_5_*, labels(group_id "Firm-product-country FE")
-esttab imp_MS5_1_* imp_MS5_2_* imp_MS5_3_* imp_MS5_4_* imp_MS5_5_* using "D:\Project C\tables\matched\table_imp_MS_xt5_fin_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles( "1st" "1st" "1st" "2nd" "2nd" "2nd" "3rd" "3rd" "3rd" "4th" "4th" "4th" "5th" "5th" "5th") order(dlnRER dlnrgdp x_*)
+estfe imp_MS imp_MS_FPC_US imp_MS_ExtFin_US imp_MS_Tang_US, labels(group_id "Firm-product-country FE")
+esttab imp_MS imp_MS_FPC_US imp_MS_ExtFin_US imp_MS_Tang_US using "D:\Project C\tables\matched\table_imp_MS.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("MS" "Add FPC" "Add ExtFin" "Add Tangibility") order(dlnRER dlnrgdp x_*)
 
 xtile MS_xt2=MS,nq(2)
 gen MS_d=MS_xt2-1
 gen x_MS_d=dlnRER*MS_d
 gen x_FPC_US_MS_d=x_FPC_US*MS_d
 gen x_ExtFin_US_MS_d=x_ExtFin_US*MS_d
-gen x_Tang_US_MS_d=x_ExtFin_US*MS_d
+gen x_Tang_US_MS_d=x_ExtFin_US*MS_d`'
 gen x_Invent_US_MS_d=x_ExtFin_US*MS_d
 
 eststo imp_MS_d: areg dlnprice_tr dlnRER x_MS_d dlnrgdp i.year, a(group_id)
@@ -266,29 +249,19 @@ esttab imp_FPC_US_fe1 imp_ExtFin_US_fe1 imp_Tang_US_fe1 imp_Invent_US_fe1 imp_FP
 cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
 
-eststo imp_SOE_baseline: areg dlnprice_tr dlnRER dlnrgdp i.year if ownership=="SOE", a(group_id)
-eststo imp_SOE_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if ownership=="SOE", a(group_id)
-eststo imp_SOE_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if ownership=="SOE", a(group_id)
-eststo imp_SOE_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if ownership=="SOE", a(group_id)
+gen SOE=1 if ownership=="SOE"
+replace SOE=0 if SOE==.
+gen MNE=1 if ownership=="MNE"
+replace MNE=0 if MNE==.
+gen JV=1 if ownership=="JV"
+replace JV=0 if JV==.
 
-eststo imp_DPE_baseline: areg dlnprice_tr dlnRER dlnrgdp i.year if ownership=="DPE", a(group_id)
-eststo imp_DPE_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if ownership=="DPE", a(group_id)
-eststo imp_DPE_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if ownership=="DPE", a(group_id)
-eststo imp_DPE_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if ownership=="DPE", a(group_id)
+gen x_SOE=dlnRER*SOE
+gen x_MNE=dlnRER*MNE
+gen x_JV=dlnRER*JV
 
-eststo imp_MNE_baseline: areg dlnprice_tr dlnRER dlnrgdp i.year if ownership=="MNE", a(group_id)
-eststo imp_MNE_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if ownership=="MNE", a(group_id)
-eststo imp_MNE_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if ownership=="MNE", a(group_id)
-eststo imp_MNE_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if ownership=="MNE", a(group_id)
-
-eststo imp_JV_baseline: areg dlnprice_tr dlnRER dlnrgdp i.year if ownership=="JV", a(group_id)
-eststo imp_JV_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if ownership=="JV", a(group_id)
-eststo imp_JV_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if ownership=="JV", a(group_id)
-eststo imp_JV_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if ownership=="JV", a(group_id)
-
-estfe imp_SOE_baseline imp_SOE_FPC_US imp_SOE_ExtFin_US imp_SOE_Tang_US imp_DPE_baseline imp_DPE_FPC_US imp_DPE_ExtFin_US imp_DPE_Tang_US imp_MNE_baseline imp_MNE_FPC_US imp_MNE_ExtFin_US imp_MNE_Tang_US imp_JV_baseline imp_JV_FPC_US imp_JV_ExtFin_US imp_JV_Tang_US,labels(group_id "Firm-product-country FE")
-
-esttab imp_SOE_baseline imp_SOE_FPC_US imp_SOE_ExtFin_US imp_SOE_Tang_US imp_DPE_baseline imp_DPE_FPC_US imp_DPE_ExtFin_US imp_DPE_Tang_US imp_MNE_baseline imp_MNE_FPC_US imp_MNE_ExtFin_US imp_MNE_Tang_US imp_JV_baseline imp_JV_FPC_US imp_JV_ExtFin_US imp_JV_Tang_US using "D:\Project C\tables\matched\table_imp_ownership.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility" "Baseline" "FPC" "External Finance" "Tangibility" "Baseline" "FPC" "External Finance" "Tangibility" "Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
+areg dlnprice_tr dlnRER x_SOE x_MNE x_JV dlnrgdp i.year, a(group_id)
+areg dlnprice_tr dlnRER x_FPC_US x_SOE x_MNE x_JV dlnrgdp i.year, a(group_id)
 
 *-------------------------------------------------------------------------------
 * Excluding USD Peg

@@ -340,15 +340,17 @@ save FLL_Appendix_A1,replace
 * focus on manufacturing firms
 cd "D:\Project A\CIE"
 use cie1998.dta,clear
-keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP)
-forv i = 1999/2004{
-append using cie`i',keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP)
+keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP CFS CFC CFL CFI CPHMT CFF)
+append using cie1999,keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP CFS CFC CFL CFI CPHMT CFF)
+rename CPHMT CFHMT
+forv i = 2000/2004{
+append using cie`i',keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP CFS CFC CFL CFI CFHMT CFF)
 }
 forv i = 2005/2006{
-append using cie`i',keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL F334 CWP)
+append using cie`i',keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL F334 CWP CFS CFC CFL CFI CFHMT CFF)
 }
 rename F334 RND
-append using cie2007,keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL RND CWP)
+append using cie2007,keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL RND CWP CFS CFC CFL CFI CFHMT CFF)
 bys FRDM: egen EN_adj=mode(EN),maxmode
 bys FRDM: egen REGTYPE_adj=mode(REGTYPE),maxmode
 drop EN REGTYPE
@@ -366,7 +368,9 @@ gen ownership="SOE" if (REGTYPE=="110" | REGTYPE=="141" | REGTYPE=="143" | REGTY
 replace ownership="DPE" if (REGTYPE=="120" | REGTYPE=="130" | REGTYPE=="142" | REGTYPE=="149" | REGTYPE=="159" | REGTYPE=="160" | REGTYPE=="170" | REGTYPE=="171" | REGTYPE=="172" | REGTYPE=="173" | REGTYPE=="174" | REGTYPE=="190")
 replace ownership="JV" if ( REGTYPE=="210" | REGTYPE=="220" | REGTYPE=="310" | REGTYPE=="320" )
 replace ownership="MNE" if ( REGTYPE=="230" | REGTYPE=="240" | REGTYPE=="330" | REGTYPE=="340" )
-replace ownership="SOE" if ownership==""
+replace ownership="DPE" if ownership=="" & (CFS==0 & CFC==0 & CFHMT==0 & CFF==0)
+replace ownership="SOE" if ownership=="" & (CFHMT==0 & CFF==0)
+replace ownership="MNE" if ownership=="" & (CFHMT!=0 | CFF!=0)
 sort FRDM year
 format EN %30s
 cd "D:\Project C\sample_matched\CIE"
@@ -380,6 +384,7 @@ save cie_98_07,replace
 cd "D:\Project C\sample_matched\CIE"
 use cie_98_07,clear
 keep if year>=1999
+drop CFS CFC CFHMT CFF CFL CFI
 tostring cic_adj,replace
 gen cic2=substr(cic_adj,1,2)
 * Add markup and tfp info
@@ -557,9 +562,8 @@ merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(m
 keep if exp_imp =="exp"
 drop exp_imp
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 duration)
-
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
-merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc *_cic2 *_US)
+merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc *_cic2 *_US ownership)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_destination,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
@@ -596,7 +600,7 @@ keep if exp_imp =="imp"
 drop exp_imp
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 duration)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
-merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US)
+merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_source,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
