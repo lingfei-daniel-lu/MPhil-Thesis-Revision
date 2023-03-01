@@ -99,7 +99,7 @@ Table A4: Robustness: two-way traders vs pure importers
 
 Table A5: Robustness: ordinary trade vs processing trade
 
-Table A6: Robustness: excluding USD-pegged countries and alternative time period (2009 or later)
+Table 7: Robustness: excluding USD-pegged countries and alternative time period (2009 or later)
 
 Table A7: Robustness: alternative fixed effects
 
@@ -107,10 +107,10 @@ Table A8: Robustness: cross-sectional estimation (FLL 7.1) (to be finished)
 
 Discussion:
 
-Table 7: Heterogeneous markup, credit constraints, and exchange rate pass-through 
+Table 8: Heterogeneous markup, credit constraints, and exchange rate pass-through 
 
 - big sellers are also big buyers/ import-export linkage
 
 Table A9: Heterogeneous market share, credit constraints, and exchange rate pass-through
 
-Table 8: Ownership, credit constraints, and exchange rate pass-through (to be finished)
+Table A10: Robustness: ownership
