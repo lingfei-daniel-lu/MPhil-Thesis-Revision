@@ -91,26 +91,25 @@ Export versions of Table 3 and 4 are placed in the Appendix (A1 and A2)
 
 Use distance as an alternative measure of import sources is placed in Appendix. (A3)
 
+# 2023.3.1
+
 Robustness check:
 
-Table 6: Robustness: alternative credit constraints measures based on Chinese data
-
-Table A4: Robustness: two-way traders vs pure importers
-
-Table A5: Robustness: ordinary trade vs processing trade
+Table 6: Robustness: alternative credit constraints measures from Chinese data
 
 Table 7: Robustness: excluding USD-pegged countries and alternative time period (2009 or later)
 
-Table A7: Robustness: alternative fixed effects
+Table A4: Robustness: trade types (1. two-way traders vs pure importers, 2. ordinary trade vs processing trade)
 
-Table A8: Robustness: cross-sectional estimation (FLL 7.1) (to be finished)
+Table A5: Robustness: firm controls (1. ownership type, 2. affiliation)
+
+Table A6: Robustness: estimation (1. alternative fixed effects 2. cross-sectional estimation (FLL 7.1))
 
 Discussion:
 
-Table 8: Heterogeneous markup, credit constraints, and exchange rate pass-through 
+Table 8: Heterogeneous markup, credit constraints, and ERPT
 
 - big sellers are also big buyers/ import-export linkage
 
-Table A9: Heterogeneous market share, credit constraints, and exchange rate pass-through
+Table 9: Heterogeneous market share, credit constraints, and ERPT
 
-Table A10: Robustness: ownership
