@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.15)  2 MAR 2023 20:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.15)  3 MAR 2023 17:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1123,17 +1123,14 @@ Overfull \hbox (8.03918pt too wide) in paragraph at lines 501--550
  [] 
  []
 
+[20] [21] [22]
 
-LaTeX Warning: Float too large for page by 24.44498pt on input line 550.
-
-[20] [21]
-
-LaTeX Warning: Reference `fig.NER' on page 22 undefined on input line 614.
+LaTeX Warning: Reference `fig.NER' on page 23 undefined on input line 614.
 
 
-LaTeX Warning: Reference `fig.RER' on page 22 undefined on input line 614.
+LaTeX Warning: Reference `fig.RER' on page 23 undefined on input line 614.
 
-[22] [23] [24]
+[23] [24]
 
 LaTeX Warning: Reference `Framework-Equations' on page 25 undefined on input li
 ne 685.
@@ -1154,15 +1151,15 @@ File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 741.
- [27]
-
-LaTeX Warning: Reference `eq.add.sqr' on page 28 undefined on input line 746.
 
 
-LaTeX Warning: Reference `Framework-Measurements' on page 28 undefined on input
+LaTeX Warning: Reference `eq.add.sqr' on page 27 undefined on input line 746.
+
+
+LaTeX Warning: Reference `Framework-Measurements' on page 27 undefined on input
  line 746.
 
-[28]
+[27] [28]
 
 LaTeX Warning: Reference `tabA.4' on page 29 undefined on input line 851.
 
@@ -1193,13 +1190,17 @@ Package rerunfilecheck Info: File `CreditERPT_Feb2023.out' has not changed.
 (rerunfilecheck)             Checksum: 0E306C8F9AF98D40864AABDAB3106D8A;4069.
  ) 
 Here is how much of TeX's memory you used:
- 26070 strings out of 478268
- 487544 string characters out of 5850345
+ 26071 strings out of 478268
+ 487555 string characters out of 5850345
  803000 words of memory out of 5000000
  43645 multiletter control sequences out of 15000+600000
  486787 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,13n,94p,1941b,671s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist
+, replaced by a fixed one
+
 
 pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist
 , replaced by a fixed one
@@ -1222,19 +1223,21 @@ s/cm/cmmi6.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7
 .pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/t
 exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/202
 2/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2022/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2022/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy6.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
-fb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/te
-xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/202
-2/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2022/te
-xmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb><c:/texlive/2022/texmf-dist/f
-onts/type1/public/cm-super/sfrm1000.pfb>
-Output written on CreditERPT_Feb2023.pdf (38 pages, 369336 bytes).
+st/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2022/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pf
+b><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texl
+ive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2022/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2022/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2022/texmf-dist/fonts/ty
+pe1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/
+public/cm-super/sfrm0700.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-
+super/sfrm1000.pfb>
+Output written on CreditERPT_Feb2023.pdf (38 pages, 386616 bytes).
 PDF statistics:
- 656 PDF objects out of 1000 (max. 8388607)
- 544 compressed objects within 6 object streams
- 114 named destinations out of 1000 (max. 500000)
+ 667 PDF objects out of 1000 (max. 8388607)
+ 551 compressed objects within 6 object streams
+ 115 named destinations out of 1000 (max. 500000)
  299 words of extra memory for PDF output out of 10000 (max. 10000000)
 

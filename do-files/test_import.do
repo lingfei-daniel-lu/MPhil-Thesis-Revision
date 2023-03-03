@@ -142,13 +142,13 @@ areg dlnprice_tr dlnRER x_twoway_trade x_Tang_US x_Tang_US_twoway dlnrgdp i.year
 cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
 
-eststo imp_source: areg dlnprice_tr dlnRER x_source dlnrgdp i.year, a(group_id)
-
+gen x_source=dlnRER*source
 gen x_FPC_US_source=x_FPC_US*source
 gen x_ExtFin_US_source=x_ExtFin_US*source
 gen x_Tang_US_source=x_Tang_US*source
 gen x_Invent_US_source=x_Invent_US*source
 
+eststo imp_source: areg dlnprice_tr dlnRER x_source dlnrgdp i.year, a(group_id)
 eststo imp_FPC_US_source: areg dlnprice_tr dlnRER x_source x_FPC_US_source x_FPC_US dlnrgdp i.year, a(group_id)
 eststo imp_ExtFin_US_source: areg dlnprice_tr dlnRER x_source x_ExtFin_US_source x_ExtFin_US dlnrgdp i.year, a(group_id)
 eststo imp_Tang_US_source: areg dlnprice_tr dlnRER x_source x_Tang_US_source x_Tang_US dlnrgdp i.year, a(group_id)
@@ -157,13 +157,13 @@ eststo imp_Invent_US_source: areg dlnprice_tr dlnRER x_source x_Invent_US_source
 estfe imp_source imp_FPC_US_source imp_ExtFin_US_source imp_Tang_US_source imp_Invent_US_source, labels(group_id "Firm-product-country FE")
 esttab imp_source imp_FPC_US_source imp_ExtFin_US_source imp_Tang_US_source imp_Invent_US_source using "D:\Project C\tables\matched\table_imp_source.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
 
-eststo imp_source_first: areg dlnprice_tr dlnRER x_source_first dlnrgdp i.year, a(group_id)
-
+gen x_source_first=dlnRER*source_first
 gen x_FPC_US_source_first=x_FPC_US*source_first
 gen x_ExtFin_US_source_first=x_ExtFin_US*source_first
 gen x_Tang_US_source_first=x_Tang_US*source_first
 gen x_Invent_US_source_first=x_Invent_US*source_first
 
+eststo imp_source_first: areg dlnprice_tr dlnRER x_source_first dlnrgdp i.year, a(group_id)
 eststo imp_FPC_US_source_first: areg dlnprice_tr dlnRER x_source_first x_FPC_US_source_first x_FPC_US dlnrgdp i.year, a(group_id)
 eststo imp_ExtFin_US_source_first: areg dlnprice_tr dlnRER x_source_first x_ExtFin_US_source_first x_ExtFin_US dlnrgdp i.year, a(group_id)
 eststo imp_Tang_US_source_first: areg dlnprice_tr dlnRER x_source_first x_Tang_US_source_first x_Tang_US dlnrgdp i.year, a(group_id)

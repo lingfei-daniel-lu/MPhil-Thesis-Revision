@@ -83,7 +83,7 @@
 %\renewcommand{\abstractname}{\color{ChadBlue}Abstract}
 %\renewcommand{\figurename}{\color{ChadBlue}Figure}
 %\renewcommand{\tablename}{\color{ChadBlue}Table}
-\renewcommand{\arraystretch}{1.2} % space between rows
+\renewcommand{\arraystretch}{1.1} % space between rows
 
 \usepackage{sectsty}
 %\allsectionsfont{\color{blue}\itshape\underline}
@@ -230,7 +230,7 @@ The summary statistics of the whole customs records, the firm information datase
 	\end{tabular}
 	\begin{tablenotes}
 		\footnotesize
-		\item[*] This table shows the summary statistics of some important variables in our three major datasets. Panel A and panel C describe the total annual average prices, and price changes for the whole customs records ("long sample") and the matched sample, respectively. The observations in panel A and panel C are at the firm-product-country-year level. The price in panel A and panel C in RMB. Panel B describes sales and costs information of Chinese manufacturing firms during 2000-2007. The money values in panel B are in thousands of RMB. The observations in panel B are at the firm-year level.
+		\item[Notes:] This table shows the summary statistics of some important variables in our three major datasets. Panel A and panel C describe the total annual average prices, and price changes for the whole customs records ("long sample") and the matched sample, respectively. The observations in panel A and panel C are at the firm-product-country-year level. The price in panel A and panel C in RMB. Panel B describes sales and costs information of Chinese manufacturing firms during 2000-2007. The money values in panel B are in thousands of RMB. The observations in panel B are at the firm-year level.
 	\end{tablenotes}
 	\end{threeparttable}
         }
@@ -279,7 +279,7 @@ The summary statistics of the sector-level credit constraints measures in the fi
 			\end{tabular}
 			\begin{tablenotes}
 				\footnotesize
-				\item[*] This table shows the summary statistics of credit constraint measures. Panel A describes the measures calculated using US data while panel B shows the alternative Chinese version. All variables are unitless, the numerical size only means relative rank.
+				\item[Notes:] This table shows the summary statistics of credit constraint measures. Panel A describes the measures calculated using US data while panel B shows the alternative Chinese version. All variables are unitless, the numerical size only means relative rank.
 			\end{tablenotes}
 		\end{threeparttable}
 	}
@@ -395,7 +395,7 @@ Table \ref{tab.credit} presents differences in exchange rate pass-through into i
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.credit}
@@ -415,25 +415,25 @@ Nonetheless, the direction in which credit constraints affect the exchange rate 
 
 After estimating exchange rate pass-through at the firm level and the effect of credit constraints on it, we need to go a step further to explore why. Through what channels will credit constraints affect the ability of importers to cope with exchange rate shocks? What other factors related to a firm's sourcing power would exacerbate or diminish this effect? Are the effects of credit constraints fully explained by these factors? In this part, we will examine how sourcing diversity affects exchange rate pass-through for firms subject to different levels of credit constraints
 
-To do so, we introduce a vector $\mathbb{Z}_{jt}$ (or its lagged form $\mathbb{Z}_{jt-1}$) in our equation to include those additional factors and apply it to both control terms and interaction terms with real exchange rate changes: 
+To do so, we add a vector $\mathbb{Z}_{jt}$ \footnote{We will also its lagged form $\mathbb{Z}_{jt-1}$ or the initial time value $\mathbb{Z}_{jt_0}$ to eliminate possible endogeneity in the robustness check.} to include additional factors and apply it to both control terms and the interaction terms with real exchange rate changes: 
 
 \begin{equation}
-	\Delta \ln P_{ijct}=\alpha+[\beta_{1}+ \beta_{2} \cdot FV_{j}+\beta_{3} \cdot {\mathbb{Z}_{jt-1}}'] \Delta \ln RER_{ct} +\gamma \Delta \ln RGDP_{ct}+ {\mathbb{Z}_{jt}}' \eta+\xi_{ijc}+\tau_{t} +\varepsilon_{ijct}.
+	\Delta \ln P_{ijct}=\alpha+[\beta_{1}+ \beta_{2} \cdot FV_{j}+\beta_{3} \cdot {\mathbb{Z}_{jt}}'] \Delta \ln RER_{ct} +\gamma \Delta \ln RGDP_{ct}+ {\mathbb{Z}_{jt}}' \eta+\xi_{ijc}+\tau_{t} +\varepsilon_{ijct}.
 	\label{eq.add.control}
 \end{equation}
 
 \begin{equation}
 	\begin{aligned}
-	\Delta \ln P_{ijct}=&\alpha+[\beta_{1}+ \beta_{2} \cdot FV_{j}+\beta_{3} \cdot {\mathbb{Z}_{jt-1}}'+\beta_{4} \cdot FV_{j} \cdot {\mathbb{Z}_{jt-1}}'] \Delta \ln RER_{ct} \\ &+\gamma \Delta \ln RGDP_{ct}+ {\mathbb{Z}_{jt}}' \eta+\xi_{ijc}+\tau_{t} +\varepsilon_{ijct}.
+	\Delta \ln P_{ijct}=&\alpha+[\beta_{1}+ \beta_{2} \cdot FV_{j}+\beta_{3} \cdot {\mathbb{Z}_{jt}}'+\beta_{4} \cdot FV_{j} \cdot {\mathbb{Z}_{jt}}'] \Delta \ln RER_{ct} \\ &+\gamma \Delta \ln RGDP_{ct}+ {\mathbb{Z}_{jt}}' \eta+\xi_{ijc}+\tau_{t} +\varepsilon_{ijct}.
 	\end{aligned}	
 	\label{eq.add.interaction}
 \end{equation}
 
-With the estimation strategy of the form \ref{eq.add.control} and \ref{eq.add.interaction}, we can analyze various factors that may directly or indirectly affect exchange rate pass-through. The coefficient of the interaction term between additional factors and real exchange rate movement $\beta_3$ represents the direct effects of those factors on the exchange rate pass-through other than through financial constraints. In equation \ref{eq.add.interaction}, the triple interaction coefficient represents the indirect effects of those factors on the exchange rate pass-through through financial constraints. The same sign of $\beta_2$ and $\beta_4$ means that the factor enhances the effect of credit constraints, while the opposite sign means that it alleviates credit constraints. 
+With the estimation strategy in the form of Equation \ref{eq.add.control} and Equation \ref{eq.add.interaction}, we can analyze various factors that may directly or indirectly affect exchange rate pass-through. The coefficient of the interaction term between additional factors and real exchange rate movement $\beta_3$ represents the direct effects of those factors on the exchange rate pass-through other than through financial constraints. In Equation \ref{eq.add.interaction}, the triple interaction coefficient represents the indirect effects of those factors on the exchange rate pass-through through financial constraints. The same sign of $\beta_2$ and $\beta_4$ means that the factor enhances the effect of credit constraints, while the opposite sign means that it alleviates credit constraints. 
 
-First of all, we will use the number of countries of origin from which each firm imports a product as a measure of its sourcing diversity. We argue that the more diverse a firm's sourcing is, the more flexible it is in adjusting its import sources when facing shocks. As emerged in an intuitive guess, a potential mechanism through which financial constraints affect an importer's bargaining power with foreign suppliers is its outside sourcing options. Companies with more trading partners can flexibly adjust the weight of imports from different countries. Firms with heterogeneous sourcing capacity may thus be affected by credit constraints to a different extent. 
+First of all, we will use the number of countries of origin from which each firm imports a product as a measure of its sourcing diversity. We argue that the more diverse a firm's sourcing behavior is, the more flexible it is in adjusting its import sources when facing shocks. Based on a reasonable guess, a potential mechanism through which financial constraints affect an importer's bargaining power with foreign suppliers is its outside sourcing options. Companies with more trading partners can flexibly adjust the weight of imports from different countries. Firms with heterogeneous sourcing capacity may thus be affected by credit constraints to a different extent. 
 
-Therefore, we employ equation \ref{eq.add.interaction} to include the number of import sources. The estimation results are reported in the below Table \ref{tab.source} and confirm the empirical relevance of differences in sourcing diversity across firms. Similarly, results for sales destination diversity on the export side are provided in panel B \ref{tabA.1} as a comparison.
+Therefore, we employ Equation \ref{eq.add.interaction} to include the number of import sources for each firm-product pair. The estimation results are reported in the below Table \ref{tab.source} which confirm the empirical relevance of differences in sourcing diversity across firms.
 
 \begin{table}[htbp]
 	\centering
@@ -443,45 +443,45 @@ Therefore, we employ equation \ref{eq.add.interaction} to include the number of 
 			\toprule
 			& (1)   & (2)   & (3)   & (4)    \\
 			\midrule
-			Panel A & \multicolumn{4}{c}{Import} \\
+			 & \multicolumn{4}{c}{Import} \\
 			& \#Sources & \#Sources+ & \#Sources+ & \#Sources+	 \\
 			&       & FPC &External & Tangibility \\
 			&       & &Finance &			\\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.433*** & 0.177*** & 0.274*** & 1.386*** \\
-			& (0.017) & (0.019) & (0.018) & (0.040) \\
-			$\Delta \ln RGDR_{ct}$ & 0.250*** & 0.292*** & 0.297*** & 0.267*** \\
-			& (0.090) & (0.090) & (0.090) & (0.090) \\
-			$\#Source_{ijt}$ & -0.021*** & -0.016*** & -0.016*** & -0.050*** \\
-			& (0.002) & (0.003) & (0.003) & (0.006) \\
-			$\Delta \ln RER_{ct}*FPC_{j}*\#Source_{ijt}$ &       & -0.014*** &       &  \\
-			&       & (0.002) &       &  \\
-			$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.443*** &       &  \\
-			&       & (0.012) &       &  \\
-			$\Delta \ln RER_{ct}*ExtFin_{j}*\#Source_{ijt}$ &       &       & -0.054*** &  \\
-			&       &       & (0.006) &  \\
-			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 1.410*** &  \\
-			&       &       & (0.037) &  \\
-			$\Delta \ln RER_{ct}*Tang_{j}*\#Source_{ijt}$ &       &       &       & 0.104*** \\
-			&       &       &       & (0.026) \\
-			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -3.790*** \\
-			&       &       &       & (0.148) \\
+			$\Delta \ln RER_{ct}$ & 0.927*** & 0.508*** & 2.417*** & 1.386*** \\
+			& (0.038) & (0.044) & (0.041) & (0.094) \\
+			$\Delta \ln RGDR_{ct}$ & 0.161 & 0.096* & 0.095 & 0.124 \\
+			& (0.115) & (0.115) & (0.115) & (0.115) \\
+			$\#Source_{ijt}$ & -0.054*** & -0.052*** & -0.051*** & -0.079*** \\
+			& (0.005) & (0.008) & (0.007) & (0.015) \\
+			$\Delta \ln RER_{ct}*FPC_{j}*\#Source_{ijt}$ &       & -0.017*** &       &  \\
+			&       & (0.005) &       &  \\
+			$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.699*** &       &  \\
+			&       & (0.029) &       &  \\
+			$\Delta \ln RER_{ct}*ExtFin_{j}*\#Source_{ijt}$ &       &       & -0.068*** &  \\
+			&       &       & (0.013) &  \\
+			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 2.201*** &  \\
+			&       &       & (0.088) &  \\
+			$\Delta \ln RER_{ct}*Tang_{j}*\#Source_{ijt}$ &       &       &       & 0.069 \\
+			&       &       &       & (0.065) \\
+			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -5.935*** \\
+			&       &       &       & (0.358) \\
 			Year FE  & Yes   & Yes   & Yes   & Yes \\
 			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
-			Observations & 1792020 & 1792020 & 1792020 & 1792020 \\
+			Observations & 1449210 & 1449210 & 1449210 & 1449210 \\
 			\bottomrule
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A shows the results of import ERPT while panel B shows the results of export ERPT. Panel B is shown in Appendix \ref{tabA.1}. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.source}
 \end{table}
 
-The estimates for intersection terms between import sources and real exchange rate changes are displayed in column (1). We find that importers who import a certain product from more sources will have a less complete pass-through. This is consistent with our hypothesis that importers with more alternative sourcing options will have less complete pass-through. Interestingly, exporters who export to more destinations (both for a certain product or in total) will have a slightly more complete pass-through. In other words, the diversity of import sources for the same product can significantly enhance the stability of import prices, but the diversity of export markets does not.
+The estimates for intersection terms between import sources and real exchange rate changes are displayed in column (1). We find that an importer who imports a certain product from more sources will have a less complete pass-through. This is consistent with our hypothesis that importers with more alternative sourcing options will have less complete pass-through. In other words, the diversity of import sources for the same product can significantly enhance the stability of import prices. 
 
-In columns (2)-(4), after adding interactions, we find the effects of credit constraints still exist while the triple interaction terms with the number of sources have the opposite and significant coefficients. That means a wider sourcing base will mitigate the effects of credit constraints, in addition to its effect on pass-through. We continue to observe that this triple interaction effect only works for the import side in panel A but not for the export side in panel B (attached in appendix \ref{tabA.1}). The opposing effects of credit constraints and purchasing diversity on exchange rate pass-through confirm our conjecture about the bargaining power of importers. If a firm can import the same product from more sources, it has more flexibility in the face of bilateral exchange rate shocks in individual markets. In other words, constrained firms with more import sources have more ways to escape the unfavorable exchange rate risk. A more diverse importer can either switch from one source to another to reduce costs (trade diversion effect) or make a more credible threat to negotiate a more stable price. 
+In columns (2)-(4), after adding interactions, we find the effects of credit constraints still exist while the triple interaction terms with the number of sources have the opposite while still significant coefficients. That means a wider sourcing base will mitigate the effects of credit constraints, in addition to its effect on pass-through. We continue to observe that this triple interaction effect only works for the import side in panel A but not for the export side in panel B (attached in appendix \ref{tabA.1}). The opposing effects of credit constraints and purchasing diversity on exchange rate pass-through confirm our conjecture about the bargaining power of importers. If a firm can import the same product from more sources, it has more flexibility in the face of bilateral exchange rate shocks in individual markets. In other words, constrained firms with more import sources have more ways to escape the unfavorable exchange rate risk. A more diverse importer can either switch from one source to another to reduce costs (trade diversion effect) or make a more credible threat to negotiate a more stable price. 
 
 
 Following the literature about import sourcing, an importer's sourcing diversity could increase its bargaining power in import prices in addition to its production characteristics. We want to test how importers' sourcing diversity affects exchange rate pass-through. We provide a simple measure for the firm-product level sourcing diversity $Source_{ijt}$ as the number of source countries from which an importer $j$ imports a certain HS6 product type $i$ in year $t$. 
@@ -492,7 +492,7 @@ In this chapter, we further check the robustness of our main results with altern
 
 \subsection{Alternative Measures of Credit Constraints}
 
-As the first robustness test to verify our baseline results, we use alternative credit constraint measures from CIE database. The purpose is to avoid potential bias from differences in the attributes of industry credit demand in different countries. The details of constructing these Chinese variables are discussed in in section \ref{Framework-Measurements}. Although Chinese financial market is less mature than that of the US, the rankings of industries in credit constraints are comparable. Thus, the results based on the credit constraints measures from Chinese data are expected be consistent with our main findings. Our results are reported in Table \ref{tab.alt.credit} which can be easily compared with the results using US measures.
+As the first robustness test to verify our baseline results, we use alternative credit constraint measures from CIE database. The purpose is to avoid potential bias from differences in the attributes of industry credit demand in different countries. The details of constructing these Chinese variables are discussed in Section \ref{Framework-Measurements}. Although Chinese financial market is less mature than that of the US, the rankings of industries in credit constraints are comparable. Thus, the results based on the credit constraints measures from Chinese data are expected be consistent with our main findings. Our results are reported in Table \ref{tab.alt.credit} which can be easily compared with the results using US measures.
 
 \begin{table}[htbp]
 	\centering
