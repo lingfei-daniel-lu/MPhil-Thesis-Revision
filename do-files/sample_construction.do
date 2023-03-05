@@ -513,8 +513,8 @@ keep FRDM year HS6 country_scope
 rename country_scope destination
 duplicates drop
 sort FRDM HS6 year
-by FRDM HS6: gen destin_first=destination[1]
-by FRDM HS6: egen destin_max=max(destination)
+by FRDM HS6: gen destin_initial=destination[1]
+by FRDM HS6: gen destin_max=destination[_n-1]
 by FRDM HS6: egen destin_mean=mean(destination)
 save customs_matched_destination,replace
 
@@ -524,8 +524,8 @@ keep FRDM year HS6 country_scope
 rename country_scope source
 duplicates drop
 sort FRDM HS6 year
-by FRDM HS6: gen source_first=source[1]
-by FRDM HS6: egen source_max=max(source)
+by FRDM HS6: gen source_initial=source[1]
+by FRDM HS6: gen source_lag=source[_n-1]
 by FRDM HS6: egen source_mean=mean(source)
 save customs_matched_source,replace
 
