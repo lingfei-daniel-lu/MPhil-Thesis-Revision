@@ -120,7 +120,7 @@
 \maketitle
 
 \begin{abstract}
-Exchange rate fluctuations are a key factor affecting international trade prices. This paper shows the incomplete exchange rate pass-through patterns in China and its linkage with importers' credit constraints. Using Chinese firm-level information and customs transaction records from 2000 to 2007, we find that (1) the average import price pass-through in China is about 35\% to 40\%, far below the near complete (95\%) export price pass-through; (2) for importers in financially more vulnerable industries, exchange rate pass-through tend to be more complete; (3) a higher degree of import source diversity can effectively lead to a less complete  pass-through and offset the effects of credit constraints.\\
+Exchange rate fluctuations are a key factor affecting international trade prices. This paper studies the incomplete exchange rate pass-through patterns in China and its linkage with importers' credit constraints. Using Chinese firm-level information and customs transaction records from 2000 to 2007, we find that (1) the average import price pass-through in China is about 65\% to 73\%, far below the near complete (94\%) export price pass-through; (2) for importers in financially more vulnerable industries, exchange rate pass-through tend to be more complete; (3) a higher degree of import source diversity can effectively lead to a less complete pass-through and offset the effects of credit constraints. This suggests that a more diverse sourcing network can alleviate the impact of financial market imperfections on trade.\\
 (\textit{JEL} F14, F31, F41)
 
 \end{abstract}
@@ -189,13 +189,13 @@ The first dataset we use is the transaction-level records from the General Admin
 
 We separate the full records into export and import parts. In our analysis, each unique transaction refers to a firm-product-country-year consolidation. The categories of products in China's customs trade records are coded according to the Harmonized Coding and Description System (HS) from World Customs Organization (WCO). The original data is subject to HS 8-digit classification. Since there are two major revisions of the HS system in 2002 and 2007, we aggregate HS8 product-level information to the HS6 level and then use conversion tables from the United Nations Trade Statistics to convert HS 2007 and 2002 codes into the older version of HS 1996 as in \cite{fan-li-yeaple2015}.
 
-For later empirical studies, we drop unwanted observations referring to the standard of \cite{lmx2015}: (1) products with inconsistent missing information of unit or quantity; (2) special product categories such as arms (HS2=93), antiques (HS2=97), and special categories (HS2=98 and 99); (3) transactions existing for only one year without any change over time. Those outliers only make up a very small part of observations. We will refer to this dataset as the "long sample" in subsequent analyses.
+For later empirical studies, we drop unwanted observations referring to the standard of \cite{lmx2015}: (1) products with inconsistent missing information of unit or quantity; (2) special product categories such as arms (HS2=93), antiques (HS2=97), and special categories (HS2=98 and 99); (3) transactions existing for only one year without any change over time. Those outliers only make up a very small part of observations. We will refer to this dataset as the ``whole sample" in subsequent analyses.
 
 \subsubsection{Chinese firm-level data} \label{Data-CIE}
 
 Our source of Chinese firm-level production and financial information is the Chinese Industrial Enterprises (CIE hereafter) database from the National Bureau of Statistics of China (NBSC). This database includes all state-owned enterprises and above-scale firms with annual sales of more than 5 million RMB. The dataset covers the period from 1999 to 2007. The number of firms each year ranges from about 130,000 in 1999 to 300,000 in 2007. The data provide details about firms’ identification code, ownership, industry type, and about 80 other variables in the balance sheet. The company information variables we use in this project include each firm's number of employees, total wage payment, the value of fixed assets, sales income, total operation inputs, etc.
 
-To merge this firm-level survey data with customs records, we follow the standard procedure to match the identification codes based on the contact information of firms as in \cite{fan-li-yeaple2015}. Manufacturing firms participating in international trade in the matched sample are uniquely identified by the FRDM code and year. We drop unsatisfactory observations refering to the criteria of \cite{bkl2021}. This merged sample contains the overlapping time of the two datasets, i.e. from 2000 to 2007, and all indicators are in annual terms. We will refer to this combined dataset as the "matched sample" in the rest of this paper.
+To merge this firm-level survey data with customs records, we follow the standard procedure to match the identification codes based on the contact information of firms as in \cite{fan-li-yeaple2015}. Manufacturing firms participating in international trade in the matched sample are uniquely identified by the FRDM code and year. We drop unsatisfactory observations refering to the criteria of \cite{bkl2021}. This merged sample contains the overlapping time of the two datasets, i.e. from 2000 to 2007, and all indicators are in annual terms. We will refer to this combined dataset as the ``matched sample" in the rest of this paper.
 
 The summary statistics of the whole customs records, the firm information dataset, and the final matched sample are shown in panels A, B, and C in Table \ref{tab.summary.sample}, respectively. A notable point is that for all variables involved in the amount of money in the table, the mean value is much larger than the median, and the mean of some variables is even larger than its 90\% quantile. This implies that the distribution of trade value is very uneven and close to the right long tail shape., with a few large transactions accounting for the majority of trade value.
 
@@ -230,7 +230,7 @@ The summary statistics of the whole customs records, the firm information datase
 	\end{tabular}
 	\begin{tablenotes}
 		\footnotesize
-		\item[Notes:] This table shows the summary statistics of some important variables in our three major datasets. Panel A and panel C describe the total annual average prices, and price changes for the whole customs records ("long sample") and the matched sample, respectively. The observations in panel A and panel C are at the firm-product-country-year level. The price in panel A and panel C in RMB. Panel B describes sales and costs information of Chinese manufacturing firms during 2000-2007. The money values in panel B are in thousands of RMB. The observations in panel B are at the firm-year level.
+		\item[Notes:] This table shows the summary statistics of some important variables in our three major datasets. Panel A and panel C describe the total annual average prices, and price changes for the whole customs records (``whole sample") and the matched sample, respectively. The observations in panel A and panel C are at the firm-product-country-year level. The price in panel A and panel C in RMB. Panel B describes sales and costs information of Chinese manufacturing firms during 2000-2007. The money values in panel B are in thousands of RMB. The observations in panel B are at the firm-year level.
 	\end{tablenotes}
 	\end{threeparttable}
         }
@@ -240,7 +240,7 @@ The summary statistics of the whole customs records, the firm information datase
 
 Another critical issue in our empirical strategy is to measure the extent of financial constraints. To deal with potential concurrent endogeneity, our measures of credit constraints are applied to each firm across the whole period. Following a widely recognized literature on the role of credit constraints in international trade (\cite{kroszner2007}; \cite{manova-wei-zhang2015}; \cite{fan-lai-li2015}), we use multiple financial vulnerability measures at the sector level to proxy for credit needs (demand for outside capital) and ability to resist financial risks. These measures are designed to reflect the nature of each industry which should be regarded as exogenous for each firm. If a firm is in a more financially vulnerable industry, it tends to face a tighter credit constraint, regardless of its operating conditions.
 
-The first measure we use is external finance dependence ($ExtFin_j$), the share of capital expenditures not financed by operational cash flows. If external finance dependence is high, the industry is more financially vulnerable and firms in this industry are more credit constrained. The second measure is asset tangibility ($Tang_j$), which describes the share of the net value of tangible assets that firms can pledge as collateral to raise external finance, in its total book value. The third measure is the inventory-to-sales ratio ($Invent_j$), which measures the production cycle duration and the necessary working capital to maintain inventories and meet demand.  
+The first measure we use is external finance dependence ($ExtFin_j$), the share of capital expenditures not financed by operational cash flows. If external finance dependence is high, the industry is more financially vulnerable and firms in this industry are more credit constrained. The second measure is asset tangibility ($Tang_j$), which describes the share of the net value of tangible assets that firms can pledge as collateral to raise external finance, in its total book value. The third measure is the inventory-to-sales ratio ($Invent_j$), which measures the production cycle duration and the necessary working capital to maintain inventories and meet demand. 
 
 To utilize the U.S. industry-level credit measures in the literature, we match China's CIC industry code system to the International Standard Industrial Classification (ISIC) system. We first convert 3-digit and 4-digit industries in the older ISIC Revision 2 from \cite{manova-wei-zhang2015} to match the newest ISIC Revision 3 codes; then we link the ISIC Revision 3 codes to the adjusted CIC codes in CIE datasets. Finally, we match firms in the merged sample to those sector-level financial vulnerability measures. For those many-to-one scenarios when matching industry types, we assign the average value from source industries to the master industry.
 
@@ -263,13 +263,13 @@ The summary statistics of the sector-level credit constraints measures in the fi
 			\begin{tabular}{lcccccc}
 				\toprule
 				& \multicolumn{1}{l}{\#observations} & \multicolumn{1}{l}{Mean} & \multicolumn{1}{l}{Median} & \multicolumn{1}{l}{Std. dev} & \multicolumn{1}{l}{P10} & \multicolumn{1}{l}{P90} \\
+				\midrule
 				\textbf{Panel A: US Measures} &       &       &       &       &       &  \\
 				$FPC_{j}$ &  1,745,511 & 0 & -0.2707 & 1 & -1.0714  & 1.0727 \\
 				$ExtFin_{j}$ & 1,745,511 & -0.0367 & -0.05 & 0.3112 & -0.25 & 0.28 \\
 				$Tang_{j}$ & 1,745,511 & 0.3107 & 0.32 & 0.0944 & 0.1867 & 0.43 \\
 				$Invent_{j}$ & 1,745,511 & 0.1594 & 0.1633  & 0.0292 & 0.115   & 0.1933 \\
 				\midrule
-				& \multicolumn{1}{l}{\#observations} & \multicolumn{1}{l}{Mean} & \multicolumn{1}{l}{Median} & \multicolumn{1}{l}{Std. dev} & \multicolumn{1}{l}{P10} & \multicolumn{1}{l}{P90} \\
 				\textbf{Panel B: Chinese Measures} &       &       &       &       &       &  \\
 				$ExtFin_{j}$ & 1,745,511 & -0.6479 & -0.47 & 0.6747 & -1.32 & -0.1  \\
 				$Tang_{j}$ & 1,745,511 & 0.3333 & 0.3269 & 0.0648 & 0.2391 & 0.4317 \\
@@ -279,7 +279,7 @@ The summary statistics of the sector-level credit constraints measures in the fi
 			\end{tabular}
 			\begin{tablenotes}
 				\footnotesize
-				\item[Notes:] This table shows the summary statistics of credit constraint measures. Panel A describes the measures calculated using US data while panel B shows the alternative Chinese version. All variables are unitless, the numerical size only means relative rank.
+				\item[Notes:] This table shows the summary statistics of credit constraint measures. Panel A describes the measures calculated using US data while panel B shows the alternative measure from Chinese data. All variables are unitless, the numerical size only means ordinal ranking.
 			\end{tablenotes}
 		\end{threeparttable}
 	}
@@ -322,7 +322,7 @@ The results for import exchange rate pass-through are shown in Table \ref{tab.ba
 			& (1)   & (2)   & (3)   & (4) \\
 			\midrule
 			& \multicolumn{4}{c}{Import} \\
-			& Long & Matched & Top 50 & Top 20 \\
+			& Whole & Matched & Top 50 & Top 20 \\
 			\midrule
 			$\Delta \ln RER_{ct}$ & 0.361*** & 0.730*** & 0.720*** & 0.653*** \\
 			& (0.033) & (0.033) & (0.033) & (0.035) \\
@@ -360,7 +360,7 @@ Therefore, We evaluate the consequences of credit constraints on the firms' pric
 
 where $FV_{j}$ represents the financial vulnerability of the sector to which the firm $j$ belongs and the rest are the same as those in the baseline equation. The interaction coefficient $\beta_2$ represents the effect of credit constraints on exchange rate pass-through. A positive $\beta^{Import}_2$ for importers implies more credit-constrained importers have a more complete import exchange rate pass-through. The overall ERPT into import prices $j$ is given by $\beta_{1} +\beta^{Import}_{2} FV_j$. \footnote{For exporters, it is the opposite: a negative $\beta^{Export}_2$ implies more credit-constrained exporters have a more complete exchange rate pass-through and the ERPT into export prices is $1-(\beta_{1} +\beta^{Export}_{2} FV_j)$.}
 
-Through this estimation strategy, we hope to scrutinize how the pricing behavior of Chinese importers in response to the exchange rate is affected by credit constraints and compare it with that of exporters. While credit-constrained exporters’ pricing decisions to deal with exchange rate shocks are mainly related to production and profit margin, the penetration effect of credit constraints on import prices is through a more direct channel, as the shortage of funds directly affects purchasing choices and bargaining.
+Through this estimation strategy, we hope to scrutinize how the pricing behavior of Chinese importers in response to the exchange rate is affected by credit constraints and compare it with that of exporters. While credit-constrained exporters’ pricing decisions to deal with exchange rate shocks are mainly related to production and profit margin, the penetration effect of credit constraints on import prices is through a more direct channel, as the shortage of funds directly affects purchasing choices and bargaining. According to our hypothesis, we expect that the interaction coefficients on $FPC_{j}$, $ExtFin_j$, and $Invent_J$ are negative, while the coefficient on $Tang_j$ is positive.
 
 Table \ref{tab.credit} presents differences in exchange rate pass-through into import prices resulting from the industry-level credit demand heterogeneity. Table \ref{tab.credit.exp} reports the comparing results for the export side. 
 
@@ -437,7 +437,7 @@ Following the literature, an importer's sourcing diversity could increase its ba
 
 \begin{sidewaystable}[htbp]
 	\centering
-	\caption{Import Sources and Effects of Credit Constraints on Import Exchange Rate Pass-Through}
+	\caption{Import Sources, Credit Constraints, and Exchange Rate Pass-Through}
 	\resizebox{\textwidth}{!}{
 	\begin{threeparttable}
 		\begin{tabular}{lcccccccc}
@@ -449,7 +449,7 @@ Following the literature, an importer's sourcing diversity could increase its ba
 			&       & FPC &External & Tangibility &       & FPC &External & Tangibility\\
 			&       & &Finance & &       & &Finance &			\\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.927*** & 0.508*** & 2.417*** & 1.386*** & 0.912*** &0.514*** &0.655*** &2.322***\\
+			$\Delta \ln RER_{ct}$ & 0.927*** & 0.508*** & 0.661*** & 2.417*** & 0.912*** &0.514*** &0.655*** &2.322***\\
 			& (0.038) & (0.044) & (0.041) & (0.094) & (0.038) & (0.045) & (0.041) & (0.096)\\
 			$\Delta \ln RGDR_{ct}$ & 0.161 & 0.096* & 0.095 & 0.124 & 0.160	& 0.097	& 0.096	& 0.124\\
 			& (0.115) & (0.115) & (0.115) & (0.115) & (0.115) & (0.115) & (0.115) & (0.115) \\
@@ -474,7 +474,7 @@ Following the literature, an importer's sourcing diversity could increase its ba
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use the number of source countries at the current year while columns (5)-(8) use the number of source countries at the initial year. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use the number of source countries in the current year while columns (5)-(8) use the number of source countries in the initial year. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	}
@@ -668,7 +668,7 @@ Table \ref{tab.alt.nopeg} demonstrates that the results without the U.S. and tho
 \section{Discussions} \label{Discussion}
 
 \subsection{Firm Heterogeneity in Markup}
-In the discussion, we argue that credit constraints will affect the "absorptive capacity" of exchange rate shocks other than the firm's attributes in sales. Our firm-level data has the merit of containing information on its production, so we could connect the exchange rate pass-through with estimated firm-specific markup. In the following work, we will control markup to test the conjectures concretely. Referring to \cite{bkl2021}, even without direct measures of prices and marginal cost, we can still estimate the firm-level markup, using the structural assumptions of \cite{dlw2012} (DLW hereafter) and GMM estimation method.
+In the discussion, we argue that credit constraints will affect the ``absorptive capacity" of exchange rate shocks other than the firm's attributes in sales. Our firm-level data has the merit of containing information on its production, so we could connect the exchange rate pass-through with estimated firm-specific markup. In the following work, we will control markup to test the conjectures concretely. Referring to \cite{bkl2021}, even without direct measures of prices and marginal cost, we can still estimate the firm-level markup, using the structural assumptions of \cite{dlw2012} (DLW hereafter) and GMM estimation method.
 
 Simply put, DLW (2012)\cite{dlw2012} derives the firm-specific markup as the ratio of an input factor's output elasticity to its firm-specific factor payment share $\mu_{t}=\theta_{t}^{X}\left(\alpha_{t}^{X}\right)^{-1}$, where $\alpha_{t}^{X}$ is the share of expenditures on input X in total sales and $\theta^X_t$ denotes the output elasticity on an input X. The major difficulty is calculating the firm-specific output elasticity concerning materials, which requires estimating firm-specific production functions. We apply the methodology of \cite{acf2015} to address the endogeneity of inputs, assuming a 3rd-order translog gross output production function in capital, labor, and material inputs:
 
@@ -891,7 +891,7 @@ There are several directions for future improvement. First, we need to explore t
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Column (1) uses the long sample from 2000 to 2011. Column (2) uses the matched sample from 2000 to 2007. Columns (3) and (4) use sub-samples with only top 50 and top 20 partners ranked by total trade value. All regressions include firm-product-country fixed effects and year fixed effects. 
+			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Column (1) uses the long sample from 2000 to 2011. Column (2) uses the matched sample from 2000 to 2007. Columns (3) and (4) use sub-samples with only top 50 and top 20 partners ranked by total trade value. All regressions include firm-product-country fixed effects and year fixed effects. 
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.baseline.exp}
@@ -899,82 +899,86 @@ There are several directions for future improvement. First, we need to explore t
 
 \begin{table}[htbp]
 	\centering
-	\caption{Effects of Credit Constraints on Exchange Rate Pass-Through in Export Prices}
+	\caption{Effects of Credit Constraints on Exchange Rate Pass-Through to Export Prices}
 	\begin{threeparttable}	
 		\begin{tabular}{lcccc}
 			\toprule
 			& (1)   & (2)   & (3)   & (4) \\
+			\midrule
 			 & \multicolumn{4}{c}{Export} \\
 			& FPC   & External Finance & Tangibility & Inventory \\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.039*** & 0.034*** & -0.030** & 0.102*** \\
-			& (0.006) & (0.005) & (0.015) & (0.030) \\
-			$\Delta \ln RGDR_{ct}$ & -0.084** & -0.083** & -0.084** & -0.083** \\
-			& (0.037) & (0.037) & (0.037) & (0.037) \\
-			$\Delta \ln RER_{ct}*FPC_{j}$ & -0.019*** &       &       &  \\
-			& (0.004) &       &       &  \\
-			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       & -0.045*** &       &  \\
-			&       & (0.013) &       &  \\
-			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       & 0.230*** &  \\
-			&       &       & (0.053) &  \\
-			$\Delta \ln RER_{ct}*Invent_{j}$ &       &       &       & -0.412** \\
-			&       &       &       & (0.171) \\
+			$\Delta \ln RER_{ct}$ & 0.076*** & 0.069*** & -0.025 & 0.149** \\
+			& (0.012) & (0.012) & (0.034) & (0.067) \\
+			$\Delta \ln RGDR_{ct}$ & -0.096** & -0.096** & -0.096** & -0.095** \\
+			& (0.042) & (0.042) & (0.042) & (0.042) \\
+			$\Delta \ln RER_{ct}*FPC_{j}$ & -0.031*** &       &       &  \\
+			& (0.010) &       &       &  \\
+			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       & -0.079*** &       &  \\
+			&       & (0.031) &       &  \\
+			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       & 0.333*** &  \\
+			&       &       & (0.120) &  \\
+			$\Delta \ln RER_{ct}*Invent_{j}$ &       &       &       & -0.495 \\
+			&       &       &       & (0.383) \\
 			Year FE  & Yes   & Yes   & Yes   & Yes \\
 			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
-			Observations & 1793974 & 1793974 & 1793974 & 1793974 \\
+			Observations & 1690717 & 1690717 & 1690717 & 1690717 \\
 			\bottomrule
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.credit.exp}
 \end{table}
 
-\begin{table}[htbp]
+\begin{sidewaystable}[htbp]
 	\centering
-	\caption{Export Markets and Effects of Credit Constraints on Exchange Rate Pass-Through}
-	\begin{threeparttable}
-		\begin{tabular}{lcccc}
-			\toprule
-			& (1)   & (2)   & (3)   & (4)    \\
-			\midrule
-			Panel B & \multicolumn{4}{c}{Export} \\
-			& \#Markets & \#Markets+ & \#Markets+ & \#Markets+	 \\
-			&       & FPC &External & Tangibility \\
-			&       & &Finance &			\\
-			\midrule
-			$\Delta \ln RER_{ct}$ & 0.055*** & 0.058*** & 0.056*** & 0.028 \\
-			& (0.007) & (0.008) & (0.007) & (0.021) \\
-			$\Delta \ln RGDR_{ct}$ & -0.079** & -0.080** & -0.079** & -0.081** \\
-			& (0.037) & (0.037) & (0.037) & (0.037) \\
-			$\#Market_{ijt}$ & -0.001*** & -0.001*** & -0.001*** & -0.003*** \\
-			& (0.000) & (0.000) & (0.000) & (0.001) \\
-			$\Delta \ln RER_{ct}*FPC_{j}*\#Market_{ijt}$ &       & -0.000* &       &  \\
-			&       & (0.000) &       &  \\
-			$\Delta \ln RER_{ct}*FPC_{j}$ &       & -0.009 &       &  \\
-			&       & (0.007) &       &  \\
-			$\Delta \ln RER_{ct}*ExtFin_{j}*\#Market_{ijt}$ &       &       & -0.001 &  \\
-			&       &       & (0.001) &  \\
-			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & -0.019 &  \\
-			&       &       & (0.020) &  \\
-			$\Delta \ln RER_{ct}*Tang_{j}*\#Market_{ijt}$ &       &       &       & 0.006** \\
-			&       &       &       & (0.003) \\
-			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & 0.102 \\
-			&       &       &       & (0.075) \\
-			Year FE  & Yes   & Yes   & Yes   & Yes \\
-			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
-			Observations & 1793974 & 1793974 & 1793974 & 1793974 \\
-			\bottomrule
-		\end{tabular}
-		\begin{tablenotes}
-			\footnotesize
-			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. Panel A is shown in Table \ref{tab.source}. All regressions include firm-product-country fixed effects and year fixed effects
-		\end{tablenotes}
-	\end{threeparttable}
-	\label{tabA.1}
-\end{table}
+	\caption{Import Sources, Credit Constraints, and Exchange Rate Pass-Through: Alternative Number of Sources}
+	\resizebox{\textwidth}{!}{
+		\begin{threeparttable}
+			\begin{tabular}{lcccccccc}
+				\toprule
+				& (1)   & (2)   & (3)   & (4) & (5)   & (6)   & (7)   & (8)   \\
+				\midrule
+				& \multicolumn{4}{c}{Lagged Number} & \multicolumn{4}{c}{Average Number} \\
+				& \#Sources & \#Sources+ & \#Sources+ & \#Sources+	& \#Sources & \#Sources+ & \#Sources+ & \#Sources+ \\
+				&       & FPC &External & Tangibility &       & FPC &External & Tangibility\\
+				&       & &Finance & &       & &Finance &			\\
+				\midrule
+				$\Delta \ln RER_{ct}$ & 0.927*** & 0.508*** & 0.675*** & 2.378*** & 0.912*** & 0.480*** & 0.642*** & 2.195***\\
+				& (0.038) & (0.044) & (0.041) & (0.095) & (0.038) & (0.043) & (0.040) & (0.083)\\
+				$\Delta \ln RGDR_{ct}$ & 0.161 & 0.096* & 0.095 & 0.124 & 0.160	& 0.097	& 0.096	& 0.124\\
+				& (0.115) & (0.115) & (0.115) & (0.115) & (0.115) & (0.115) & (0.115) & (0.115) \\
+				$\#Source_{ijt}$ & -0.055*** & -0.059*** & -0.056*** & -0.072*** & -0.061*** & -0.052*** & -0.054*** & -0.025***\\
+				& (0.005) & (0.008) & (0.007) & (0.015) & (0.007) & (0.008) & (0.008) & (0.011) \\
+				$\Delta \ln RER_{ct}*FPC_{j}*\#Source_{ijt}$ &       & -0.012*** &       & 	&       & -0.024*** & &\\
+				&       & (0.005) &       &  &       & (0.005) &       &\\
+				$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.680*** &       &  &       & 0.716*** &       &\\
+				&       & (0.029) &       & &       & (0.029) &       & \\
+				$\Delta \ln RER_{ct}*ExtFin_{j}*\#Source_{ijt}$ &       &    &   -0.056*** &  &       &    &   -0.086*** &\\
+				&       &       & (0.014) &  &       &       & (0.014) &\\
+				$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 2.145*** &   &       &       & 2.233*** &\\
+				&       &       & (0.089) &  &       &       & (0.089) &\\
+				$\Delta \ln RER_{ct}*Tang_{j}*\#Source_{ijt}$ &       &       &       & 0.026
+				 &       &       &       & -0.239***\\
+				&       &       &       & (0.066) &       &       &       & (0.045)\\
+				$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -5.761*** &       &       &       & -4.890***\\
+				&       &       &       & (0.359) &       &       &       & (0.307)\\
+				Year FE  & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
+				Firm-product-country FE & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
+				Observations & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210\\
+				\bottomrule
+			\end{tabular}
+			\begin{tablenotes}
+				\footnotesize
+				\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use the number of source countries in the previous (lagged) year while columns (5)-(8) use the average number of source countries i over the period from 2000-2007. All regressions include firm-product-country fixed effects and year fixed effects.
+			\end{tablenotes}
+		\end{threeparttable}
+	}
+	\label{tab.source.lag}
+\end{sidewaystable}
 
 \begin{table}[htbp]
 	\centering

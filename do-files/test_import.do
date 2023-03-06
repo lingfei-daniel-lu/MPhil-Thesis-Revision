@@ -92,6 +92,8 @@ eststo imp_Invent_US_source_init: areg dlnprice_tr dlnRER x_source_initial x_Inv
 estfe imp_source_init imp_FPC_US_source_init imp_ExtFin_US_source_init imp_Tang_US_source_init imp_Invent_US_source_init, labels(group_id "Firm-product-country FE")
 esttab imp_source_init imp_FPC_US_source_init imp_ExtFin_US_source_init imp_Tang_US_source_init imp_Invent_US_source_init using "D:\Project C\tables\matched\table_imp_source_initial.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
 
+ 
+
 *-------------------------------------------------------------------------------
 * Distance
 cd "D:\Project C\sample_matched"
