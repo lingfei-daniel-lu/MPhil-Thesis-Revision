@@ -980,6 +980,53 @@ There are several directions for future improvement. First, we need to explore t
 	\label{tab.source.lag}
 \end{sidewaystable}
 
+\begin{sidewaystable}[htbp]
+	\centering
+	\caption{Import Sources, Credit Constraints, and Exchange Rate Pass-Through: Geographical Distance}
+	\resizebox{\textwidth}{!}{
+		\begin{threeparttable}
+			\begin{tabular}{lcccccccc}
+				\toprule
+				& (1)   & (2)   & (3)   & (4) & (5)   & (6)   & (7)   & (8)   \\
+				\midrule
+				& \multicolumn{4}{c}{Simple Distance} & \multicolumn{4}{c}{Population-weighted Distance} \\
+				& Distance & Distance & Distance & Distance	& Distance & Distance & Distance & Distance \\
+				&       & FPC &External & Tangibility &       & FPC &External & Tangibility\\
+				&       & &Finance & &       & &Finance &			\\
+				\midrule
+				$\Delta \ln RER_{ct}$ & 1.104*** & 0.464***	& 0.670*** & 2.755*** & 1.102*** &	0.445*** & 0.656***	& 2.782***\\
+				& (0.041) & (0.048) & (0.044) & (0.107) & (0.043) & (0.050) & (0.045) & (0.111)\\
+				$\Delta \ln RGDR_{ct}$ & 0.052 & 0.017 & 0.003 & 0.042 & 0.064 & 0.028 & 0.014 & 0.054\\
+				& (0.116) & (0.116) & (0.116) & (0.116) & (0.116) & (0.116) & (0.116) & (0.116) \\
+				$ Distance_{ijt}$ & -0.091*** & -0.037*** & -0.055*** & -0.201*** & -0.091*** & -0.033*** & -0.052*** & -0.206***\\
+				& (0.006) & (0.007) & (0.006) & (0.019) & (0.007) & (0.008) & (0.007) & (0.021) \\
+				$\Delta \ln RER_{ct}*FPC_{j}*Distance_{ijt}$ &       & -0.068*** &       & 	&       & -0.073*** & &\\
+				&       & (0.006) &       &  &       & (0.007) &       &\\
+				$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.851*** &       &  &       & 0.873*** &       &\\
+				&       & (0.034) &       & &       & (0.036) &       & \\
+				$\Delta \ln RER_{ct}*ExtFin_{j}*Distance_{ijt}$ &       &    &   -0.237*** &  &       &    &   -0.258*** &\\
+				&       &       & (0.017) &  &       &       & (0.019) &\\
+				$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 2.793*** &   &       &       & 2.882*** &\\
+				&       &       & (0.103) &  &       &       & (0.108) &\\
+				$\Delta \ln RER_{ct}*Tang_{j}*Distance_{ijt}$ &       &       &       & 0.486***
+				&       &       &       & 0.510***\\
+				&       &       &       & (0.071) &       &       &       & (0.077)\\
+				$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -6.988*** &       &       &       & -7.115***\\
+				&       &       &       & (0.413) &       &       &       & (0.429)\\
+				Year FE  & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
+				Firm-product-country FE & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
+				Observations & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210\\
+				\bottomrule
+			\end{tabular}
+			\begin{tablenotes}
+				\footnotesize
+				\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use the the simple distance between the most populated cites of two countries while columns (5)-(8) use the population-weighted harmonic-average distance between two countries. All regressions include firm-product-country fixed effects and year fixed effects.
+			\end{tablenotes}
+		\end{threeparttable}
+	}
+	\label{tab.source.distance}
+\end{sidewaystable}
+
 \begin{table}[htbp]
 	\centering
 	\caption{Heterogeneous Markup of Exporters and Effects of Credit Constraints on Exchange Rate Pass-through}

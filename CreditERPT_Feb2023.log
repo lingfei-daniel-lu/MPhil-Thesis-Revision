@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.15)  6 MAR 2023 18:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.15)  7 MAR 2023 19:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1108,12 +1108,7 @@ File: R/EUR-eps-converted-to.pdf Graphic file (type pdf)
 Package pdftex.def Info: R/EUR-eps-converted-to.pdf  used on input line 179.
 (pdftex.def)             Requested size: 452.9679pt x 226.48665pt.
  [6 <./R/USD-eps-converted-to.pdf>] [7 <./R/EUR-eps-converted-to.pdf>]
-[8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
-
-LaTeX Warning: Reference `tab.source.distance' on page 18 undefined on input li
-ne 484.
-
-[18] [19]
+[8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
 
 LaTeX Warning: Reference `Framework-Measurements' on page 20 undefined on input
  line 494.
@@ -1173,7 +1168,7 @@ Underfull \hbox (badness 1097) in paragraph at lines 102--105
 
  []
 
-[33]) [34] [35] [36] [37] [38] (./CreditERPT_Feb2023.aux)
+[33]) [34] [35] [36] [37] [38] [39] (./CreditERPT_Feb2023.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1181,10 +1176,10 @@ Package rerunfilecheck Info: File `CreditERPT_Feb2023.out' has not changed.
 (rerunfilecheck)             Checksum: 0E306C8F9AF98D40864AABDAB3106D8A;4069.
  ) 
 Here is how much of TeX's memory you used:
- 26074 strings out of 478268
- 487576 string characters out of 5850345
- 809014 words of memory out of 5000000
- 43648 multiletter control sequences out of 15000+600000
+ 26077 strings out of 478268
+ 487595 string characters out of 5850345
+ 822131 words of memory out of 5000000
+ 43649 multiletter control sequences out of 15000+600000
  486787 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,15n,94p,1941b,671s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1225,10 +1220,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2022/texmf-dist
 pe1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/
 public/cm-super/sfrm0700.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-
 super/sfrm1000.pfb>
-Output written on CreditERPT_Feb2023.pdf (38 pages, 387555 bytes).
+Output written on CreditERPT_Feb2023.pdf (39 pages, 389765 bytes).
 PDF statistics:
- 664 PDF objects out of 1000 (max. 8388607)
- 548 compressed objects within 6 object streams
- 115 named destinations out of 1000 (max. 500000)
+ 670 PDF objects out of 1000 (max. 8388607)
+ 553 compressed objects within 6 object streams
+ 117 named destinations out of 1000 (max. 500000)
  299 words of extra memory for PDF output out of 10000 (max. 10000000)
 

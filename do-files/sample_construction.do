@@ -470,12 +470,12 @@ keep if country_id_d=="CHN"
 save Gravity_CHN_d,replace
 
 use Gravity_CHN_d,clear
-keep year iso3_o distw_harmonic
+keep year iso3_o dist distw_harmonic
 keep if year>=1999 & year<=2007
-rename (iso3_o distw_harmonic) (countrycode distance)
-drop if distance==.
+rename (iso3_o distw_harmonic) (countrycode distw)
+drop if dist==. | distw==.
 merge n:1 countrycode using "D:\Project C\customs data\customs_country_code",nogen keep(matched)
-collapse (mean) distance, by (countrycode coun_aim)
+collapse (mean) dist distw, by (countrycode coun_aim)
 save distance_CHN,replace
 
 *-------------------------------------------------------------------------------
@@ -604,8 +604,8 @@ merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_source,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
-bys FRDM HS6: egen dist=mean(distance)
 replace dist=dist/1000
+replace distw=distw/1000
 foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
 	drop if strmatch(EN, "*`key'*") 
 }
