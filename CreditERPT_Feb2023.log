@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.15)  7 MAR 2023 19:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.15)  8 MAR 2023 14:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1111,56 +1111,62 @@ Package pdftex.def Info: R/EUR-eps-converted-to.pdf  used on input line 179.
 [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
 
 LaTeX Warning: Reference `Framework-Measurements' on page 20 undefined on input
- line 494.
+ line 497.
 
 
-Overfull \hbox (8.03918pt too wide) in paragraph at lines 500--549
+Overfull \hbox (8.03918pt too wide) in paragraph at lines 503--552
  [] 
  []
 
 [20] [21] [22]
 
-LaTeX Warning: Reference `fig.NER' on page 23 undefined on input line 613.
+LaTeX Warning: Reference `fig.NER' on page 23 undefined on input line 616.
 
 
-LaTeX Warning: Reference `fig.RER' on page 23 undefined on input line 613.
+LaTeX Warning: Reference `fig.RER' on page 23 undefined on input line 616.
 
 [23] [24]
 
 LaTeX Warning: Reference `Framework-Equations' on page 25 undefined on input li
-ne 684.
+ne 687.
 
 
-LaTeX Warning: Reference `Results-Credit' on page 25 undefined on input line 72
-7.
+LaTeX Warning: Reference `tabA.2' on page 25 undefined on input line 728.
+
+
+LaTeX Warning: Reference `Results-Credit' on page 25 undefined on input line 73
+0.
+
+
+LaTeX Warning: Reference `tabA.2' on page 25 undefined on input line 730.
 
 [25] [26]
 
-LaTeX Warning: Reference `Results-Credit' on page 27 undefined on input line 72
-9.
+LaTeX Warning: Reference `Results-Credit' on page 27 undefined on input line 73
+2.
 
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 7
-40.
+43.
 (c:/texlive/2022/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 740.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 743.
 
 
-LaTeX Warning: Reference `eq.add.sqr' on page 27 undefined on input line 745.
+LaTeX Warning: Reference `eq.add.sqr' on page 27 undefined on input line 748.
 
 
 LaTeX Warning: Reference `Framework-Measurements' on page 27 undefined on input
- line 745.
+ line 748.
 
 [27] [28]
-Overfull \hbox (45.31314pt too wide) in paragraph at lines 800--851
+Overfull \hbox (45.31314pt too wide) in paragraph at lines 803--854
  [][] 
  []
 
 
-LaTeX Warning: Reference `tabA.4' on page 29 undefined on input line 853.
+LaTeX Warning: Reference `tabA.4' on page 29 undefined on input line 856.
 
 [29] [30] [31] (./CreditERPT_Feb2023.bbl [32]
 Underfull \hbox (badness 1097) in paragraph at lines 102--105
@@ -1168,7 +1174,7 @@ Underfull \hbox (badness 1097) in paragraph at lines 102--105
 
  []
 
-[33]) [34] [35] [36] [37] [38] [39] (./CreditERPT_Feb2023.aux)
+[33]) [34] [35] [36] [37] [38] (./CreditERPT_Feb2023.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1176,9 +1182,9 @@ Package rerunfilecheck Info: File `CreditERPT_Feb2023.out' has not changed.
 (rerunfilecheck)             Checksum: 0E306C8F9AF98D40864AABDAB3106D8A;4069.
  ) 
 Here is how much of TeX's memory you used:
- 26077 strings out of 478268
- 487595 string characters out of 5850345
- 822131 words of memory out of 5000000
+ 26075 strings out of 478268
+ 487572 string characters out of 5850345
+ 815001 words of memory out of 5000000
  43649 multiletter control sequences out of 15000+600000
  486787 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1220,10 +1226,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2022/texmf-dist
 pe1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/
 public/cm-super/sfrm0700.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-
 super/sfrm1000.pfb>
-Output written on CreditERPT_Feb2023.pdf (39 pages, 389765 bytes).
+Output written on CreditERPT_Feb2023.pdf (38 pages, 388054 bytes).
 PDF statistics:
- 670 PDF objects out of 1000 (max. 8388607)
- 553 compressed objects within 6 object streams
- 117 named destinations out of 1000 (max. 500000)
+ 662 PDF objects out of 1000 (max. 8388607)
+ 546 compressed objects within 6 object streams
+ 115 named destinations out of 1000 (max. 500000)
  299 words of extra memory for PDF output out of 10000 (max. 10000000)
 
