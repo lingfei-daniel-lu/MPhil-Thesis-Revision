@@ -91,7 +91,7 @@ Export versions of Table 3 and 4 are placed in the Appendix (A1 and A2)
 
 Use the lagged or average import sources in Appendix. (A3)
 
-Use distance as an alternative measure of import sources in Appendix. (A4)
+Use geographical distance as an alternative measure of import sources in Appendix. (A4)
 
 # 2023.3.1
 
@@ -101,11 +101,11 @@ Table 6: Robustness: alternative credit constraints measures from Chinese data
 
 Table 7: Robustness: excluding USD-pegged countries and alternative time period (2009 or later)
 
-Table A5: Robustness: trade types (1. two-way traders vs pure importers, 2. ordinary trade vs processing trade)
+Table A5: Robustness: trade type controls (1. two-way traders vs pure importers, 2. ordinary trade vs processing trade)
 
-Table A6: Robustness: firm controls (1. ownership type, 2. affiliation)
+Table A6: Robustness: firm type controls (1. ownership type, 2. affiliation)
 
-Table A7: Robustness: estimation (1. alternative fixed effects 2. cross-sectional estimation (FLL 7.1))
+Table A7: Robustness: alternative estimation (1. alternative fixed effects 2. cross-sectional estimation (FLL 7.1))
 
 Discussion:
 
