@@ -366,8 +366,8 @@ merge n:1 year using "D:\Project A\deflator\inv_deflator.dta",nogen keep(matched
 *add registration type
 gen ownership="SOE" if (REGTYPE=="110" | REGTYPE=="141" | REGTYPE=="143" | REGTYPE=="151" )
 replace ownership="DPE" if (REGTYPE=="120" | REGTYPE=="130" | REGTYPE=="142" | REGTYPE=="149" | REGTYPE=="159" | REGTYPE=="160" | REGTYPE=="170" | REGTYPE=="171" | REGTYPE=="172" | REGTYPE=="173" | REGTYPE=="174" | REGTYPE=="190")
-replace ownership="JV" if ( REGTYPE=="210" | REGTYPE=="220" | REGTYPE=="310" | REGTYPE=="320" )
-replace ownership="MNE" if ( REGTYPE=="230" | REGTYPE=="240" | REGTYPE=="330" | REGTYPE=="340" )
+replace ownership="JV" if (REGTYPE=="210" | REGTYPE=="220" | REGTYPE=="310" | REGTYPE=="320")
+replace ownership="MNE" if (REGTYPE=="230" | REGTYPE=="240" | REGTYPE=="330" | REGTYPE=="340")
 replace ownership="DPE" if ownership=="" & (CFS==0 & CFC==0 & CFHMT==0 & CFF==0)
 replace ownership="SOE" if ownership=="" & (CFHMT==0 & CFF==0)
 replace ownership="MNE" if ownership=="" & (CFHMT!=0 | CFF!=0)
