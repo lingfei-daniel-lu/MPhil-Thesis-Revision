@@ -99,7 +99,7 @@ Robustness check:
 
 Table 6: Robustness: alternative credit constraints measures from Chinese data
 
-Table 7: Robustness: excluding USD-pegged countries and alternative time period (2009 or later)
+Table 7: Robustness: alternative samples excluding USD-pegged countries or using longer time period (2009 or later)
 
 Table A5: Robustness: trade type controls (1. two-way traders vs pure importers, 2. ordinary trade vs processing trade)
 
