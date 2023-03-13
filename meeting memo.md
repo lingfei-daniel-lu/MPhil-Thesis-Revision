@@ -103,7 +103,7 @@ Table 7: Robustness: alternative samples excluding USD-pegged countries or using
 
 Table A5: Robustness: trade type controls (1. two-way traders vs pure importers, 2. ordinary trade vs processing trade)
 
-Table A6: Robustness: firm type controls (1. ownership type, 2. affiliation)
+Table A6: Robustness: ownership controls (1. registration type, 2. affiliation)
 
 Table A7: Robustness: alternative estimation (1. alternative fixed effects 2. cross-sectional estimation (FLL 7.1))
 
