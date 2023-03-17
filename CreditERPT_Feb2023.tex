@@ -561,7 +561,7 @@ First, we exclude the U.S. and other countries who use the US dollar as their of
 		&       &       &       & (0.121) &&&&\\
 		Year FE  &   Yes    & Yes   & Yes   & Yes &&&&\\
 		Firm-product-country FE &   Yes    & Yes   & Yes   & Yes &&&&\\
-		Observations & 1489984 & 1489984 & 1489984 & 1489984 &&&&\\
+		Observations & 1449210 & 1449210 & 1449210 & 1449210 &&&&\\
 		\bottomrule
 	\end{tabular}
 	\begin{tablenotes}
@@ -607,7 +607,7 @@ Second, some importers may be registered as ``processing trade'', that is, impor
 			Firm-product-country FE &  Yes   & Yes   & Yes   & Yes &&&&\\
 			Two-way trade control &  Yes   & Yes   & Yes   & Yes &&&&\\
 			Processing trade control &&&& &  Yes   & Yes   & Yes   & Yes \\
-			Observations & 1712289 & 1712289 & 1712289 & 1712289 &&&&\\
+			Observations & 1449210 & 1449210 & 1449210 & 1449210 &&&&\\
 			\bottomrule
 		\end{tabular}
 		\begin{tablenotes}
@@ -630,13 +630,9 @@ In this part, we will add ownership information as additional controls of firm c
 
 Table \ref{tab.robust.ownership} in the Appendix shows the results after controlling for different ownership types. The signs and significance of regression coefficients for all types of firms are the same as in the previous main results. This suggests that although ownership type itself may cause differences among firms, the impact of importers' credit constraints on exchange rate pass-through cannot be ignored in all types of firms.
 
-\subsection{Alternative estimation method}
+\subsection{Alternative estimation methods}
 
-The baseline estimation of exchange rate pass-through uses panel fixed effect regression. 
-
-$\xi_{ijc}$ denotes the firm-product-country level fixed effects to capture any time-invariant unobserved factors for a combination of firm, product, and destination. These multi-dimensional fixed effects restrict unit value changes to price adjustments, rather than other corporate trade decisions. $\tau_t$, the time fixed effect, controls for macro-shocks that are common to all firms.
-
-
+The baseline estimation of exchange rate pass-through uses panel fixed effect regression, in which $\xi_{ijc}$, the firm-product-country level fixed effects and $\tau_t$, the time fixed effect exclude factors that affect prices other than exchange rate movements, thereby lead to accurate estimation of exchange rate pass-through.
 
 However, our measures of credit constraints only capture the cross-sectional pattern (to avoid firm endogeneity): the industry-level credit needs measures are persistent and thus averaged over time. Therefore, to fully sort out the time variation effect, we also conduct cross-sectional estimation using both one-year sample and between estimator.
 
@@ -660,12 +656,12 @@ Given that credit constraints play an important role in China's import exchange 
 
 \begin{table}[htbp]
 	\centering
-	\caption{Heterogeneous Markup and Effects of Credit Constraints on Import Exchange Rate Pass-through}
+	\caption{Heterogeneous Markup, Credit Constraints, and Exchange Rate Pass-through}
 	\begin{threeparttable}
 		\begin{tabular}{lcccc}
 			\midrule          & (1)   & (2)   & (3)   & (4)     \\
 			\midrule
-			Panel A & \multicolumn{4}{c}{Import} \\
+			& \multicolumn{4}{c}{Import} \\
 			& Markup & Markup+& Markup+ & Markup+      \\
 			&       & FPC & External & Tangibility        \\
 			&       & & Finance &  	          \\
@@ -686,12 +682,12 @@ Given that credit constraints play an important role in China's import exchange 
 			& (0.006) & (0.006) & (0.006) & (0.006)  \\
 			Year FE  & Yes   & Yes   & Yes   & Yes       \\
 			Firm-product-country FE & Yes   & Yes   & Yes   & Yes       \\
-			Observations & 1411106 & 1411106 & 1411106 & 1411106  \\
+			Observations & 1449210 & 1449210 & 1449210 & 1449210  \\
 			\bottomrule
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\%. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\%. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
         \label{tab.markup}
@@ -721,40 +717,38 @@ In this section, we first provide the regression results of equation \ref{eq.add
 
 \begin{table}[htbp]
 	\centering
-	\caption{Market Share and Effects of Credit Constraints on Import Exchange Rate Pass-through}
+	\caption{Heterogeneous Market Share, Credit Constraints, and Exchange Rate Pass-through}
 	\begin{threeparttable}
-		\begin{tabular}{lccccc}
+		\begin{tabular}{lcccc}
 			\toprule
-			& (1)   & (2)   & (3)   & (4) & (5)\\
+			& (1)   & (2)   & (3)   & (4) \\
 			\midrule
-			Panel A & \multicolumn{5}{c}{Import} \\
-			& MS    & $MS^2$ & FPC   & External & Tangibility \\
-			&       &       &       & Finance &  \\
+			& \multicolumn{4}{c}{Import} \\
+			& Market    &  FPC & External & Tangibility\\
+			& Share       &       & Finance  & \\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.392*** & 0.381*** & 0.119*** & 0.220*** & 1.175*** \\
-			& (0.016) & (0.016) & (0.018) & (0.017) & (0.033) \\
-			$\Delta \ln RGDP_{ct}$ & 0.247*** & 0.251*** & 0.314*** & 0.321*** & 0.280*** \\
-			& (0.090) & (0.090) & (0.090) & (0.090) & (0.090) \\
-			$\Delta \ln RGDP_{ct}*MS_{ijct}$ & -0.305*** & 0.155 & 0.677*** & 0.556*** & 0.546*** \\
-			& (0.042) & (0.156) & (0.156) & (0.156) & (0.156) \\
-			$\Delta \ln RGDP_{ct}*MS^2_{ijct}$ &       & -0.531*** & -0.941*** & -0.837*** & -0.846*** \\
-			&       & (0.173) & (0.173) & (0.173) & (0.173) \\
-			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       &       & 0.379*** &       &  \\
-			&       &       & (0.010) &       &  \\
-			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       &       & 1.156*** &  \\
-			&       &       &       & (0.029) &  \\
-			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       &       & -3.290*** \\
-			&       &       &       &       & (0.118) \\
-			$MS_{ijpt}$    & -0.012 & -0.009 & -0.002 & -0.004 & -0.003 \\
-			& (0.012) & (0.012) & (0.012) & (0.012) & (0.012) \\
-			Year FE  & Yes   & Yes   & Yes   & Yes   & Yes \\
-			Firm-product-country FE & Yes   & Yes   & Yes   & Yes   & Yes \\
-			Observations & 1792020 & 1792020 & 1792020 & 1792020 & 1792020 \\
+			$\Delta \ln RER_{ct}$ & 0.392*** * & 0.119*** & 0.220*** & 1.175*** \\
+			& (0.016)  & (0.018) & (0.017) & (0.033) \\
+			$\Delta \ln RGDP_{ct}$ & 0.247***  & 0.314*** & 0.321*** & 0.280*** \\
+			& (0.090)  & (0.090) & (0.090) & (0.090) \\
+			$\Delta \ln RGDP_{ct}*MS_{ijct}$ & -0.305***  & 0.677*** & 0.556*** & 0.546*** \\
+			& (0.042)  & (0.156) & (0.156) & (0.156) \\
+			$\Delta \ln RER_{ct}$*$FPC_{j}$ &   & 0.379*** &       &  \\
+			&       & (0.010) &       &  \\
+			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.156*** &  \\
+			&      &       & (0.029) &  \\
+			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.290*** \\
+			&       &       &       & (0.118) \\
+			$MS_{ijpt}$    & -0.012 & -0.002 & -0.004 & -0.003 \\
+			& (0.012)  & (0.012) & (0.012) & (0.012) \\
+			Year FE  & Yes  & Yes   & Yes   & Yes \\
+			Firm-product-country FE & Yes    & Yes   & Yes   & Yes \\
+			Observations & 1449210  & 1449210 & 1449210 & 1449210 \\
 			\bottomrule
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\%. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (3)-(5) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\%. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.share}
