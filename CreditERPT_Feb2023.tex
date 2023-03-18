@@ -536,11 +536,11 @@ Columns 1-4 of Table \ref{tab.robust.credit} present the import-side results for
 
 From 1994 until July 2005, the Chinese RMB was pegged to the U.S. dollar. This practice has kept RMB undervalued. The effect on trade is that China's exports are cheaper and, therefore, more attractive compared to those of other countries. Due to China's exchange rate peg to the US dollar, we observe weak movements in the exchange rate of RMB against the USD and other currencies pegged to the US dollar until 2005 as shown in \ref{fig.USD}. To eliminate the confounding effect of the RMB-USD peg on our main findings, we will perform two groups of robustness tests using different subsamples.
 
-First, we exclude the U.S. and other countries who use the US dollar as their official currency or whose currency is pegged to the US dollar from our baseline matched sample.\footnote{The excluded countries and regions are Belize, Liberia, Qatar, Ecuador, Djibouti, Saint Lucia, Saint Kitts and Nevis, St. Vincent and the Grenadines, Dominica, Antigua and Barbuda, Palestine, Bahamas, Barbados, Panama, Bahrain, Curaçao, Grenada, Saudi Arabia, Zimbabwe, Macao SAR of China, Turks and Caicos Islands, Bermuda, Jordan, United States, British Virgin Islands, Dutch Sint Maarten, El Salvador, Montserrat, United Arab Emirates, Oman, Aruba, Hong Kong SAR of China, Maldives, Lebanon.}. We examine whether our previous conclusion is robust after excluding those countries whose currencies are denominated in or pegged to the US dollar. Second, we will use a longer panel from 2000 to 2011 using the whole sample. Since the pegged exchange rate regime of the RMB to the USD was lifted in 2005, a longer panel will give the RMB more room for volatility against the USD. Results of both tests are shown in Table \ref{tab.alt.nopeg}.
+First, we exclude the U.S. and other countries who use the US dollar as their official currency or whose currency is pegged to the US dollar from our baseline matched sample.\footnote{The excluded countries and regions are Belize, Liberia, Qatar, Ecuador, Djibouti, Saint Lucia, Saint Kitts and Nevis, St. Vincent and the Grenadines, Dominica, Antigua and Barbuda, Palestine, Bahamas, Barbados, Panama, Bahrain, Curaçao, Grenada, Saudi Arabia, Zimbabwe, Macao SAR of China, Turks and Caicos Islands, Bermuda, Jordan, United States, British Virgin Islands, Dutch Sint Maarten, El Salvador, Montserrat, United Arab Emirates, Oman, Aruba, Hong Kong SAR of China, Maldives, Lebanon.}. We examine whether our previous conclusion is robust after excluding those countries whose currencies are denominated in or pegged to the US dollar. Second, we will use a longer panel from 2000 to 2011 using the whole sample. Since the pegged exchange rate regime of the RMB to the USD was lifted in 2005, a longer panel will give the RMB more room for volatility against the USD. Since the complicated merging process between the U.S. and Chinese data requires firm-level industry codes as in \ref{Measurements-Credit Constraints}, we will only include continuing firms who have appeared in the matched sample from 2000 to 2007  and assign each firm to its previous industry when we extend the period to 2011. Due to the nature of credit constraint measures as cross-sectional patterns, this assumption of time-invariant industry is plausible. Results of both tests are shown in Table \ref{tab.robust.nopeg}.
 
 \begin{sidewaystable}[htbp]
 	\centering
-	\caption{Robustness check: alternative samples excluding USD-pegged countries or covering a longer period}
+	\caption{Robustness check: alternative samples excluding USD-pegged countries}
 	\begin{threeparttable}
 	\begin{tabular}{lcccccccc}
 		\toprule
@@ -588,26 +588,26 @@ Second, some importers may be registered as ``processing trade'', that is, impor
 	\begin{threeparttable}
 		\begin{tabular}{lcccccccc}
 			\toprule
-			& (1)   & (2)   & (3)   & (4) & (1)   & (2)   & (3)   & (4)\\
+			& (1)   & (2)   & (3)   & (4) &  (5)  &  (6)   & (7)   & (8)\\
 			\midrule
 			& \multicolumn{4}{c}{Two-way traders controls} & \multicolumn{4}{c}{Processing trade controls}\\
-			& Baseline & FPC   & External Finance & Tangibility & Baseline & FPC   & External Finance & Tangibility\\
+			& Baseline & FPC & External Finance & Tangibility & Baseline & FPC & External Finance & Tangibility\\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.394*** & 0.136*** & 0.231*** & 1.158*** &&&&\\
-			& (0.015) & (0.016) & (0.015) & (0.031) &&&&\\
-			$\Delta \ln RGDP_{ct}$ & 0.406*** & 0.459*** & 0.469*** & 0.427*** &&&&\\
-			& (0.086) & (0.086) & (0.086) & (0.086) &&&&\\
-			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.388*** &       &  &&&&\\
-			&       & (0.009) &       &  &&&&\\
-			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.246*** &  &&&&\\
-			&       &       & (0.028) &  &&&&\\
-			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.138*** &&&&\\
-			&       &       &       & (0.112) &&&&\\
-			Year FE  &  Yes   & Yes   & Yes   & Yes &&&&\\
-			Firm-product-country FE &  Yes   & Yes   & Yes   & Yes &&&&\\
-			Two-way trade control &  Yes   & Yes   & Yes   & Yes &&&&\\
-			Processing trade control &&&& &  Yes   & Yes   & Yes   & Yes \\
-			Observations & 1449210 & 1449210 & 1449210 & 1449210 &&&&\\
+			$\Delta \ln RER_{ct}$ & 0.730*** & 0.332*** & 0.479*** & 2.039*** & 0.692*** & 0.324*** & 0.455*** &0.455***\\
+			& (0.033) & (0.036) & (0.034) & (0.075) & (0.034) & (0.038) & (0.036) & (0.079)\\
+			$\Delta \ln RGDP_{ct}$ & 0.185 & 0.130 & 0.128 & 0.155 &&&&\\
+			& (0.115) & (0.115) & (0.115) & (0.115) & (0.121) & (0.121) & (0.121) & (0.121)\\
+			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.598*** &       &  & & 0.554*** &&\\
+			&       & (0.023) &       &  &&(0.024)&&\\
+			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.825*** &  &&& 1.721*** &\\
+			&       &       & (0.069) &  &&&(0.073)&\\
+			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -5.340*** &&&  &-4.791***\\
+			&       &       &       & (0.275) &&&&(0.289)\\
+			Year FE  &  Yes   & Yes   & Yes   & Yes &  Yes   & Yes   & Yes   & Yes\\
+			Firm-product-country FE &  Yes   & Yes   & Yes   & Yes &  Yes   & Yes   & Yes   & Yes\\
+			Two-way trade control &  Yes   & Yes   & Yes   & Yes & No & No & No & No\\
+			Processing trade control & No & No & No & No &  Yes   & Yes   & Yes   & Yes \\
+			Observations & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210\\
 			\bottomrule
 		\end{tabular}
 		\begin{tablenotes}
@@ -632,16 +632,18 @@ Table \ref{tab.robust.ownership} in the Appendix shows the results after control
 
 \subsection{Alternative estimation methods}
 
-The baseline estimation of exchange rate pass-through uses panel fixed effect regression, in which $\xi_{ijc}$, the firm-product-country level fixed effects and $\tau_t$, the time fixed effect exclude factors that affect prices other than exchange rate movements, thereby lead to accurate estimation of exchange rate pass-through.
+Our estimation strategy includes multiple dimensions of the data including product, source country and time. Therefore, the baseline estimation of exchange rate pass-through adapts panel fixed effect regression, in which $\xi_{ijc}$, the firm-product-country level three-dimensional fixed effects and $\tau_t$, the time fixed effects, thereby lead to accurate estimation of price changes only due to exchange rate shocks. In this section, we will try alternative estimation methods to check the robustness of our results.
 
-However, our measures of credit constraints only capture the cross-sectional pattern (to avoid firm endogeneity): the industry-level credit needs measures are persistent and thus averaged over time. Therefore, to fully sort out the time variation effect, we also conduct cross-sectional estimation using both one-year sample and between estimator.
+First, we will further check whether other fixed-effect combinations will yield similar results. In this test, We will combine firm-year fixed effects $\tilde{\xi}_{ij}$ with two-dimensional country-time fixed effects $\tilde{\tau}_{ct}$ or separately with country fixed effects $\theta_{c}$ and time fixed effects $\tau_t$.  Results of alternative fixed effects are shown in columns (1)-(4) and (5)-(8) in Table \ref{tab.robust.fe}, respectively. 
+
+Second, to avoid firm endogeneity, our measures of credit constraints only capture the cross-sectional pattern, i.e. the industry-level credit needs measures are persistent and thus averaged over time. Therefore, to fully sort out the time variation effect, we also conduct cross-sectional estimation using both one-year sample and between estimator. Results of cross-sectional estimation are shown in Table \ref{tab.robust.crosec}. All results regarding the estimation of import ERPT and effects of credit constraints on import ERPT remain similar as in the baseline.
 
 \section{Discussions} \label{Discussion}
 
 \subsection{Firm Heterogeneity in Markup}
 In the discussion, we argue that credit constraints will affect the ``absorptive capacity" of exchange rate shocks other than the firm's attributes in sales. Our firm-level data has the merit of containing information on its production, so we could connect the exchange rate pass-through with estimated firm-specific markup. In the following work, we will control markup to test the conjectures concretely. Referring to \cite{bkl2021}, even without direct measures of prices and marginal cost, we can still estimate the firm-level markup, using the structural assumptions of \cite{dlw2012} and GMM estimation method.
 
-Simply put, DLW (2012)\cite{dlw2012} derives the firm-specific markup as the ratio of an input factor's output elasticity to its firm-specific factor payment share $\mu_{t}=\theta_{t}^{X}\left(\alpha_{t}^{X}\right)^{-1}$, where $\alpha_{t}^{X}$ is the share of expenditures on input X in total sales and $\theta^X_t$ denotes the output elasticity on an input X. The major difficulty is calculating the firm-specific output elasticity concerning materials, which requires estimating firm-specific production functions. We apply the methodology of \cite{acf2015} to address the endogeneity of inputs, assuming a 3rd-order translog gross output production function in capital, labor, and material inputs:
+Simply put, \cite{dlw2012} derives the firm-specific markup as the ratio of an input factor's output elasticity to its firm-specific factor payment share $\mu_{t}=\theta_{t}^{X}\left(\alpha_{t}^{X}\right)^{-1}$, where $\alpha_{t}^{X}$ is the share of expenditures on input X in total sales and $\theta^X_t$ denotes the output elasticity on an input X. The major difficulty is calculating the firm-specific output elasticity concerning materials, which requires estimating firm-specific production functions. We apply the methodology of \cite{acf2015} to address the endogeneity of inputs, assuming a 3rd-order translog gross output production function in capital, labor, and material inputs:
 
 $$
 \begin{aligned}
@@ -693,9 +695,7 @@ Given that credit constraints play an important role in China's import exchange 
         \label{tab.markup}
 \end{table}
 
-Panel A shows how markup affects import ERPT in addition to credit constraints and panel B (attached in \ref{tabA.2}) shows the comparison results for export ERPT. Column (1) shows the direct effects of firm-level markup on exchange rate pass-through. Columns (2) to (4) add the first principal component, external finance dependence, and asset tangibility to the regression respectively. All columns control for the lag term of markup.
-
-From the coefficients of interaction terms in panel A, firms with higher markup have less complete import pass-through while firms. The effects of financial constraints are still significant and robust as in section \ref{Results-Credit} after controlling for markup. The coefficients in panel B \ref{tabA.2} imply a similar conclusion. Exporters with higher markup have less complete export pass-through. In other words, higher markup on the exchange rate pass-through work in the opposite direction with tighter credit constraints. However, the coefficients in rows (4)-(6) are significant respectively, indicating that markup cannot fully explain the effect of credit constraints, which is consistent with \cite{xu-guo2021}.
+Table \ref{tab.markup} shows how markup affects import ERPT in addition to credit constraints. Column (1) shows the direct effects of firm-level markup on exchange rate pass-through. Columns (2) to (4) add the first principal component, external finance dependence, and asset tangibility to the regression respectively. All columns control for the lag term of markup. From the coefficients of interaction terms, firms with higher markup have less complete import pass-through while firms. The effects of financial constraints are still significant and robust as in section \ref{Results-Credit} after controlling for markup. Exporters with higher markup have less complete export pass-through. In other words, higher markup on the exchange rate pass-through work in the opposite direction with tighter credit constraints. However, the coefficients in rows (4)-(6) are significant respectively, indicating that markup cannot fully explain the effect of credit constraints, which is consistent with \cite{xu-guo2021}.
 
 The explanation for import price absorptive capacity seems more complicated than which for export ERPT. BMM\cite{bmm2012} documents that more productive firms react to depreciation (or appreciation) by adjusting more markup and less export volume, keeping local market prices relatively stable, which means a less complete pass-through. This explanation hinges on endogenous markup over marginal costs where less elastic demand allows them to adjust markups more extensively during currency fluctuations. However, on the import side, other factors influence the sourcing capacity upon exchange rate movements. In any case, the effects of credit constraints are not offset or replaced by the sales factors, so the conclusions in section \ref{Results-Credit} about credit constraints remain valid.
 
@@ -969,46 +969,41 @@ There are several directions for future improvement. First, we need to explore t
 	\label{tab.robust.ownership}
 \end{sidewaystable}
 
-\begin{table}[htbp]
+\begin{sidewaystable}[htbp]
 	\centering
-	\caption{Market Share and Effects of Credit Constraints on Import Exchange Rate Pass-through}
+	\caption{Robustness check: alternative fixed effects}
 	\begin{threeparttable}
-	\begin{tabular}{lccccc}
-		\toprule
-		& (1)   & (2)   & (3)   & (4) & (5)\\
-		\midrule
-		Panel B & \multicolumn{5}{c}{Export} \\
-		& MS    & $MS^2$ &FPC& External & Tangibility \\
-		&       &       && Finance &  \\
-		\midrule
-		$\Delta \ln RER_{ct}$ & 0.035*** & 0.037*** & 0.045*** & 0.039*** & -0.022 \\
-		& (0.006) & (0.007) & (0.007) & (0.007) & (0.015) \\
-		$\Delta \ln RGDP_{ct}$ & -0.079** & -0.079** & -0.080** & -0.079** & -0.080** \\
-		& (0.037) & (0.037) & (0.037) & (0.037) & (0.037) \\
-		$\Delta \ln RGDP_{ct}*MS_{ijct}$ & -0.008 & -0.040 & -0.043 & -0.036 & -0.051 \\
-		& (0.012) & (0.049) & (0.049) & (0.049) & (0.049) \\
-		$\Delta \ln RGDP_{ct}*MS^2_{ijct}$ &       & 0.035 & 0.037 & 0.033 & 0.041 \\
-		&       & (0.050) & (0.050) & (0.050) & (0.050) \\
-		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       &       & -0.019*** &       &  \\
-		&       &       & (0.004) &       &  \\
-		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       &       & -0.045*** &  \\
-		&       &       &       & (0.013) &  \\
-		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       &       & 0.229*** \\
-		&       &       &       &       & (0.053) \\
-		$MS_{ijpt}$    & 0.070*** & 0.070*** & 0.070*** & 0.070*** & 0.070*** \\
-		& (0.004) & (0.004) & (0.004) & (0.004) & (0.004) \\
-		Year FE  & Yes   & Yes   &   Yes    & Yes   & Yes \\
-		Firm-product-country FE & Yes   & Yes   &   Yes    & Yes   & Yes \\
-		Observations & 1793974 & 1793974 & 1793974 & 1793974 & 1793974 \\
-		\bottomrule
-	    \end{tabular}
-    \begin{tablenotes}
-    	\footnotesize
-    	\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (3)-(5) use different measures of credit constraints calculated using U.S. data. Panel A is shown in Table \ref{tab.share}. All regressions include firm-product-country fixed effects and year fixed effects.
-    \end{tablenotes}
+		\begin{tabular}{lcccccccc}
+			\toprule
+			& (1)   & (2)   & (3)   & (4) &  (5)  &  (6)  & (7)  & (8)\\
+			\midrule
+			& \multicolumn{4}{c}{registration type controls} & \multicolumn{4}{c}{Affiliation controls}\\
+			& Baseline & FPC   & External Finance & Tangibility & Baseline & FPC & External Finance & Tangibility\\
+			\midrule
+			$\Delta \ln RER_{ct}$ & 0.394*** & 0.136*** & 0.231*** & 1.158*** &&&&\\
+			& (0.015) & (0.016) & (0.015) & (0.031) &&&&\\
+			$\Delta \ln RGDP_{ct}$ & 0.406*** & 0.459*** & 0.469*** & 0.427*** &&&&\\
+			& (0.086) & (0.086) & (0.086) & (0.086) &&&&\\
+			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.388*** &       &  &&&&\\
+			&       & (0.009) &       &  &&&&\\
+			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.246*** &  &&&&\\
+			&       &       & (0.028) &  &&&&\\
+			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.138*** &&&&\\
+			&       &       &       & (0.112) &&&&\\
+			Year FE  &  Yes   & Yes   & Yes   & Yes &&&&\\
+			Firm-product-country FE &  Yes   & Yes   & Yes   & Yes &&&&\\
+			Two-way trade control &  Yes   & Yes   & Yes   & Yes & No & No & No & No\\
+			Processing trade control & No & No & No &  No &  Yes   & Yes   & Yes  & Yes \\
+			Observations & 1712289 & 1712289 & 1712289 & 1712289 &&&&\\
+			\bottomrule
+		\end{tabular}
+		\begin{tablenotes}
+			\footnotesize
+			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) include controls of registration type while columns (5)-(8) include controls of affiliation. All regressions include firm-product-country fixed effects and year fixed effects.
+		\end{tablenotes}
 	\end{threeparttable}
-	\label{tab.marketshare}
-\end{table}
+	\label{tab.robust.fe}
+\end{sidewaystable}
 
 
 \end{document}

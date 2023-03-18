@@ -185,29 +185,6 @@ estfe imp_markup imp_ExtFin_US_markup imp_Tang_US_markup imp_tfp imp_ExtFin_US_t
 esttab imp_markup imp_ExtFin_US_markup imp_Tang_US_markup imp_tfp imp_ExtFin_US_tfp imp_Tang_US_tfp imp_scratio imp_ExtFin_US_scratio imp_Tang_US_scratio using "D:\Project C\tables\matched\table_imp_markup_tfp_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*_lag x_*_US)
 
 *-------------------------------------------------------------------------------
-* Two-way traders
-cd "D:\Project C\sample_matched"
-use sample_matched_imp,clear
-
-eststo imp_twoway: areg dlnprice_tr dlnRER dlnrgdp i.year if twoway_trade==1, a(group_id)
-eststo imp_twoway_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if twoway_trade==1, a(group_id)
-eststo imp_twoway_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if twoway_trade==1, a(group_id)
-eststo imp_twoway_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if twoway_trade==1, a(group_id)
-eststo imp_oneway: areg dlnprice_tr dlnRER dlnrgdp i.year if twoway_trade==0, a(group_id)
-eststo imp_oneway_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if twoway_trade==0, a(group_id)
-eststo imp_oneway_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if twoway_trade==0, a(group_id)
-eststo imp_oneway_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if twoway_trade==0, a(group_id)
-
-estfe imp_twoway imp_twoway_FPC_US imp_twoway_ExtFin_US imp_twoway_Tang_US imp_oneway imp_oneway_FPC_US imp_oneway_ExtFin_US imp_oneway_Tang_US, labels(group_id "Firm-product-country FE")
-esttab imp_twoway imp_twoway_FPC_US imp_twoway_ExtFin_US imp_twoway_Tang_US imp_oneway imp_oneway_FPC_US imp_oneway_ExtFin_US imp_oneway_Tang_US using "D:\Project C\tables\matched\table_imp_twoway_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Twoway" "FPC" "External Finance" "Tangibility" "Oneway" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*_US)
-
-gen x_ExtFin_US_twoway=x_ExtFin_US*twoway_trade
-gen x_Tang_US_twoway=x_Tang_US*twoway_trade
-areg dlnprice_tr dlnRER x_twoway_trade dlnrgdp twoway_trade i.year, a(group_id)
-areg dlnprice_tr dlnRER x_twoway_trade x_ExtFin_US x_ExtFin_US_twoway dlnrgdp i.year, a(group_id)
-areg dlnprice_tr dlnRER x_twoway_trade x_Tang_US x_Tang_US_twoway dlnrgdp i.year, a(group_id)
-
-*-------------------------------------------------------------------------------
 * Duration
 cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
@@ -296,23 +273,26 @@ estfe imp_nopeg_baseline imp_nopeg_FPC_US imp_nopeg_ExtFin_US imp_nopeg_Tang_US,
 esttab imp_nopeg_baseline imp_nopeg_FPC_US imp_nopeg_ExtFin_US imp_nopeg_Tang_US using "D:\Project C\tables\matched\table_imp_nopeg.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
 
 *-------------------------------------------------------------------------------
+* Two-way traders
+cd "D:\Project C\sample_matched"
+use sample_matched_imp,clear
+
+eststo imp_twoway_baseline: areg dlnprice_tr dlnRER dlnrgdp i.twoway_trade i.year, a(group_id)
+eststo imp_twoway_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.twoway_trade i.year, a(group_id)
+eststo imp_twoway_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.twoway_trade i.year, a(group_id)
+eststo imp_twoway_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.twoway_trade i.year, a(group_id)
+
+estfe imp_twoway_baseline imp_twoway_FPC_US imp_twoway_ExtFin_US imp_twoway_Tang_US, labels(group_id "Firm-product-country FE")
+esttab imp_twoway_baseline imp_twoway_FPC_US imp_twoway_ExtFin_US imp_twoway_Tang_US using "D:\Project C\tables\matched\table_imp_twoway_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" "Two-way FE =*.twoway_trade" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*_US)
+
+*-------------------------------------------------------------------------------
 * Ordinary vs Processing
 use sample_matched_imp_shipment,clear
 
-eststo imp_ordinary_baseline: areg dlnprice_tr dlnRER dlnrgdp i.year if shipment_type==1, a(group_id)
-eststo imp_ordinary_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if shipment_type==1, a(group_id)
-eststo imp_ordinary_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if shipment_type==1, a(group_id)
-eststo imp_ordinary_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if shipment_type==1, a(group_id)
+eststo imp_process_baseline: areg dlnprice_tr dlnRER dlnrgdp i.shipment_type i.year, a(group_id)
+eststo imp_process_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.shipment_type i.year, a(group_id)
+eststo imp_process_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.shipment_type i.year, a(group_id)
+eststo imp_process_Tang_US: areg dlnprice_tr dlnRER dlnrgdp x_Tang_US i.shipment_type i.year, a(group_id)
 
-eststo imp_process_baseline: areg dlnprice_tr dlnRER dlnrgdp i.year if shipment_type>=2, a(group_id)
-eststo imp_process_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if shipment_type>=2, a(group_id)
-eststo imp_process_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if shipment_type>=2, a(group_id)
-eststo imp_process_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if shipment_type>=2, a(group_id)
-
-eststo imp_assemble_baseline: areg dlnprice_tr dlnRER dlnrgdp i.year if shipment_type==3, a(group_id)
-eststo imp_assemble_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year if shipment_type==3, a(group_id)
-eststo imp_assemble_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year if shipment_type==3, a(group_id)
-eststo imp_assemble_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp i.year if shipment_type==3, a(group_id)
-
-estfe imp_ordinary_baseline imp_ordinary_FPC_US imp_ordinary_ExtFin_US imp_ordinary_Tang_US imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US imp_assemble_baseline imp_assemble_FPC_US imp_assemble_ExtFin_US imp_assemble_Tang_US, labels(group_id "Firm-product-country FE")
-esttab imp_ordinary_baseline imp_ordinary_FPC_US imp_ordinary_ExtFin_US imp_ordinary_Tang_US imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US imp_assemble_baseline imp_assemble_FPC_US imp_assemble_ExtFin_US imp_assemble_Tang_US using "D:\Project C\tables\matched\table_imp_process.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Ordinary" "Ordinary" "Ordinary" "Ordinary" "Processing" "Processing" "Processing" "Processing" "Assembling" "Assembling" "Assembling" "Assembling") order(dlnRER dlnrgdp x_*)
+estfe imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US, labels(group_id "Firm-product-country FE")
+esttab imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US using "D:\Project C\tables\matched\table_imp_processing.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" "Processing FE =*.shipment_type" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)

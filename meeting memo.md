@@ -115,3 +115,23 @@ Table 8: Heterogeneous markup, credit constraints, and ERPT
 
 Table 9: Heterogeneous market share, credit constraints, and ERPT
 
+
+
+
+
+2023.3.17
+
+JMCB JIMF JEBO JCE
+
+exporting or sourcing decision and exchange rate (market-specific)
+
+1. expectation, forward rate
+2. uncertainty, exchange rate risk
+
+domestic inputs vs imported inputs, position in global value chain, domestic value added, integrate into global market
+
+favor or harm from exchange rate uncertainty
+
+two same firms, one sell to US, one sell to Brazil
+
+why China's export exchange rate pass-through so complete?
