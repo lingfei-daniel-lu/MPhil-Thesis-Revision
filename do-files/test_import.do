@@ -133,29 +133,12 @@ cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
 
 eststo imp_MS: areg dlnprice_tr dlnRER x_MS dlnrgdp MS i.year, a(group_id)
-eststo imp_MS_FPC_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_FPC_US dlnrgdp MS i.year, a(group_id)
-eststo imp_MS_ExtFin_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_ExtFin_US dlnrgdp MS i.year, a(group_id)
-eststo imp_MS_Tang_US: areg dlnprice_tr dlnRER x_MS x_MS_sqr x_Tang_US dlnrgdp MS i.year, a(group_id)
+eststo imp_MS_FPC_US: areg dlnprice_tr dlnRER x_MS x_FPC_US dlnrgdp MS i.year, a(group_id)
+eststo imp_MS_ExtFin_US: areg dlnprice_tr dlnRER x_MS x_ExtFin_US dlnrgdp MS i.year, a(group_id)
+eststo imp_MS_Tang_US: areg dlnprice_tr dlnRER x_MS x_Tang_US dlnrgdp MS i.year, a(group_id)
 
 estfe imp_MS imp_MS_FPC_US imp_MS_ExtFin_US imp_MS_Tang_US, labels(group_id "Firm-product-country FE")
-esttab imp_MS imp_MS_FPC_US imp_MS_ExtFin_US imp_MS_Tang_US using "D:\Project C\tables\matched\table_imp_MS.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("MS" "Add FPC" "Add ExtFin" "Add Tangibility") order(dlnRER dlnrgdp x_*)
-
-xtile MS_xt2=MS,nq(2)
-gen MS_d=MS_xt2-1
-gen x_MS_d=dlnRER*MS_d
-gen x_FPC_US_MS_d=x_FPC_US*MS_d
-gen x_ExtFin_US_MS_d=x_ExtFin_US*MS_d
-gen x_Tang_US_MS_d=x_ExtFin_US*MS_d`'
-gen x_Invent_US_MS_d=x_ExtFin_US*MS_d
-
-eststo imp_MS_d: areg dlnprice_tr dlnRER x_MS_d dlnrgdp i.year, a(group_id)
-eststo imp_FPC_US_MS_d: areg dlnprice_tr dlnRER x_MS_d x_FPC_US x_FPC_US_MS_d dlnrgdp i.year, a(group_id)
-eststo imp_ExtFin_US_MS_d: areg dlnprice_tr dlnRER x_MS_d x_ExtFin_US x_ExtFin_US_MS_d dlnrgdp i.year, a(group_id)
-eststo imp_Tang_US_MS_d: areg dlnprice_tr dlnRER x_MS_d x_Tang_US x_Tang_US_MS_d dlnrgdp i.year, a(group_id)
-eststo imp_Invent_US_MS_d: areg dlnprice_tr dlnRER x_MS_d x_Invent_US x_Invent_US_MS_d dlnrgdp i.year, a(group_id)
-
-estfe imp_MS_d imp_FPC_US_MS_d imp_ExtFin_US_MS_d imp_Tang_US_MS_d imp_Invent_US_MS_d, labels(group_id "Firm-product-country FE")
-esttab imp_MS_d imp_FPC_US_MS_d imp_ExtFin_US_MS_d imp_Tang_US_MS_d imp_Invent_US_MS_d using "D:\Project C\tables\matched\table_imp_MS_d.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "ExtFin" "Tangibility" "Inventory") order(dlnRER dlnrgdp x_*)
+esttab imp_MS imp_MS_FPC_US imp_MS_ExtFin_US imp_MS_Tang_US using "D:\Project C\tables\matched\table_imp_MS.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("MS" "FPC" "ExtFin" "Tangibility") order(dlnRER dlnrgdp x_*)
 
 *-------------------------------------------------------------------------------
 * Regressions controlling firms' markup and TFP

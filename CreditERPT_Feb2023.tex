@@ -230,7 +230,7 @@ The summary statistics of the whole customs records, the firm information datase
 	\end{tabular}
 	\begin{tablenotes}
 		\footnotesize
-		\item[Notes:] This table shows the summary statistics of some important variables in our three major datasets. Panel A and panel C describe the total annual average prices, and price changes for the whole sample and the matched sample, respectively. The observations in panel Ae and panel C are at the firm-product-country-year level. The price in panel A and panel C in RMB. Panel B describes sales and costs information of Chinese manufacturing firms during 2000-2007. The money values in panel B are in thousands of RMB. The observations in panel B are at the firm-year level.
+		\item[Notes:] This table shows the summary statistics of some important variables in our three major datasets. Panel A and panel C describe the total annual average prices, and price changes for the whole sample and the matched sample, respectively. The observations in panel A and panel C are at the firm-product-country-year level. The price in panel A and panel C in RMB. Panel B describes sales and costs information of Chinese manufacturing firms during 2000-2007. The money values in panel B are in thousands of RMB. The observations in panel B are at the firm-year level.
 	\end{tablenotes}
 	\end{threeparttable}
         }
@@ -538,6 +538,41 @@ From 1994 until July 2005, the Chinese RMB was pegged to the U.S. dollar. This p
 
 First, we exclude the U.S. and other countries who use the US dollar as their official currency or whose currency is pegged to the US dollar from our baseline matched sample.\footnote{The excluded countries and regions are Belize, Liberia, Qatar, Ecuador, Djibouti, Saint Lucia, Saint Kitts and Nevis, St. Vincent and the Grenadines, Dominica, Antigua and Barbuda, Palestine, Bahamas, Barbados, Panama, Bahrain, Curaçao, Grenada, Saudi Arabia, Zimbabwe, Macao SAR of China, Turks and Caicos Islands, Bermuda, Jordan, United States, British Virgin Islands, Dutch Sint Maarten, El Salvador, Montserrat, United Arab Emirates, Oman, Aruba, Hong Kong SAR of China, Maldives, Lebanon.}. We examine whether our previous conclusion is robust after excluding those countries whose currencies are denominated in or pegged to the US dollar. Second, we will use a longer panel from 2000 to 2011 using the whole sample. Since the pegged exchange rate regime of the RMB to the USD was lifted in 2005, a longer panel will give the RMB more room for volatility against the USD. Since the complicated merging process between the U.S. and Chinese data requires firm-level industry codes as in \ref{Measurements-Credit Constraints}, we will only include continuing firms who have appeared in the matched sample from 2000 to 2007  and assign each firm to its previous industry when we extend the period to 2011. Due to the nature of credit constraint measures as cross-sectional patterns, this assumption of time-invariant industry is plausible. Results of both tests are shown in Table \ref{tab.robust.nopeg}.
 
+\begin{table}[htbp]
+	\centering
+	\caption{Robustness check: alternative samples excluding USD-pegged countries}
+	\begin{threeparttable}
+		\begin{tabular}{lcccc}
+			\toprule
+			& (1)   & (2)   & (3)   & (4) \\
+			\midrule
+			& \multicolumn{4}{c}{Excluding US Dollar Peg}\\
+			& Baseline & FPC   & External Finance & Tangibility \\
+			\midrule
+			$\Delta \ln RER_{ct}$ & 0.382*** & 0.164*** & 0.256*** & 1.173*** \\
+			& (0.017) & (0.018) & (0.018) & (0.035)\\
+			$\Delta \ln RGDP_{ct}$ & 0.709*** & 0.778*** & 0.797*** & 0.730*** \\
+			& (0.106) & (0.106) & (0.106) & (0.106) \\
+			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.362*** &       &   \\
+			&       & (0.010) &       &  \\
+			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.103*** &  \\
+			&       &       & (0.030) &  \\
+			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.186*** \\
+			&       &       &       & (0.121) \\
+			Year FE  &   Yes    & Yes   & Yes   & Yes \\
+			Firm-product-country FE &   Yes    & Yes   & Yes   & Yes \\
+			Observations & 1449210 & 1449210 & 1449210 & 1449210 \\
+			\bottomrule
+		\end{tabular}
+		\begin{tablenotes}
+			\footnotesize
+			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and, 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. We do not include countries that use the U.S. dollar or currencies pegged to the U.S. dollar. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+		\end{tablenotes}
+	\end{threeparttable}
+	\label{tab.robust.nopeg1}
+\end{table}
+
+
 \begin{sidewaystable}[htbp]
 	\centering
 	\caption{Robustness check: alternative samples excluding USD-pegged countries}
@@ -595,7 +630,7 @@ Second, some importers may be registered as ``processing trade'', that is, impor
 			\midrule
 			$\Delta \ln RER_{ct}$ & 0.730*** & 0.332*** & 0.479*** & 2.039*** & 0.692*** & 0.324*** & 0.455*** &0.455***\\
 			& (0.033) & (0.036) & (0.034) & (0.075) & (0.034) & (0.038) & (0.036) & (0.079)\\
-			$\Delta \ln RGDP_{ct}$ & 0.185 & 0.130 & 0.128 & 0.155 &&&&\\
+			$\Delta \ln RGDP_{ct}$ & 0.185 & 0.130 & 0.128 & 0.155 &-0.003&-0.054&-0.056&-0.029\\
 			& (0.115) & (0.115) & (0.115) & (0.115) & (0.121) & (0.121) & (0.121) & (0.121)\\
 			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.598*** &       &  & & 0.554*** &&\\
 			&       & (0.023) &       &  &&(0.024)&&\\
