@@ -119,7 +119,7 @@ Table 9: Heterogeneous market share, credit constraints, and ERPT
 
 
 
-2023.3.17
+# 2023.3.17
 
 JMCB JIMF JEBO JCE
 
@@ -135,3 +135,18 @@ favor or harm from exchange rate uncertainty
 two same firms, one sell to US, one sell to Brazil
 
 why China's export exchange rate pass-through so complete?
+
+
+
+# 2023.3.20
+
+Questions from the audience:
+Credit constraint can be correlated with firm size
+Financial hedging 
+Sourcing diversity, source country or firm
+Price heterogeneity within the 6d group
+Raw price or price weighted by units
+A way to verify the measure of credit constraints
+All variables are unitless
+Discussion on Table 2
+Tangibility
