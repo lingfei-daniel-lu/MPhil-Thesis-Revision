@@ -538,41 +538,6 @@ From 1994 until July 2005, the Chinese RMB was pegged to the U.S. dollar. This p
 
 First, we exclude the U.S. and other countries who use the US dollar as their official currency or whose currency is pegged to the US dollar from our baseline matched sample.\footnote{The excluded countries and regions are Belize, Liberia, Qatar, Ecuador, Djibouti, Saint Lucia, Saint Kitts and Nevis, St. Vincent and the Grenadines, Dominica, Antigua and Barbuda, Palestine, Bahamas, Barbados, Panama, Bahrain, Curaçao, Grenada, Saudi Arabia, Zimbabwe, Macao SAR of China, Turks and Caicos Islands, Bermuda, Jordan, United States, British Virgin Islands, Dutch Sint Maarten, El Salvador, Montserrat, United Arab Emirates, Oman, Aruba, Hong Kong SAR of China, Maldives, Lebanon.}. We examine whether our previous conclusion is robust after excluding those countries whose currencies are denominated in or pegged to the US dollar. Second, we will use a longer panel from 2000 to 2011 using the whole sample. Since the pegged exchange rate regime of the RMB to the USD was lifted in 2005, a longer panel will give the RMB more room for volatility against the USD. Since the complicated merging process between the U.S. and Chinese data requires firm-level industry codes as in \ref{Measurements-Credit Constraints}, we will only include continuing firms who have appeared in the matched sample from 2000 to 2007  and assign each firm to its previous industry when we extend the period to 2011. Due to the nature of credit constraint measures as cross-sectional patterns, this assumption of time-invariant industry is plausible. Results of both tests are shown in Table \ref{tab.robust.nopeg}.
 
-\begin{table}[htbp]
-	\centering
-	\caption{Robustness check: alternative samples excluding USD-pegged countries}
-	\begin{threeparttable}
-		\begin{tabular}{lcccc}
-			\toprule
-			& (1)   & (2)   & (3)   & (4) \\
-			\midrule
-			& \multicolumn{4}{c}{Excluding US Dollar Peg}\\
-			& Baseline & FPC   & External Finance & Tangibility \\
-			\midrule
-			$\Delta \ln RER_{ct}$ & 0.382*** & 0.164*** & 0.256*** & 1.173*** \\
-			& (0.017) & (0.018) & (0.018) & (0.035)\\
-			$\Delta \ln RGDP_{ct}$ & 0.709*** & 0.778*** & 0.797*** & 0.730*** \\
-			& (0.106) & (0.106) & (0.106) & (0.106) \\
-			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.362*** &       &   \\
-			&       & (0.010) &       &  \\
-			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.103*** &  \\
-			&       &       & (0.030) &  \\
-			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.186*** \\
-			&       &       &       & (0.121) \\
-			Year FE  &   Yes    & Yes   & Yes   & Yes \\
-			Firm-product-country FE &   Yes    & Yes   & Yes   & Yes \\
-			Observations & 1449210 & 1449210 & 1449210 & 1449210 \\
-			\bottomrule
-		\end{tabular}
-		\begin{tablenotes}
-			\footnotesize
-			\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and, 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. We do not include countries that use the U.S. dollar or currencies pegged to the U.S. dollar. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
-		\end{tablenotes}
-	\end{threeparttable}
-	\label{tab.robust.nopeg1}
-\end{table}
-
-
 \begin{sidewaystable}[htbp]
 	\centering
 	\caption{Robustness check: alternative samples excluding USD-pegged countries}
@@ -607,7 +572,7 @@ First, we exclude the U.S. and other countries who use the US dollar as their of
         \label{tab.robust.nopeg}
 \end{sidewaystable}
 
-Table \ref{tab.robust.nopeg} demonstrates that our results excluding the U.S. and those pegged countries are not overturned. When we extend the sample to a longer time period, we still reach similar conclusions. The estimated import ERPT is 38.2\% in column (1) and in column (5), which are slightly more complete than 35.7\% in the matched sample shown in Table \ref{tab.baseline}. All coefficients on interaction terms remain robust and significant, suggesting that higher external finance dependence makes exchange rate pass-through more complete while higher asset tangibility plays an opposite role. Therefore, the peg of RMB to the dollar before 2005 fo not interfere with the main conclusions of this paper.
+Table \ref{tab.robust.nopeg} demonstrates that our results excluding the U.S. and those pegged countries are not overturned. When we extend the sample to a longer time period, we still reach similar conclusions. The estimated import ERPT is 38.2\% in column (1) and in column (5), which are slightly more complete than 35.7\% in the matched sample. All coefficients on interaction terms remain robust and significant, suggesting that higher external finance dependence makes exchange rate pass-through more complete while higher asset tangibility plays an opposite role. Therefore, the peg of RMB to the dollar before 2005 fo not interfere with the main conclusions of this paper.
 
 \subsection{Trade type controls}
 
@@ -678,7 +643,7 @@ Second, to avoid firm endogeneity, our measures of credit constraints only captu
 \subsection{Firm Heterogeneity in Markup}
 In the discussion, we argue that credit constraints will affect the ``absorptive capacity" of exchange rate shocks other than the firm's attributes in sales. Our firm-level data has the merit of containing information on its production, so we could connect the exchange rate pass-through with estimated firm-specific markup. In the following work, we will control markup to test the conjectures concretely. Referring to \cite{bkl2021}, even without direct measures of prices and marginal cost, we can still estimate the firm-level markup, using the structural assumptions of \cite{dlw2012} and GMM estimation method.
 
-Simply put, \cite{dlw2012} derives the firm-specific markup as the ratio of an input factor's output elasticity to its firm-specific factor payment share $\mu_{t}=\theta_{t}^{X}\left(\alpha_{t}^{X}\right)^{-1}$, where $\alpha_{t}^{X}$ is the share of expenditures on input X in total sales and $\theta^X_t$ denotes the output elasticity on an input X. The major difficulty is calculating the firm-specific output elasticity concerning materials, which requires estimating firm-specific production functions. We apply the methodology of \cite{acf2015} to address the endogeneity of inputs, assuming a 3rd-order translog gross output production function in capital, labor, and material inputs:
+We follow the method by \cite{dlw2012} who derives the firm-specific markup as the ratio of an input factor's output elasticity to its firm-specific factor payment share $\mu_{t}=\theta_{t}^{X}\left(\alpha_{t}^{X}\right)^{-1}$, where $\alpha_{t}^{X}$ is the share of expenditures on input X in total sales and $\theta^X_t$ denotes the output elasticity on an input X. The major difficulty is calculating the firm-specific output elasticity concerning materials, which requires estimating firm-specific production functions. We apply the methodology of \cite{acf2015} to address the endogeneity of inputs, assuming a 3rd-order translog gross output production function in capital, labor, and material inputs:
 
 $$
 \begin{aligned}
