@@ -160,9 +160,9 @@ merge n:1 HS2002 using "D:\Project C\HS Conversion\HS2002to1996.dta",nogen updat
 replace HS1996=substr(HS8,1,6) if year<2002
 rename HS1996 HS6
 drop if HS6=="" | party_id==""
-collapse (sum) value quant, by (party_id EN exp_imp HS6 coun_aim year)
+collapse (sum) value quant, by (party_id EN exp_imp HS6 coun_aim year shipment)
 format EN %30s
-format coun_aim %15s
+format coun_aim %20s
 cd "D:\Project C\sample_all"
 save customs_all,replace
 
@@ -207,6 +207,7 @@ cd "D:\Project C\sample_all"
 use customs_all,clear
 keep if exp_imp =="imp"
 drop exp_imp
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6)
 foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
 	drop if strmatch(EN, "*`key'*") 
 }
@@ -245,11 +246,29 @@ merge n:1 HS2002 using "D:\Project C\HS Conversion\HS2002to1996.dta",nogen updat
 replace HS1996=substr(HS8,1,6) if year<2002
 rename HS1996 HS6
 drop if HS6=="" | FRDM=="" | quant_year==0 | value_year==0
-collapse (sum) value_year quant_year, by (FRDM EN exp_imp HS6 coun_aim year shipment)
+collapse (sum) value_year quant_year, by (FRDM EN exp_imp party_id HS6 coun_aim year shipment)
 sort FRDM HS6 coun_aim year
 format EN %30s
 format coun_aim %20s
+format shipment %20s
 save customs_matched,replace
+
+*-------------------------------------------------------------------------------
+* Construct matching directory
+cd "D:\Project C\sample_matched"
+use "D:\Project A\customs merged\cust.matched.all.dta",clear
+keep FRDM party_id year exp_imp
+tostring party_id,replace
+duplicates drop party_id year exp_imp,force
+save customs_matched_imp_partyid,replace
+
+*-------------------------------------------------------------------------------
+* Use new custom matched data
+cd "D:\Project C\sample_matched"
+use "D:\Project C\sample_all\customs_all",clear
+merge n:1 party_id year exp_imp using customs_matched_imp_partyid, nogen keep(matched)
+sort FRDM HS6 coun_aim year
+save customs_matched_new,replace
 
 *-------------------------------------------------------------------------------
 * Construct top trade partners
@@ -429,8 +448,21 @@ factortest Tang_US ExtFin_US
 rotate, promax(3) factors(1)
 predict f1
 rename f1 FPC_US
+pca Tang_cic2 ExtFin_cic2
+factor Tang_cic2 ExtFin_cic2,pcf
+factortest Tang_cic2 ExtFin_cic2
+rotate, promax(3) factors(1)
+predict f1
+rename f1 FPC_cic2
 sort FRDM EN year
 save cie_credit,replace
+
+cd "D:\Project C\sample_matched\CIE"
+use cie_credit,clear
+sort FRDM year
+by FRDM: replace cic_adj=cic_adj[_N]
+collapse (mean) *_US *_cic2, by (FRDM cic_adj)
+save cie_credit_list,replace
 
 *-------------------------------------------------------------------------------
 * GVC upstreamness measures (from CMY 2021)
@@ -558,17 +590,16 @@ save customs_twoway,replace
 * Merge customs data with CIE data to construct export sample
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
-merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
 keep if exp_imp =="exp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 duration)
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc *_cic2 *_US ownership)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_destination,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
-bys FRDM HS6: egen dist=mean(distance)
 replace dist=dist/1000
+replace distw=distw/1000
 foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
 	drop if strmatch(EN, "*`key'*") 
 }
@@ -584,7 +615,7 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US FPC_cic2 ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
@@ -595,10 +626,9 @@ save sample_matched_exp,replace
 * Use the same method to construct import sample
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
-merge n:1 FRDM year coun_aim exp_imp using customs_matched_duration,nogen keep(matched)
 keep if exp_imp =="imp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 duration)
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
@@ -621,7 +651,7 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US FPC_cic2 ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
@@ -662,3 +692,15 @@ foreach var of local varlist {
 }
 format EN %30s
 save sample_matched_imp_shipment,replace
+
+*-------------------------------------------------------------------------------
+* Construct longer sample using matched party_id
+cd "D:\Project C\sample_matched"
+use "D:\Project C\sample_all\sample_all_imp",clear
+merge n:1 party_id using customs_matched_imp_partyid, nogen keep(matched)
+merge n:1 FRDM using ".\CIE\cie_credit_list", nogen keep(matched) keepusing(cic_adj *_US *cic2)
+local varlist "FPC_US ExtFin_US Invent_US Tang_US FPC_cic2 ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2"
+foreach var of local varlist {
+	gen x_`var' = `var'*dlnRER
+}  
+save sample_long_imp,replace
