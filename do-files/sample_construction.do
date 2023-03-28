@@ -146,7 +146,7 @@ save customs_country_code,replace
 
 cd "D:\Project C"
 use ".\customs data\customs_00-11.dta",clear
-bys party_id: egen EN_adj=mode(EN),maxmode
+by party_id: egen EN_adj=mode(EN),maxmode
 drop EN
 rename EN_adj EN
 merge n:1 coun_aim using ".\customs data\customs_country_name",nogen keep(matched)
@@ -159,7 +159,7 @@ gen HS2002=substr(HS8,1,6) if year<2007 & year>=2002
 merge n:1 HS2002 using "D:\Project C\HS Conversion\HS2002to1996.dta",nogen update replace
 replace HS1996=substr(HS8,1,6) if year<2002
 rename HS1996 HS6
-drop if HS6=="" | party_id==""
+drop if HS6==""
 collapse (sum) value quant, by (party_id EN exp_imp HS6 coun_aim year shipment)
 format EN %30s
 format coun_aim %20s
@@ -229,6 +229,7 @@ save sample_all_imp,replace
 * Use custom matched data
 cd "D:\Project C\sample_matched"
 use "D:\Project A\customs merged\cust.matched.all.dta",clear
+tostring party_id,replace
 bys FRDM: egen EN_adj=mode(EN),maxmode
 drop EN
 rename EN_adj EN
@@ -267,7 +268,11 @@ save customs_matched_imp_partyid,replace
 cd "D:\Project C\sample_matched"
 use "D:\Project C\sample_all\customs_all",clear
 merge n:1 party_id year exp_imp using customs_matched_imp_partyid, nogen keep(matched)
+collapse (sum) value quant, by (FRDM EN exp_imp party_id HS6 coun_aim year shipment)
+merge 1:1 FRDM EN exp_imp party_id HS6 coun_aim year shipment using customs_matched
 sort FRDM HS6 coun_aim year
+format EN %30s
+format coun_aim %20s
 save customs_matched_new,replace
 
 *-------------------------------------------------------------------------------
@@ -278,7 +283,7 @@ collapse (sum) value_year, by (coun_aim exp_imp)
 gen value_exp=value_year if exp_imp=="exp"
 gen value_imp=value_year if exp_imp=="imp"
 drop value_year
-collapse (sum) value_exp value_imp , by (coun_aim)
+collapse (sum) value_exp value_imp, by (coun_aim)
 gsort -value_exp, gen(rank_exp)
 gsort -value_imp, gen(rank_imp)
 save customs_matched_top_partners,replace
