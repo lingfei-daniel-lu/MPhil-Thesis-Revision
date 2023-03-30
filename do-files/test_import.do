@@ -145,6 +145,12 @@ esttab imp_MS imp_MS_FPC_US imp_MS_ExtFin_US imp_MS_Tang_US using "D:\Project C\
 cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
 
+gen x_Markup_lag=dlnRER*Markup_lag
+gen x_FPC_US_Markup_lag=x_FPC_US*Markup_lag
+gen x_ExtFin_US_Markup_lag=x_ExtFin_US*Markup_lag
+gen x_Tang_US_Markup_lag=x_Tang_US*Markup_lag
+gen x_Invent_US_Markup_lag=x_Invent_US*Markup_lag
+
 eststo imp_markup: areg dlnprice_tr dlnRER x_Markup_lag dlnrgdp Markup_lag i.year, a(group_id)
 eststo imp_FPC_US_markup: areg dlnprice_tr dlnRER x_FPC_US x_Markup_lag dlnrgdp Markup_lag i.year, a(group_id)
 eststo imp_ExtFin_US_markup: areg dlnprice_tr dlnRER x_ExtFin_US x_Markup_lag dlnrgdp Markup_lag i.year, a(group_id)
@@ -154,18 +160,20 @@ eststo imp_Invent_US_markup: areg dlnprice_tr dlnRER x_Invent_US x_Markup_lag Ma
 estfe imp_markup imp_FPC_US_markup imp_ExtFin_US_markup imp_Tang_US_markup imp_Invent_US_markup, labels(group_id "Firm-product-country FE")
 esttab imp_markup imp_FPC_US_markup imp_ExtFin_US_markup imp_Tang_US_markup imp_Invent_US_markup using "D:\Project C\tables\matched\table_imp_markup_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*_lag x_*_US)
 
+gen x_tfp_lag=dlnRER*tfp_lag
+gen x_FPC_US_tfp_lag=x_FPC_US*tfp_lag
+gen x_ExtFin_US_tfp_lag=x_ExtFin_US*tfp_lag
+gen x_Tang_US_tfp_lag=x_Tang_US*tfp_lag
+gen x_Invent_US_tfp_lag=x_Invent_US*tfp_lag
+
 eststo imp_tfp: areg dlnprice_tr dlnRER x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id)
+eststo imp_FPC_US_tfp: areg dlnprice_tr dlnRER x_FPC_US x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id)
 eststo imp_ExtFin_US_tfp: areg dlnprice_tr dlnRER x_ExtFin_US x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id)
 eststo imp_Tang_US_tfp: areg dlnprice_tr dlnRER x_Tang_US x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id)
+eststo imp_Invent_US_tfp: areg dlnprice_tr dlnRER x_Invent_US x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id)
 
-gen x_scratio_lag=dlnRER*scratio_lag
-
-eststo imp_scratio: areg dlnprice_tr dlnRER x_scratio_lag dlnrgdp scratio_lag i.year, a(group_id)
-eststo imp_ExtFin_US_scratio: areg dlnprice_tr dlnRER x_ExtFin_US x_scratio_lag dlnrgdp scratio_lag i.year, a(group_id)
-eststo imp_Tang_US_scratio: areg dlnprice_tr dlnRER x_Tang_US x_scratio_lag dlnrgdp scratio_lag i.year, a(group_id)
-
-estfe imp_markup imp_ExtFin_US_markup imp_Tang_US_markup imp_tfp imp_ExtFin_US_tfp imp_Tang_US_tfp imp_scratio imp_ExtFin_US_scratio imp_Tang_US_scratio, labels(group_id "Firm-product-country FE")
-esttab imp_markup imp_ExtFin_US_markup imp_Tang_US_markup imp_tfp imp_ExtFin_US_tfp imp_Tang_US_tfp imp_scratio imp_ExtFin_US_scratio imp_Tang_US_scratio using "D:\Project C\tables\matched\table_imp_markup_tfp_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*_lag x_*_US)
+estfe imp_tfp imp_FPC_US_tfp imp_ExtFin_US_tfp imp_Tang_US_tfp imp_Invent_US_tfp, labels(group_id "Firm-product-country FE")
+esttab imp_tfp imp_FPC_US_tfp imp_ExtFin_US_tfp imp_Tang_US_tfp imp_Invent_US_tfp using "D:\Project C\tables\matched\table_imp_tfp_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*_lag x_*_US)
 
 *-------------------------------------------------------------------------------
 * Duration
@@ -279,15 +287,3 @@ eststo imp_process_Tang_US: areg dlnprice_tr dlnRER dlnrgdp x_Tang_US i.shipment
 
 estfe imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US, labels(group_id "Firm-product-country FE")
 esttab imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US using "D:\Project C\tables\matched\table_imp_processing.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" "Processing FE =*.shipment_type" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
-
-*-------------------------------------------------------------------------------
-* Long sample
-use sample_long_imp,clear
-
-eststo imp_long_baseline: areg dlnprice_tr dlnRER dlnrgdp i.year, a(group_id)
-eststo imp_long_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.year, a(group_id)
-eststo imp_long_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.year, a(group_id)
-eststo imp_long_Tang_US: areg dlnprice_tr dlnRER dlnrgdp x_Tang_US i.year, a(group_id)
-
-estfe imp_long_baseline imp_long_FPC_US imp_long_ExtFin_US imp_long_Tang_US, labels(group_id "Firm-product-country FE")
-esttab imp_long_baseline imp_long_FPC_US imp_long_ExtFin_US imp_long_Tang_US using "D:\Project C\tables\matched\table_imp_long.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)

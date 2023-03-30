@@ -248,9 +248,9 @@ Although we construct three measures of credit constraints as in the literature,
 
 We have two major reasons why we use credit constraint measures based on US data in our main regressions. First, we want to remove the distortion by the limited credit supply in China and focus on the credit demand associated with sectoral characteristics. A nice feature of using U.S. data to calculate credit constraint measures is that because the U.S. has a financially developed credit market, there is no concern about that credit shortages may distort the estimation of true credit demand in an industry. Second, the U.S. patterns of sectoral credit demand are proved persistent in a cross-country setting in the literature (\cite{kroszner2007}; \cite{manova-wei-zhang2015}; \cite{fan-lai-li2015}), especially when the industry classification is broadly defined. Intuitively, the financial needs of an industry may differ in level across countries, but the relative ranking between industries is supposed to be determined only by technical reasons specific to the industry itself.
 
-Alternatively, we also compute credit demand based on Chinese firm-level information from CIE data. In addition to the already mentioned three measures, external finance dependence ($ExtFin_j$), asset tangibility ($Tang_j$), and inventory ratio ($Invent_j$), we include the fourth measure is R\&D intensity ($RD_j$), defined as the ratio of research and development expenditure to the total sales. Usually, R\&D activities are capital-intensive so it requires firms to pay a large fixed cost before production and sales. Therefore, firms in an R\&D-intensive industry should be more financially vulnerable. However, since we only have the information on firms' R\&D expenditure in and after 2005, which narrows the range of available samples, R\&D intensity will be used only as an auxiliary proxy in the robustness check. 
+Alternatively, we also compute credit measures based on Chinese firm-level information from CIE data. In addition to the already mentioned measures, external finance dependence ($ExtFin_j$), asset tangibility ($Tang_j$), and inventory ratio ($Invent_j$), we include the fourth measure is R\&D intensity ($RD_j$), defined as the ratio of research and development expenditure to the total sales. Usually, R\&D activities are capital-intensive so it requires firms to pay a large fixed cost before production and sales. Therefore, firms in an R\&D-intensive industry should be more financially vulnerable. However, since we only have the information on firms' R\&D expenditure in and after 2005, which narrows the range of available samples, R\&D intensity will be used only as an auxiliary proxy in the robustness check. 
 
-We adopt the measure of external finance dependence used by \cite{fan-lai-li2015}. Then we calculate the inventory ratio as the value of inventory over sales income, the asset tangibility as the value of fixed assets over total assets, and the R\&D intensity as R\&D spending over total sales income. To avoid credit constraints being endogenously affected by other corporate factors, we take the median of the firm-level credit constraint measure in the same CIC 2-digit industry as the industry-level credit constraint measure. Since the R\&D investment of a considerable number of companies is equal to 0, we choose to take the average rather than the median when calculating the R\&D intensity of the industry. The regression results using the Chinese industry measures are provided as robustness checks.
+We adopt the measure of external finance dependence from \cite{fan-lai-li2015}. Then we calculate the inventory ratio as the value of inventory over sales income, the asset tangibility as the value of fixed assets over total assets, and the R\&D intensity as R\&D spending over total sales income. To avoid credit constraints being endogenously affected by other firm factors, we take the median of the firm-level credit constraint among the same CIC 2-digit industry as the industry-level credit constraint. Since the R\&D investment of a considerable number of companies is equal to 0, we choose to take the average rather than the median when calculating the R\&D intensity of the industry.
 
 The summary statistics of the sector-level credit constraints measures in the firm-level data are shown in panels A and B in Table \ref{tab.summary.credit}, respectively.
 
@@ -271,6 +271,7 @@ The summary statistics of the sector-level credit constraints measures in the fi
 				$Invent_{j}$ & 1,745,511 & 0.1594 & 0.1633  & 0.0292 & 0.115   & 0.1933 \\
 				\midrule
 				\textbf{Panel B: Chinese Measures} &       &       &       &       &       &  \\
+				$FPC_{j}$ & 1,745,511 & 0 & 0.1021 & 1 & -1.0859  & 1.1619 \\
 				$ExtFin_{j}$ & 1,745,511 & -0.6479 & -0.47 & 0.6747 & -1.32 & -0.1  \\
 				$Tang_{j}$ & 1,745,511 & 0.3333 & 0.3269 & 0.0648 & 0.2391 & 0.4317 \\
 				$Invent_{j}$ & 1,745,511 & 0.1103 & 0.1031  & 0.0275 & 0.0779   & 0.1348 \\
@@ -335,7 +336,7 @@ The results for import exchange rate pass-through are shown in Table \ref{tab.ba
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Column (1) uses the long sample from 2000 to 2011. Column (2) uses the matched sample from 2000 to 2007. Columns (3) and (4) use sub-samples with only top 50 and top 20 partners ranked by total trade value. All regressions include firm-product-country fixed effects and year fixed effects. 
+			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Column (1) uses the whole sample from 2000 to 2011. Column (2) uses the matched sample from 2000 to 2007. Columns (3) and (4) use sub-samples with only top 50 and top 20 partners ranked by total trade value. All regressions include firm-product-country fixed effects and year fixed effects. 
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.baseline}
@@ -532,36 +533,36 @@ Although China's financial markets are less mature than those of the U.S., the r
 
 Columns 1-4 of Table \ref{tab.robust.credit} present the import-side results for external finance dependence, tangibility, inventory ratio, and R\&D intensity, respectively. Nevertheless, all interaction term coefficients exhibit the same signs and significance as above, confirming the validity of the effects of credit constraints on exchange rate pass-through shown in the previous section. Even using Chinese measures, we can conclude that financially more constrained importers have more complete exchange rate pass-through than those less constrained.
 
-\subsection{Alternative transaction samples}
+\subsection{Alternative sample excluding USD-pegged countries}
 
-From 1994 until July 2005, the Chinese RMB was pegged to the U.S. dollar. This practice has kept RMB undervalued. The effect on trade is that China's exports are cheaper and, therefore, more attractive compared to those of other countries. Due to China's exchange rate peg to the US dollar, we observe weak movements in the exchange rate of RMB against the USD and other currencies pegged to the US dollar until 2005 as shown in \ref{fig.USD}. To eliminate the confounding effect of the RMB-USD peg on our main findings, we will perform two groups of robustness tests using different subsamples.
+From 1994 until July 2005, the Chinese RMB was pegged to the U.S. dollar. This practice has kept RMB undervalued. The effect on trade is that China's exports are cheaper and, therefore, more attractive compared to those of other countries. Due to China's exchange rate peg to the US dollar, we observe weak movements in the exchange rate of RMB against the USD and other currencies pegged to the US dollar until 2005 as shown in Figure \ref{fig.USD}. During this period, estimates of the elasticity of import prices to exchange rate changes during this period may be inaccurate.
 
-First, we exclude the U.S. and other countries who use the US dollar as their official currency or whose currency is pegged to the US dollar from our baseline matched sample.\footnote{The excluded countries and regions are Belize, Liberia, Qatar, Ecuador, Djibouti, Saint Lucia, Saint Kitts and Nevis, St. Vincent and the Grenadines, Dominica, Antigua and Barbuda, Palestine, Bahamas, Barbados, Panama, Bahrain, Curaçao, Grenada, Saudi Arabia, Zimbabwe, Macao SAR of China, Turks and Caicos Islands, Bermuda, Jordan, United States, British Virgin Islands, Dutch Sint Maarten, El Salvador, Montserrat, United Arab Emirates, Oman, Aruba, Hong Kong SAR of China, Maldives, Lebanon.}. We examine whether our previous conclusion is robust after excluding those countries whose currencies are denominated in or pegged to the US dollar. Second, we will use a longer panel from 2000 to 2011 using the whole sample. Since the pegged exchange rate regime of the RMB to the USD was lifted in 2005, a longer panel will give the RMB more room for volatility against the USD. Since the complicated merging process between the U.S. and Chinese data requires firm-level industry codes as in \ref{Measurements-Credit Constraints}, we will only include continuing firms who have appeared in the matched sample from 2000 to 2007  and assign each firm to its previous industry when we extend the period to 2011. Due to the nature of credit constraint measures as cross-sectional patterns, this assumption of time-invariant industry is plausible. Results of both tests are shown in Table \ref{tab.robust.nopeg}.
+To eliminate the confounding effect of the RMB-USD peg on our main findings, we will perform robustness tests using an alternative subsample. Specifically, we exclude the U.S. and other countries who use the US dollar as their official currency or whose currency is pegged to the US dollar from our baseline matched sample.\footnote{The excluded countries and regions are Belize, Liberia, Qatar, Ecuador, Djibouti, Saint Lucia, Saint Kitts and Nevis, St. Vincent and the Grenadines, Dominica, Antigua and Barbuda, Palestine, Bahamas, Barbados, Panama, Bahrain, Curaçao, Grenada, Saudi Arabia, Zimbabwe, Macao SAR of China, Turks and Caicos Islands, Bermuda, Jordan, United States, British Virgin Islands, Dutch Sint Maarten, El Salvador, Montserrat, United Arab Emirates, Oman, Aruba, Hong Kong SAR of China, Maldives, Lebanon.}. We examine whether our previous conclusion is robust after excluding those countries whose currencies are denominated in or pegged to the US dollar.
 
-\begin{sidewaystable}[htbp]
+\begin{table}[htbp]
 	\centering
 	\caption{Robustness check: alternative samples excluding USD-pegged countries}
 	\begin{threeparttable}
-	\begin{tabular}{lcccccccc}
+	\begin{tabular}{lcccc}
 		\toprule
-		& (1)   & (2)   & (3)   & (4) & (5)   & (6)   & (7)   & (8)\\
+		& (1)   & (2)   & (3)   & (4) \\
 		\midrule
-		& \multicolumn{4}{c}{Excluding US Dollar Peg} & \multicolumn{4}{c}{Longer Panel (2000-2011)}\\
-		& Baseline & FPC   & External Finance & Tangibility & Baseline & FPC   & External Finance & Tangibility \\
+		& \multicolumn{4}{c}{Excluding US Dollar Peg} \\
+		& Baseline & FPC   & External Finance & Tangibility \\
 		\midrule
-		$\Delta \ln RER_{ct}$ & 0.382*** & 0.164*** & 0.256*** & 1.173*** &&&&\\
-		& (0.017) & (0.018) & (0.018) & (0.035) &&&&\\
-		$\Delta \ln RGDP_{ct}$ & 0.709*** & 0.778*** & 0.797*** & 0.730*** &&&&\\
-		& (0.106) & (0.106) & (0.106) & (0.106) &&&&\\
-		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.362*** &       &  &&&& \\
-		&       & (0.010) &       &  &&&&\\
-		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.103*** &  &&&&\\
-		&       &       & (0.030) &  &&&&\\
-		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.186*** &&&&\\
-		&       &       &       & (0.121) &&&&\\
-		Year FE  &   Yes    & Yes   & Yes   & Yes &&&&\\
-		Firm-product-country FE &   Yes    & Yes   & Yes   & Yes &&&&\\
-		Observations & 1449210 & 1449210 & 1449210 & 1449210 &&&&\\
+		$\Delta \ln RER_{ct}$ & 0.382*** & 0.164*** & 0.256*** & 1.173*** \\
+		& (0.017) & (0.018) & (0.018) & (0.035) \\
+		$\Delta \ln RGDP_{ct}$ & 0.709*** & 0.778*** & 0.797*** & 0.730*** \\
+		& (0.106) & (0.106) & (0.106) & (0.106) \\
+		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.362*** &       & \\
+		&       & (0.010) &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.103*** &  \\
+		&       &       & (0.030) &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.186*** \\
+		&       &       &       & (0.121) \\
+		Year FE  &   Yes    & Yes   & Yes   & Yes \\
+		Firm-product-country FE &   Yes    & Yes   & Yes   & Yes \\
+		Observations & 1449210 & 1449210 & 1449210 & 1449210 \\
 		\bottomrule
 	\end{tabular}
 	\begin{tablenotes}
@@ -570,7 +571,7 @@ First, we exclude the U.S. and other countries who use the US dollar as their of
 	\end{tablenotes}
         \end{threeparttable}
         \label{tab.robust.nopeg}
-\end{sidewaystable}
+\end{table}
 
 Table \ref{tab.robust.nopeg} demonstrates that our results excluding the U.S. and those pegged countries are not overturned. When we extend the sample to a longer time period, we still reach similar conclusions. The estimated import ERPT is 38.2\% in column (1) and in column (5), which are slightly more complete than 35.7\% in the matched sample. All coefficients on interaction terms remain robust and significant, suggesting that higher external finance dependence makes exchange rate pass-through more complete while higher asset tangibility plays an opposite role. Therefore, the peg of RMB to the dollar before 2005 fo not interfere with the main conclusions of this paper.
 
@@ -636,7 +637,7 @@ Our estimation strategy includes multiple dimensions of the data including produ
 
 First, we will further check whether other fixed-effect combinations will yield similar results. In this test, We will combine firm-year fixed effects $\tilde{\xi}_{ij}$ with two-dimensional country-time fixed effects $\tilde{\tau}_{ct}$ or separately with country fixed effects $\theta_{c}$ and time fixed effects $\tau_t$.  Results of alternative fixed effects are shown in columns (1)-(4) and (5)-(8) in Table \ref{tab.robust.fe}, respectively. 
 
-Second, to avoid firm endogeneity, our measures of credit constraints only capture the cross-sectional pattern, i.e. the industry-level credit needs measures are persistent and thus averaged over time. Therefore, to fully sort out the time variation effect, we also conduct cross-sectional estimation using both one-year sample and between estimator. Results of cross-sectional estimation are shown in Table \ref{tab.robust.crosec}. All results regarding the estimation of import ERPT and effects of credit constraints on import ERPT remain similar as in the baseline.
+Second, to avoid firm endogeneity, our measures of credit constraints only capture the cross-sectional pattern, i.e. the industry-level credit needs measures are persistent and thus averaged over time. Therefore, to fully sort out the time variation effect, we also conduct cross-sectional estimation using both one-year sample and between estimator. Results of cross-sectional estimation are shown in Table \ref{tab.robust.crosec}. All results on the estimated import ERPT and the effect of credit constraints on import ERPT are similar to the baseline.
 
 \section{Discussions} \label{Discussion}
 

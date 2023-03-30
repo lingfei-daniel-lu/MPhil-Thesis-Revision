@@ -697,15 +697,4 @@ foreach var of local varlist {
 }
 format EN %30s
 save sample_matched_imp_shipment,replace
-
-*-------------------------------------------------------------------------------
-* Construct longer sample using matched party_id
-cd "D:\Project C\sample_matched"
-use "D:\Project C\sample_all\sample_all_imp",clear
-merge n:1 party_id using customs_matched_imp_partyid, nogen keep(matched)
-merge n:1 FRDM using ".\CIE\cie_credit_list", nogen keep(matched) keepusing(cic_adj *_US *cic2)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US FPC_cic2 ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2"
-foreach var of local varlist {
-	gen x_`var' = `var'*dlnRER
-}  
 save sample_long_imp,replace
