@@ -132,13 +132,15 @@ esttab imp_distw imp_FPC_US_distw imp_ExtFin_US_distw imp_Tang_US_distw imp_Inve
 cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
 
-eststo imp_MS: areg dlnprice_tr dlnRER x_MS dlnrgdp MS i.year, a(group_id)
-eststo imp_MS_FPC_US: areg dlnprice_tr dlnRER x_MS x_FPC_US dlnrgdp MS i.year, a(group_id)
-eststo imp_MS_ExtFin_US: areg dlnprice_tr dlnRER x_MS x_ExtFin_US dlnrgdp MS i.year, a(group_id)
-eststo imp_MS_Tang_US: areg dlnprice_tr dlnRER x_MS x_Tang_US dlnrgdp MS i.year, a(group_id)
+gen x_MS_lag=dlnRER*MS_lag
+
+eststo imp_MS: areg dlnprice_tr dlnRER x_MS_lag dlnrgdp MS_lag i.year, a(group_id)
+eststo imp_MS_FPC_US: areg dlnprice_tr dlnRER x_MS_lag x_FPC_US dlnrgdp MS_lag i.year, a(group_id)
+eststo imp_MS_ExtFin_US: areg dlnprice_tr dlnRER x_MS_lag x_ExtFin_US dlnrgdp MS_lag i.year, a(group_id)
+eststo imp_MS_Tang_US: areg dlnprice_tr dlnRER x_MS_lag x_Tang_US dlnrgdp MS_lag i.year, a(group_id)
 
 estfe imp_MS imp_MS_FPC_US imp_MS_ExtFin_US imp_MS_Tang_US, labels(group_id "Firm-product-country FE")
-esttab imp_MS imp_MS_FPC_US imp_MS_ExtFin_US imp_MS_Tang_US using "D:\Project C\tables\matched\table_imp_MS.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("MS" "FPC" "ExtFin" "Tangibility") order(dlnRER dlnrgdp x_*)
+esttab imp_MS imp_MS_FPC_US imp_MS_ExtFin_US imp_MS_Tang_US using "D:\Project C\tables\matched\table_imp_MS.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("MS_lag" "FPC" "ExtFin" "Tangibility") order(dlnRER dlnrgdp x_*)
 
 *-------------------------------------------------------------------------------
 * Regressions controlling firms' markup and TFP

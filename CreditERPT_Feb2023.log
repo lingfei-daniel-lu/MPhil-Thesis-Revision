@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.18)  31 MAR 2023 00:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.18)  6 APR 2023 00:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1127,42 +1127,7 @@ Overfull \hbox (5.58017pt too wide) in paragraph at lines 590--620
  [] 
  []
 
-[23] [24]
-
-LaTeX Warning: Reference `tab.robust.crosec' on page 25 undefined on input line
- 640.
-
-[25]
-
-LaTeX Warning: Reference `Framework-Equations' on page 26 undefined on input li
-ne 658.
-
-[26]
-
-LaTeX Warning: Reference `Results-Credit' on page 27 undefined on input line 69
-9.
-
-[27]
-
-LaTeX Warning: Reference `Results-Credit' on page 28 undefined on input line 70
-1.
-
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 7
-12.
-(d:/texlive/2021/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 712.
- [28]
-
-LaTeX Warning: Reference `eq.add.sqr' on page 29 undefined on input line 717.
-
-
-LaTeX Warning: Reference `Framework-Measurements' on page 29 undefined on input
- line 717.
-
-[29] [30] (./CreditERPT_Feb2023.bbl [31]
+[23] [24] [25] [26] [27] [28] [29] [30] (./CreditERPT_Feb2023.bbl [31]
 Underfull \hbox (badness 1097) in paragraph at lines 102--105
 \OT1/cmr/m/n/12 CREDIT CON-STRAINTS UN-DER IN-COM-PLETE IN-FOR-MA-TION: THE-ORY
 
@@ -1172,21 +1137,21 @@ Underfull \hbox (badness 1097) in paragraph at lines 102--105
 ) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.939 ...ls for registration type and affiliation}
+l.937 ...ls for registration type and affiliation}
                                                    [33] [34] [35] [36] [37]
-[38] (./CreditERPT_Feb2023.aux)
+[38] [39] (./CreditERPT_Feb2023.aux)
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `CreditERPT_Feb2023.out' has not changed.
-(rerunfilecheck)             Checksum: 2602A948B209671D2DB09D6B8407E6EB;4214.
+(rerunfilecheck)             Checksum: DA5DFB7BB38968E39E4F2C8D6A166E7E;4224.
  ) 
 Here is how much of TeX's memory you used:
- 25229 strings out of 478599
- 456710 string characters out of 5858101
- 824829 words of memory out of 5000000
- 42473 multiletter control sequences out of 15000+600000
- 420958 words of font info for 90 fonts, out of 8000000 for 9000
+ 25212 strings out of 478599
+ 456372 string characters out of 5858101
+ 832993 words of memory out of 5000000
+ 42456 multiletter control sequences out of 15000+600000
+ 421295 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,15n,97p,1941b,671s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exi
@@ -1221,11 +1186,12 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><d:/texlive/2021/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti12.pfb><d:/texlive/2021/texmf-dist/fonts/ty
 pe1/public/amsfonts/symbols/msbm10.pfb><d:/texlive/2021/texmf-dist/fonts/type1/
 public/cm-super/sfrm0700.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/cm-
-super/sfrm1000.pfb>
-Output written on CreditERPT_Feb2023.pdf (38 pages, 390104 bytes).
+super/sfrm1000.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm
+1200.pfb>
+Output written on CreditERPT_Feb2023.pdf (39 pages, 394061 bytes).
 PDF statistics:
- 668 PDF objects out of 1000 (max. 8388607)
- 552 compressed objects within 6 object streams
- 115 named destinations out of 1000 (max. 500000)
+ 686 PDF objects out of 1000 (max. 8388607)
+ 567 compressed objects within 6 object streams
+ 117 named destinations out of 1000 (max. 500000)
  307 words of extra memory for PDF output out of 10000 (max. 10000000)
 

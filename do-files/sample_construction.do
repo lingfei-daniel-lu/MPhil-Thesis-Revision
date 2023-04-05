@@ -614,6 +614,7 @@ merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(ma
 sort FRDM HS6 coun_aim year
 gen price_RMB=value_year*NER_US/quant_year
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
+by FRDM HS6 coun_aim: gen MS_lag=MS[_n-1] if year==year[_n-1]+1
 by FRDM HS6 coun_aim: egen year_count=count(year)
 drop if dlnRER==. | dlnprice==.
 gen HS2=substr(HS6,1,2)
@@ -650,6 +651,7 @@ merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(ma
 sort FRDM HS6 coun_aim year
 gen price_RMB=value_year*NER_US/quant_year
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
+by FRDM HS6 coun_aim: gen MS_lag=MS[_n-1] if year==year[_n-1]+1
 by FRDM HS6 coun_aim: egen year_count=count(year)
 drop if dlnRER==. | dlnprice==.
 gen HS2=substr(HS6,1,2)
@@ -697,4 +699,3 @@ foreach var of local varlist {
 }
 format EN %30s
 save sample_matched_imp_shipment,replace
-save sample_long_imp,replace
