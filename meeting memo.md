@@ -115,10 +115,6 @@ Table 8: Heterogeneous markup, credit constraints, and ERPT
 
 Table 9: Heterogeneous market share, credit constraints, and ERPT
 
-
-
-
-
 # 2023.3.17
 
 JMCB JIMF JEBO JCE

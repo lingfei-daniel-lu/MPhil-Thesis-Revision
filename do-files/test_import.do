@@ -218,18 +218,20 @@ use sample_matched_imp,clear
 egen group_id_fy=group(FRDM year)
 egen group_id_pc=group(HS6 coun_aim)
 
-eststo imp_FPC_US_fe1: reghdfe dlnprice_tr dlnRER x_FPC_US dlnrgdp, absorb(group_id_fy coun_aim HS6)
-eststo imp_ExtFin_US_fe1: reghdfe dlnprice_tr dlnRER x_ExtFin_US dlnrgdp, absorb(group_id_fy coun_aim HS6)
-eststo imp_Tang_US_fe1: reghdfe dlnprice_tr dlnRER x_Tang_US dlnrgdp, absorb(group_id_fy coun_aim HS6)
-eststo imp_Invent_US_fe1: reghdfe dlnprice_tr dlnRER x_Invent_US dlnrgdp, absorb(group_id_fy coun_aim HS6)
+eststo imp_baseline_fe1: reghdfe dlnprice_tr dlnRER dlnrgdp, a(group_id_fy coun_aim HS6)
+eststo imp_FPC_US_fe1: reghdfe dlnprice_tr dlnRER x_FPC_US dlnrgdp, a(group_id_fy coun_aim HS6)
+eststo imp_ExtFin_US_fe1: reghdfe dlnprice_tr dlnRER x_ExtFin_US dlnrgdp, a(group_id_fy coun_aim HS6)
+eststo imp_Tang_US_fe1: reghdfe dlnprice_tr dlnRER x_Tang_US dlnrgdp, a(group_id_fy coun_aim HS6)
+eststo imp_Invent_US_fe1: reghdfe dlnprice_tr dlnRER x_Invent_US dlnrgdp, a(group_id_fy coun_aim HS6)
 
-eststo imp_FPC_US_fe2: reghdfe dlnprice_tr dlnRER x_FPC_US dlnrgdp, absorb(group_id_fy group_id_pc)
-eststo imp_ExtFin_US_fe2: reghdfe dlnprice_tr dlnRER x_ExtFin_US dlnrgdp, absorb(group_id_fy group_id_pc)
-eststo imp_Tang_US_fe2: reghdfe dlnprice_tr dlnRER x_Tang_US dlnrgdp, absorb(group_id_fy group_id_pc)
-eststo imp_Invent_US_fe2: reghdfe dlnprice_tr dlnRER x_Invent_US dlnrgdp, absorb(group_id_fy group_id_pc)
+eststo imp_baseline_fe2: reghdfe dlnprice_tr dlnRER dlnrgdp, a(group_id_fy group_id_pc)
+eststo imp_FPC_US_fe2: reghdfe dlnprice_tr dlnRER x_FPC_US dlnrgdp, a(group_id_fy group_id_pc)
+eststo imp_ExtFin_US_fe2: reghdfe dlnprice_tr dlnRER x_ExtFin_US dlnrgdp, a(group_id_fy group_id_pc)
+eststo imp_Tang_US_fe2: reghdfe dlnprice_tr dlnRER x_Tang_US dlnrgdp, a(group_id_fy group_id_pc)
+eststo imp_Invent_US_fe2: reghdfe dlnprice_tr dlnRER x_Invent_US dlnrgdp, a(group_id_fy group_id_pc)
 
-estfe imp_FPC_US_fe1 imp_ExtFin_US_fe1 imp_Tang_US_fe1 imp_Invent_US_fe1 imp_FPC_US_fe2 imp_ExtFin_US_fe2 imp_Tang_US_fe2 imp_Invent_US_fe2, labels(group_id "Firm-product-country FE" group_id_fy "Firm-year FE" group_id_pc "Product-Country FE" coun_aim "Country FE" HS6 "Product FE")
-esttab imp_FPC_US_fe1 imp_ExtFin_US_fe1 imp_Tang_US_fe1 imp_Invent_US_fe1 imp_FPC_US_fe2 imp_ExtFin_US_fe2 imp_Tang_US_fe2 imp_Invent_US_fe2 using "D:\Project C\tables\matched\table_imp_fe.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate(`r(indicate_fe)') mtitles("FPC" "External Finance" "Tangibility" "Inventory" "FPC" "External Finance" "Tangibility" "Inventory") order(dlnRER dlnrgdp x_*)
+estfe imp_baseline_fe1 imp_FPC_US_fe1 imp_ExtFin_US_fe1 imp_Tang_US_fe1 imp_Invent_US_fe1 imp_baseline_fe2 imp_FPC_US_fe2 imp_ExtFin_US_fe2 imp_Tang_US_fe2 imp_Invent_US_fe2, labels(group_id "Firm-product-country FE" group_id_fy "Firm-year FE" group_id_pc "Product-country FE" coun_aim "Country FE" HS6 "Product FE")
+esttab imp_baseline_fe1 imp_FPC_US_fe1 imp_ExtFin_US_fe1 imp_Tang_US_fe1 imp_Invent_US_fe1 imp_baseline_fe2 imp_FPC_US_fe2 imp_ExtFin_US_fe2 imp_Tang_US_fe2 imp_Invent_US_fe2 using "D:\Project C\tables\matched\table_imp_fe.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate(`r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility" "Inventory" "Baseline" "FPC" "External Finance" "Tangibility" "Inventory") order(dlnRER dlnrgdp x_*)
 
 *-------------------------------------------------------------------------------
 * Ownership Types
@@ -289,3 +291,36 @@ eststo imp_process_Tang_US: areg dlnprice_tr dlnRER dlnrgdp x_Tang_US i.shipment
 
 estfe imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US, labels(group_id "Firm-product-country FE")
 esttab imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US using "D:\Project C\tables\matched\table_imp_processing.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" "Processing FE =*.shipment_type" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
+
+*-------------------------------------------------------------------------------
+* One-year sample (2007)
+cd "D:\Project C\sample_matched"
+use sample_matched_imp,clear
+
+keep if year==2007
+drop year
+egen group_id_fp=group(FRDM HS6)
+
+eststo imp_oneyear_baseline: areg dlnprice_tr dlnRER dlnrgdp, a(group_id_fp)
+eststo imp_oneyear_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp, a(group_id_fp)
+eststo imp_oneyear_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp, a(group_id_fp)
+eststo imp_oneyear_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp, a(group_id_fp)
+
+estfe imp_oneyear_baseline imp_oneyear_FPC_US imp_oneyear_ExtFin_US imp_oneyear_Tang_US, labels(group_id "Product FE")
+esttab imp_oneyear_baseline imp_oneyear_FPC_US imp_oneyear_ExtFin_US imp_oneyear_Tang_US using "D:\Project C\tables\matched\table_imp_oneyear.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate( `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*_US)
+
+*-------------------------------------------------------------------------------
+* Between Estimator
+cd "D:\Project C\sample_matched"
+use sample_matched_imp,clear
+
+collapse (mean) dlnprice_tr dlnRER x_*_US dlnrgdp, by (FRDM HS6 coun_aim)
+egen group_id_fp=group(FRDM HS6)
+
+eststo imp_between_baseline: areg dlnprice_tr dlnRER dlnrgdp, a(group_id_fp)
+eststo imp_between_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp, a(group_id_fp)
+eststo imp_between_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp, a(group_id_fp)
+eststo imp_between_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp, a(group_id_fp)
+
+estfe imp_between_baseline imp_between_FPC_US imp_between_ExtFin_US imp_between_Tang_US, labels(group_id "Product FE")
+esttab imp_between_baseline imp_between_FPC_US imp_between_ExtFin_US imp_between_Tang_US using "D:\Project C\tables\matched\table_imp_between.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate( `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*_US)

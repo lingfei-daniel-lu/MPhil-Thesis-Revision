@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.18)  6 APR 2023 00:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.18)  7 APR 2023 00:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1127,19 +1127,19 @@ Overfull \hbox (5.58017pt too wide) in paragraph at lines 590--620
  [] 
  []
 
-[23] [24] [25] [26] [27] [28] [29] [30] (./CreditERPT_Feb2023.bbl [31]
+[23] [24] [25] [26] [27] [28] [29] [30] [31] (./CreditERPT_Feb2023.bbl [32]
 Underfull \hbox (badness 1097) in paragraph at lines 102--105
 \OT1/cmr/m/n/12 CREDIT CON-STRAINTS UN-DER IN-COM-PLETE IN-FOR-MA-TION: THE-ORY
 
  []
 
-[32])pdfTeX warning (ext4): destination with the same identifier (name{table.5}
-) has been already used, duplicate ignored
+[33]) [34]pdfTeX warning (ext4): destination with the same identifier (name{tab
+le.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.937 ...ls for registration type and affiliation}
-                                                   [33] [34] [35] [36] [37]
-[38] [39] (./CreditERPT_Feb2023.aux)
+l.943 ...ls for registration type and affiliation}
+                                                   [35] [36] [37] [38] [39]
+[40] [41] (./CreditERPT_Feb2023.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1147,15 +1147,18 @@ Package rerunfilecheck Info: File `CreditERPT_Feb2023.out' has not changed.
 (rerunfilecheck)             Checksum: DA5DFB7BB38968E39E4F2C8D6A166E7E;4224.
  ) 
 Here is how much of TeX's memory you used:
- 25212 strings out of 478599
- 456372 string characters out of 5858101
- 832993 words of memory out of 5000000
- 42456 multiletter control sequences out of 15000+600000
+ 25217 strings out of 478599
+ 456427 string characters out of 5858101
+ 830050 words of memory out of 5000000
+ 42457 multiletter control sequences out of 15000+600000
  421295 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,15n,97p,1941b,671s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exi
+pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exi
 st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist
+, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist
 , replaced by a fixed one
@@ -1188,10 +1191,10 @@ pe1/public/amsfonts/symbols/msbm10.pfb><d:/texlive/2021/texmf-dist/fonts/type1/
 public/cm-super/sfrm0700.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/cm-
 super/sfrm1000.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm
 1200.pfb>
-Output written on CreditERPT_Feb2023.pdf (39 pages, 394061 bytes).
+Output written on CreditERPT_Feb2023.pdf (41 pages, 396084 bytes).
 PDF statistics:
- 686 PDF objects out of 1000 (max. 8388607)
- 567 compressed objects within 6 object streams
- 117 named destinations out of 1000 (max. 500000)
+ 696 PDF objects out of 1000 (max. 8388607)
+ 575 compressed objects within 6 object streams
+ 121 named destinations out of 1000 (max. 500000)
  307 words of extra memory for PDF output out of 10000 (max. 10000000)
 
