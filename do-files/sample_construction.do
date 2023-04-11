@@ -612,7 +612,11 @@ cd "D:\Project C\sample_matched"
 use customs_matched,clear
 keep if exp_imp =="exp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6)
+gen process = 1 if shipment=="进料加工贸易" | shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
+replace process=0 if process==.
+gen assembly = 1 if shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
+replace assembly=0 if assembly==.
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 process assembly)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership affiliate)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
@@ -649,7 +653,11 @@ cd "D:\Project C\sample_matched"
 use customs_matched,clear
 keep if exp_imp =="imp"
 drop exp_imp
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6)
+gen process = 1 if shipment=="进料加工贸易" | shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
+replace process=0 if process==.
+gen assembly = 1 if shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
+replace assembly=0 if assembly==.
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 process assembly)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership affiliate)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
@@ -679,37 +687,3 @@ foreach var of local varlist {
 }
 format EN %30s
 save sample_matched_imp,replace
-
-*-------------------------------------------------------------------------------
-* Ordinary vs Processing
-cd "D:\Project C\sample_matched"
-use customs_matched,clear
-keep if exp_imp =="imp"
-drop exp_imp
-gen process = 0 if shipment=="一般贸易" | shipment==""
-replace process = 1 if shipment=="进料加工贸易" | shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
-replace process=0 if process==.
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 process)
-merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
-merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched)
-merge n:1 coun_aim using ".\customs_matched_top_partners",nogen keep(matched)
-foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
-	drop if strmatch(EN, "*`key'*") 
-}
-merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
-merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
-sort FRDM HS6 coun_aim year
-gen price_RMB=value_year*NER_US/quant_year
-by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
-by FRDM HS6 coun_aim: egen year_count=count(year)
-drop if dlnRER==. | dlnprice==.
-gen HS2=substr(HS6,1,2)
-drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
-egen group_id=group(FRDM HS6 coun_aim)
-winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 process"
-foreach var of local varlist {
-	gen x_`var' = `var'*dlnRER
-}
-format EN %30s
-save sample_matched_imp_process,replace
