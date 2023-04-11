@@ -404,6 +404,18 @@ save cie_98_07,replace
 * Markup estimation according to DLW(2012) in DLW.do
 
 *-------------------------------------------------------------------------------
+* Check the affiliation relationship
+cd "D:\Project C\parent_affiliate"
+use parent_affiliate_2004.dta,clear
+gsort id -parentcompany_id
+duplicates drop id,force
+rename id FRDM
+gen affiliate=1 if parentcompany_id !=""
+replace affiliate=0 if affiliate==.
+keep FRDM affiliate
+save affiliate_2004,replace
+
+*-------------------------------------------------------------------------------
 * Add markup and financial vulnerability measures to firm data
 cd "D:\Project C\sample_matched\CIE"
 use cie_98_07,clear
@@ -459,6 +471,9 @@ factortest Tang_cic2 ExtFin_cic2
 rotate, promax(3) factors(1)
 predict f1
 rename f1 FPC_cic2
+* Match affiliation info
+merge n:1 FRDM using "D:\Project C\parent_affiliate\affiliate_2004",nogen keep(matched master)
+replace affiliate=0 if affiliate==.
 sort FRDM EN year
 save cie_credit,replace
 
@@ -599,7 +614,7 @@ keep if exp_imp =="exp"
 drop exp_imp
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
-merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc *_cic2 *_US ownership)
+merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership affiliate)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_destination,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
@@ -636,7 +651,7 @@ keep if exp_imp =="imp"
 drop exp_imp
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
-merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_DLWTLD tfp_tld Markup_lag tfp_lag rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership)
+merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership affiliate)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_source,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
@@ -671,11 +686,10 @@ cd "D:\Project C\sample_matched"
 use customs_matched,clear
 keep if exp_imp =="imp"
 drop exp_imp
-gen shipment_type = 1 if shipment=="一般贸易" | shipment==""
-replace shipment_type = 2 if shipment=="进料加工贸易"
-replace shipment_type = 3 if shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
-replace shipment_type= 0 if shipment_type==.
-collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 shipment_type)
+gen process = 0 if shipment=="一般贸易" | shipment==""
+replace process = 1 if shipment=="进料加工贸易" | shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
+replace process=0 if process==.
+collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 process)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched)
 merge n:1 coun_aim using ".\customs_matched_top_partners",nogen keep(matched)
@@ -693,9 +707,9 @@ gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
-local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2"
+local varlist "FPC_US ExtFin_US Invent_US Tang_US ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2 process"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
 }
 format EN %30s
-save sample_matched_imp_shipment,replace
+save sample_matched_imp_process,replace

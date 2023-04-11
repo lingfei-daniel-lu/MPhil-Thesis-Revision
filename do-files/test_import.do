@@ -282,15 +282,15 @@ esttab imp_twoway_baseline imp_twoway_FPC_US imp_twoway_ExtFin_US imp_twoway_Tan
 
 *-------------------------------------------------------------------------------
 * Ordinary vs Processing
-use sample_matched_imp_shipment,clear
+use sample_matched_imp_process,clear
 
-eststo imp_process_baseline: areg dlnprice_tr dlnRER dlnrgdp i.shipment_type i.year, a(group_id)
-eststo imp_process_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp i.shipment_type i.year, a(group_id)
-eststo imp_process_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.shipment_type i.year, a(group_id)
-eststo imp_process_Tang_US: areg dlnprice_tr dlnRER dlnrgdp x_Tang_US i.shipment_type i.year, a(group_id)
+eststo imp_process_baseline: areg dlnprice_tr dlnRER x_process dlnrgdp i.year, a(group_id)
+eststo imp_process_FPC_US: areg dlnprice_tr dlnRER x_process x_FPC_US dlnrgdp i.year, a(group_id)
+eststo imp_process_ExtFin_US: areg dlnprice_tr dlnRER x_process x_ExtFin_US dlnrgdp i.year, a(group_id)
+eststo imp_process_Tang_US: areg dlnprice_tr dlnRER x_process x_Tang_US dlnrgdp i.year, a(group_id)
 
 estfe imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US, labels(group_id "Firm-product-country FE")
-esttab imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US using "D:\Project C\tables\matched\table_imp_processing.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" "Processing FE =*.shipment_type" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
+esttab imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US using "D:\Project C\tables\matched\table_imp_processing.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
 
 *-------------------------------------------------------------------------------
 * One-year sample (2007)
@@ -324,3 +324,16 @@ eststo imp_between_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp, a(group_i
 
 estfe imp_between_baseline imp_between_FPC_US imp_between_ExtFin_US imp_between_Tang_US, labels(group_id "Product FE")
 esttab imp_between_baseline imp_between_FPC_US imp_between_ExtFin_US imp_between_Tang_US using "D:\Project C\tables\matched\table_imp_between.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate( `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*_US)
+
+*-------------------------------------------------------------------------------
+* Affiliation
+use sample_matched_imp,clear
+gen x_affiliate=affiliate*dlnRER
+
+eststo imp_affiliate_baseline: areg dlnprice_tr dlnRER affiliate dlnrgdp i.year, a(group_id)
+eststo imp_affiliate_FPC_US: areg dlnprice_tr dlnRER x_affiliate x_FPC_US dlnrgdp i.year, a(group_id)
+eststo imp_affiliate_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp i.affiliate i.year, a(group_id)
+eststo imp_affiliate_Tang_US: areg dlnprice_tr dlnRER dlnrgdp x_Tang_US i.affiliate i.year, a(group_id)
+
+estfe imp_affiliate_baseline imp_affiliateFPC_US imp_affiliate_ExtFin_US imp_affiliate_Tang_US, labels(group_id "Firm-product-country FE")
+esttab imp_affiliate_baseline imp_affiliate_FPC_US imp_affiliate_ExtFin_US imp_affiliate_Tang_US using "D:\Project C\tables\matched\table_imp_affiliate.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" "Processing FE =*.shipment_type" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
