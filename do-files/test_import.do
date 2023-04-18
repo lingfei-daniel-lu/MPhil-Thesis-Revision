@@ -5,9 +5,9 @@ dis c(processors)
 * Baseline regressions for import whole customs data
 cd "D:\Project C\sample_all"
 use sample_all_imp,clear
-eststo reg_all_imp: areg dlnprice_tr dlnRER dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo reg_top50_imp: areg dlnprice_tr dlnRER dlnrgdp i.year if rank_imp<=50, a(group_id) vce(cluster FRDM)
-eststo reg_top20_imp: areg dlnprice_tr dlnRER dlnrgdp i.year if rank_imp<=20, a(group_id) vce(cluster FRDM)
+eststo reg_all_imp: areg dlnprice_tr dlnRER dlnrgdp i.year, a(group_id) vce(cluster party_id)
+eststo reg_top50_imp: areg dlnprice_tr dlnRER dlnrgdp i.year if rank_imp<=50, a(group_id) vce(cluster party_id)
+eststo reg_top20_imp: areg dlnprice_tr dlnRER dlnrgdp i.year if rank_imp<=20, a(group_id) vce(cluster party_id)
 
 estfe reg_all_imp reg_top50_imp reg_top20_imp, labels(group_id "Firm-product-country FE")
 esttab reg_all_imp reg_top50_imp reg_top20_imp using "D:\Project C\tables\all\table_all_imp.csv", replace b(3) se(3) starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Whole" "Top 50" "Top 20")
