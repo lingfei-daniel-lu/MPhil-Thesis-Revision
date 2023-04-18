@@ -151,7 +151,7 @@ We conduct our empirical research using various data sources: (1) country-level 
 
 \subsubsection{Country-level macro data} \label{Data-Macro}
 
-We obtain annual bilateral nominal exchange rates from the newest version of Penn World Table (PWT 10.0) referring to \cite{feenstra2015}, and consumer price indices (CPI) from the International Financial Statistics. We keep all of China's trade partners who keep full records of exchange rates and CPI from 1999 to 2011, resulting in 154 countries. Those major countries account for more than 95 \% of Chinese total import and export value.
+We obtain annual bilateral nominal exchange rates from the newest version of Penn World Table (PWT 10.0) referring to \cite{feenstra2015}, and consumer price indices (CPI) from the International Financial Statistics. We keep all of China's trade partners who keep full records of exchange rates and CPI from 1999 to 2011, resulting in 154 countries. Those major countries account for more than 95 \% of the Chinese total import and export value.
 
 Following the convention, the bilateral nominal exchange rate ($NER_{ct}$) is defined as the number of home currency units that can purchase a unit of foreign currency. By this definition, an increase in $NER_{ct}$ means a nominal depreciation of the Chinese RMB against this currency from country $c$. Following \cite{lmx2015}, the CPI-based real exchange rate ($RER_{ct}$) is defined as the nominal exchange rate multiplied by the foreign consumer price index and divided by the Chinese consumer price index at the same year, which is
 
@@ -315,13 +315,13 @@ The import exchange rate pass-through results are shown in Table \ref{tab.baseli
 			& \multicolumn{4}{c}{Import} \\
 			& Whole & Matched & Top 50 & Top 20 \\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.361*** & 0.730*** & 0.720*** & 0.653*** \\
-			& (0.033) & (0.033) & (0.033) & (0.035) \\
-			$\Delta \ln RGDR_{ct}$ & -0.180*** & 0.185 & 0.203* & 0.097 \\
-			& (0.032) & (0.115) & (0.117) & (0.128) \\
+			$\Delta \ln RER_{ct}$ & 0.361*** & 0.711*** & 0.700*** & 0.634***\\
+			& (0.011) & (0.061) & (0.061) & (0.063)\\
+			$\Delta \ln RGDR_{ct}$ & -0.180*** & 0.196 & 0.215 & 0.124\\
+			& (0.045) & (0.181) & (0.184) & (0.205)\\
 			Year FE  & Yes   & Yes   & Yes   & Yes \\
 			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
-			Observations & 7054033 & 1449210 & 1439306 & 1343239 \\
+			Observations & 7054033 & 1449210 & 1439299 & 1343160 \\
 			\bottomrule
 		\end{tabular}
 		\begin{tablenotes}
@@ -366,18 +366,18 @@ Table \ref{tab.credit} presents differences in exchange rate pass-through into i
 			 & \multicolumn{4}{c}{Credit Constraints Measures} \\
 			& FPC   & External Finance & Tangibility & Inventory \\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.332*** & 0.479*** & 2.039*** & -1.052*** \\
-			& (0.036) & (0.034) & (0.075) & (0.164) \\
-			$\Delta \ln RGDR_{ct}$ & 0.130 & 0.128 & 0.155 & 0.170 \\
-			& (0.115) & (0.115) & (0.115) & (0.115) \\
-			$\Delta \ln RER_{ct}*FPC_{j}$ & 0.598*** &       &       &  \\
-			& (0.023) &       &       &  \\
-			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       & 1.825*** &       &  \\
-			&       & (0.069) &       &  \\
-			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       & -5.341*** &  \\
-			&       &       & (0.275) &  \\
-			$\Delta \ln RER_{ct}*Invent_{j}$ &       &       &       & 10.217*** \\
-			&       &       &       & (0.922) \\
+			$\Delta \ln RER_{ct}$ & 0.342*** & 0.478*** & 1.917*** & -0.925*** \\
+			& (0.074) & (0.064) & (0.249) & (0.416) \\
+			$\Delta \ln RGDR_{ct}$ & 0.145 & 0.143 & 0.168 & 0.182 \\
+			& (0.179) & (0.179) & (0.180) & (0.180) \\
+			$\Delta \ln RER_{ct}*FPC_{j}$ & 0.556*** &       &       &  \\
+			& (0.087) &       &       &  \\
+			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       & 1.703*** &       &  \\
+			&       & (0.261) &       &  \\
+			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       & -4.916*** &  \\
+			&       &       & (0.935) &  \\
+			$\Delta \ln RER_{ct}*Invent_{j}$ &       &       &       & 9.385*** \\
+			&       &       &       & (2.427) \\
 			Year FE  & Yes   & Yes   & Yes   & Yes \\
 			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
 			Observations & 1449210 & 1449210 & 1449210 & 1449210 \\
@@ -589,7 +589,7 @@ Our estimation strategy includes multiple data dimensions, including product, so
 
 First, we will check whether other fixed-effect combinations yield similar results. In this test, We will combine firm-year fixed effects $\tilde{\xi}_{jt}$ with two-dimensional product-country fixed effects $\tilde{\tau}_{ic}$ or separately with product fixed effects $\lambda_i$ and country fixed effects $\theta_{c}$.  Results from alternative fixed effect combinations are shown in columns (1)-(4) and (5)-(8) in Table \ref{tab.robust.fe}, respectively. 
 
-Second, to avoid firm endogeneity, our measures of credit constraints only capture the cross-sectional pattern, i.e. the industry-level credit needs measures are persistent and thus averaged over time. Therefore, to fully sort out the time variation effect, we also conduct cross-sectional estimation using both a one-year sample and between estimator, with the following equation:
+Second, to avoid firm endogeneity, our measures of credit constraints only capture the cross-sectional pattern, i.e., the industry-level credit needs measures are persistent and thus averaged over time. Therefore, to fully sort out the time variation effect, we also conduct cross-sectional estimation using both a one-year sample and between estimator, with the following equation:
 
 \begin{equation}
 	\overline{\Delta \ln P}_{ijc}=\alpha+\beta_{1} \overline{\Delta \ln RER}_{c}+\beta_{2} \overline{\Delta \ln RER}_{c} \cdot FC_{j}+\gamma \overline{\Delta \ln RGDP}_{c}+\bar{\xi}_{ij} +\varepsilon_{ijc}
