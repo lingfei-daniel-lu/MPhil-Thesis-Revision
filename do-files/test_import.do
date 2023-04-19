@@ -259,7 +259,7 @@ eststo imp_process_ctrl_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US process a
 eststo imp_process_ctrl_Tang_US: areg dlnprice_tr dlnRER x_Tang_US process assembly dlnrgdp i.year, a(group_id) vce(cluster FRDM)
 
 estfe imp_process_ctrl_baseline imp_process_ctrl_FPC_US imp_process_ctrl_ExtFin_US imp_process_ctrl_Tang_US, labels(group_id "Firm-product-country FE")
-esttab imp_process_baseline imp_process_FPC_US imp_process_ExtFin_US imp_process_Tang_US using "D:\Project C\tables\matched\table_imp_processing_control.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
+esttab imp_process_ctrl_baseline imp_process_ctrl_FPC_US imp_process_ctrl_ExtFin_US imp_process_ctrl_Tang_US using "D:\Project C\tables\matched\table_imp_processing_control.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp)
 
 gen x_process=dlnRER*process
 gen x_assembly=dlnRER*assembly
