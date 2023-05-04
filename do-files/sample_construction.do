@@ -104,6 +104,7 @@ replace RER=NER*cpi/100.00 if year==2010
 replace RER=NER*cpi/105.55 if year==2011
 label var RER "Real exchange rate to China price at the same year"
 sort coun_aim year
+by coun_aim: gen dlnNER= ln(NER)-ln(NER[_n-1]) if year==year[_n-1]+1
 by coun_aim: gen dlnRER= ln(RER)-ln(RER[_n-1]) if year==year[_n-1]+1
 by coun_aim: gen dlnrgdp=ln(rgdpna)-ln(rgdpna[_n-1]) if year==year[_n-1]+1
 gen peg_USD=1 if countrycode=="ABW" | countrycode=="BHS" | countrycode=="PAN" | countrycode=="BHR"  | countrycode=="BRB" | countrycode=="BLZ" | countrycode=="BMU" | currency_unit =="East Caribbean Dollar" | currency_unit =="Netherlands Antillian Guilder"| currency_unit =="US Dollar" | countrycode=="DJI" | countrycode=="HKG" | countrycode=="JOR" | countrycode=="LBN" | countrycode=="MAC" | countrycode=="MDV" | countrycode=="OMN" | countrycode=="PAN" | countrycode=="QAT" | countrycode=="SAU" | countrycode=="ARE" | xr==1
@@ -629,7 +630,7 @@ foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口
 }
 bys HS6 coun_aim year: egen MS=pc(value_year),prop
 merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
-merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
+merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnNER dlnRER dlnrgdp peg_USD)
 sort FRDM HS6 coun_aim year
 gen price_USD=value_year/quant_year
 gen price_RMB=value_year*NER_US/quant_year
@@ -673,12 +674,12 @@ foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口
 }
 bys HS6 coun_aim year: egen MS=pc(value_year),prop
 merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
-merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
+merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnNER dlnRER dlnrgdp peg_USD)
 sort FRDM HS6 coun_aim year
 gen price_USD=value_year/quant_year
 gen price_RMB=value_year*NER_US/quant_year
 by FRDM HS6 coun_aim: gen dlnquant=ln(quant_year)-ln(quant_year[_n-1]) if year==year[_n-1]+1
-by FRDM HS6 coun_aim: gen dlnprice_USD=ln(price_year)-ln(price_year[_n-1]) if year==year[_n-1]+1
+by FRDM HS6 coun_aim: gen dlnprice_USD=ln(price_USD)-ln(price_USD[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: gen MS_lag=MS[_n-1] if year==year[_n-1]+1
 by FRDM HS6 coun_aim: egen year_count=count(year)
