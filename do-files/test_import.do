@@ -68,10 +68,12 @@ gen x_FPC_US_source=x_FPC_US*source
 gen x_ExtFin_US_source=x_ExtFin_US*source
 gen x_Tang_US_source=x_Tang_US*source
 
-eststo imp_source: areg dlnprice_tr dlnRER x_source dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_FPC_US_source: areg dlnprice_tr dlnRER x_source x_FPC_US_source x_FPC_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_ExtFin_US_source: areg dlnprice_tr dlnRER x_source x_ExtFin_US_source x_ExtFin_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_Tang_US_source: areg dlnprice_tr dlnRER x_source x_Tang_US_source x_Tang_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
+egen group_id_fp=group(FRDM HS6)
+
+eststo imp_source: areg dlnprice_tr dlnRER x_source dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_FPC_US_source: areg dlnprice_tr dlnRER x_source x_FPC_US_source x_FPC_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_ExtFin_US_source: areg dlnprice_tr dlnRER x_source x_ExtFin_US_source x_ExtFin_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_Tang_US_source: areg dlnprice_tr dlnRER x_source x_Tang_US_source x_Tang_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
 
 estfe imp_source imp_FPC_US_source imp_ExtFin_US_source imp_Tang_US_source, labels(group_id "Firm-product-country FE")
 esttab imp_source imp_FPC_US_source imp_ExtFin_US_source imp_Tang_US_source using "D:\Project C\tables\matched\table_imp_source.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
@@ -81,10 +83,10 @@ gen x_FPC_US_source_initial=x_FPC_US*source_initial
 gen x_ExtFin_US_source_initial=x_ExtFin_US*source_initial
 gen x_Tang_US_source_initial=x_Tang_US*source_initial
 
-eststo imp_source_init: areg dlnprice_tr dlnRER x_source_initial dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_FPC_US_source_init: areg dlnprice_tr dlnRER x_source_initial x_FPC_US_source_initial x_FPC_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_ExtFin_US_source_init: areg dlnprice_tr dlnRER x_source_initial x_ExtFin_US_source_initial x_ExtFin_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_Tang_US_source_init: areg dlnprice_tr dlnRER x_source_initial x_Tang_US_source_initial x_Tang_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
+eststo imp_source_init: areg dlnprice_tr dlnRER x_source_initial dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_FPC_US_source_init: areg dlnprice_tr dlnRER x_source_initial x_FPC_US_source_initial x_FPC_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_ExtFin_US_source_init: areg dlnprice_tr dlnRER x_source_initial x_ExtFin_US_source_initial x_ExtFin_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_Tang_US_source_init: areg dlnprice_tr dlnRER x_source_initial x_Tang_US_source_initial x_Tang_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
 
 estfe imp_source_init imp_FPC_US_source_init imp_ExtFin_US_source_init imp_Tang_US_source_init, labels(group_id "Firm-product-country FE")
 esttab imp_source_init imp_FPC_US_source_init imp_ExtFin_US_source_init imp_Tang_US_source_init using "D:\Project C\tables\matched\table_imp_source_initial.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
@@ -94,10 +96,10 @@ gen x_FPC_US_source_lag=x_FPC_US*source_lag
 gen x_ExtFin_US_source_lag=x_ExtFin_US*source_lag
 gen x_Tang_US_source_lag=x_Tang_US*source_lag
 
-eststo imp_source_lag: areg dlnprice_tr dlnRER x_source_lag dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_FPC_US_source_lag: areg dlnprice_tr dlnRER x_source_lag x_FPC_US_source_lag x_FPC_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_ExtFin_US_source_lag: areg dlnprice_tr dlnRER x_source_lag x_ExtFin_US_source_lag x_ExtFin_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_Tang_US_source_lag: areg dlnprice_tr dlnRER x_source_lag x_Tang_US_source_lag x_Tang_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
+eststo imp_source_lag: areg dlnprice_tr dlnRER x_source_lag dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_FPC_US_source_lag: areg dlnprice_tr dlnRER x_source_lag x_FPC_US_source_lag x_FPC_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_ExtFin_US_source_lag: areg dlnprice_tr dlnRER x_source_lag x_ExtFin_US_source_lag x_ExtFin_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_Tang_US_source_lag: areg dlnprice_tr dlnRER x_source_lag x_Tang_US_source_lag x_Tang_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
 
 estfe imp_source_lag imp_FPC_US_source_lag imp_ExtFin_US_source_lag imp_Tang_US_source_lag, labels(group_id "Firm-product-country FE")
 esttab imp_source_lag imp_FPC_US_source_lag imp_ExtFin_US_source_lag imp_Tang_US_source_lag using "D:\Project C\tables\matched\table_imp_source_lag.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
@@ -107,10 +109,10 @@ gen x_FPC_US_source_mean=x_FPC_US*source_mean
 gen x_ExtFin_US_source_mean=x_ExtFin_US*source_mean
 gen x_Tang_US_source_mean=x_Tang_US*source_mean
 
-eststo imp_source_mean: areg dlnprice_tr dlnRER x_source_mean dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_FPC_US_source_mean: areg dlnprice_tr dlnRER x_source_mean x_FPC_US_source_mean x_FPC_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_ExtFin_US_source_mean: areg dlnprice_tr dlnRER x_source_mean x_ExtFin_US_source_mean x_ExtFin_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
-eststo imp_Tang_US_source_mean: areg dlnprice_tr dlnRER x_source_mean x_Tang_US_source_mean x_Tang_US dlnrgdp i.year, a(group_id) vce(cluster FRDM)
+eststo imp_source_mean: areg dlnprice_tr dlnRER x_source_mean dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_FPC_US_source_mean: areg dlnprice_tr dlnRER x_source_mean x_FPC_US_source_mean x_FPC_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_ExtFin_US_source_mean: areg dlnprice_tr dlnRER x_source_mean x_ExtFin_US_source_mean x_ExtFin_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
+eststo imp_Tang_US_source_mean: areg dlnprice_tr dlnRER x_source_mean x_Tang_US_source_mean x_Tang_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
 
 estfe imp_source_mean imp_FPC_US_source_mean imp_ExtFin_US_source_mean imp_Tang_US_source_mean, labels(group_id "Firm-product-country FE")
 esttab imp_source_mean imp_FPC_US_source_mean imp_ExtFin_US_source_mean imp_Tang_US_source_mean using "D:\Project C\tables\matched\table_imp_source_mean.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
