@@ -631,10 +631,7 @@ bys HS6 coun_aim year: egen MS=pc(value_year),prop
 merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
 merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
 sort FRDM HS6 coun_aim year
-gen price_USD=value_year/quant_year
 gen price_RMB=value_year*NER_US/quant_year
-by FRDM HS6 coun_aim: gen dlnquant=ln(quant_year)-ln(quant_year[_n-1]) if year==year[_n-1]+1
-by FRDM HS6 coun_aim: gen dlnprice_USD=ln(price_USD)-ln(price_USD[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: gen MS_lag=MS[_n-1] if year==year[_n-1]+1
 by FRDM HS6 coun_aim: egen year_count=count(year)
@@ -675,10 +672,7 @@ bys HS6 coun_aim year: egen MS=pc(value_year),prop
 merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
 merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
 sort FRDM HS6 coun_aim year
-gen price_USD=value_year/quant_year
 gen price_RMB=value_year*NER_US/quant_year
-by FRDM HS6 coun_aim: gen dlnquant=ln(quant_year)-ln(quant_year[_n-1]) if year==year[_n-1]+1
-by FRDM HS6 coun_aim: gen dlnprice_USD=ln(price_year)-ln(price_year[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: gen MS_lag=MS[_n-1] if year==year[_n-1]+1
 by FRDM HS6 coun_aim: egen year_count=count(year)
