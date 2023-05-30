@@ -138,10 +138,17 @@ use ".\customs_00-11.dta",clear
 customs_country_clean
 save customs_country_name,replace
 
+import delimited "D:\Project C\customs data\ISO-3166.csv", stringcols(4 8 9) clear
+keep alpha3 countrycode
+rename (alpha3 countrycode) (countrycode country)
+replace country=substr("000"+country,-3,.) if country!=""
+save ISO3166_alpha,replace
+
 use customs_country_name,clear
 drop coun_aim
 rename country_adj coun_aim
-duplicates drop 
+duplicates drop
+merge 1:1 countrycode using ISO3166_alpha,nogen keep(matched master)
 save customs_country_code,replace
 
 cd "D:\Project C"
@@ -397,7 +404,7 @@ replace ownership="SOE" if ownership=="" & (CFHMT==0 & CFF==0)
 replace ownership="MNE" if ownership=="" & (CFHMT!=0 | CFF!=0)
 sort FRDM year
 format EN %30s
-cd "D:\Project C\sample_matched\CIE"
+cd "D:\Project C\CIE"
 save cie_98_07,replace
 
 *-------------------------------------------------------------------------------
@@ -417,7 +424,7 @@ save affiliate_2004,replace
 
 *-------------------------------------------------------------------------------
 * Add markup and financial vulnerability measures to firm data
-cd "D:\Project C\sample_matched\CIE"
+cd "D:\Project C\CIE"
 use cie_98_07,clear
 keep if year>=1999
 drop CFS CFC CFHMT CFF CFL CFI
@@ -477,7 +484,7 @@ replace affiliate=0 if affiliate==.
 sort FRDM EN year
 save cie_credit,replace
 
-cd "D:\Project C\sample_matched\CIE"
+cd "D:\Project C\CIE"
 use cie_credit,clear
 sort FRDM year
 by FRDM: replace cic_adj=cic_adj[_N]
@@ -618,7 +625,7 @@ gen assembly = 1 if shipment=="来料加工装配贸易" | shipment=="来料加�
 replace assembly=0 if assembly==.
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 process assembly)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
-merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership affiliate)
+merge n:1 FRDM year using "D:\Project C\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership affiliate)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_destination,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
