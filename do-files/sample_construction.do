@@ -432,10 +432,8 @@ tostring cic_adj,replace
 gen cic2=substr(cic_adj,1,2)
 * Add markup and tfp info
 merge 1:1 FRDM year using "D:\Project C\markup\cie_99_07_markup", nogen keepus(Markup_DLWTLD Markup_lag tfp_tld tfp_lag) keep(matched master)
-sum Markup_*,detail
-winsor2 Markup_*, replace by(year cic2)
-sum tfp_*,detail
-winsor2 tfp_*, replace by(year cic2)
+winsor2 Markup_*, trim replace by(cic2)
+winsor2 tfp_*, trim replace by(cic2)
 * Calculate firm-level markup from CIE
 sort FRDM year
 gen rSI=SI/OutputDefl*100
@@ -445,8 +443,7 @@ gen rkap=FA/inv_deflator*100
 gen tc=rTOIPT+rCWP+0.15*rkap
 gen scratio=rSI/tc
 by FRDM: gen scratio_lag=scratio[_n-1] if year==year[_n-1]+1
-sum scratio*,detail
-winsor2 scratio*, replace cuts(0 99) by(year cic2)
+winsor2 scratio*, trim replace by(cic2)
 * Calculate firm-level financial constraints from CIE
 gen Tang=FA/TA
 gen Invent=STOCK/SI
