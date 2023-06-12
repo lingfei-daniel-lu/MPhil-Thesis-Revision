@@ -371,17 +371,17 @@ save FLL_Appendix_A1,replace
 * focus on manufacturing firms
 cd "D:\Project A\CIE"
 use cie1998.dta,clear
-keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP CFS CFC CFL CFI CPHMT CFF)
-append using cie1999,keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP CFS CFC CFL CFI CPHMT CFF)
+keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP FN IE CFS CFC CFL CFI CPHMT CFF)
+append using cie1999,keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP FN IE CFS CFC CFL CFI CPHMT CFF)
 rename CPHMT CFHMT
 forv i = 2000/2004{
-append using cie`i',keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP CFS CFC CFL CFI CFHMT CFF)
+append using cie`i',keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL CWP FN IE CFS CFC CFL CFI CFHMT CFF)
 }
 forv i = 2005/2006{
-append using cie`i',keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL F334 CWP CFS CFC CFL CFI CFHMT CFF)
+append using cie`i',keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL F334 CWP FN IE CFS CFC CFL CFI CFHMT CFF)
 }
 rename F334 RND
-append using cie2007,keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL RND CWP CFS CFC CFL CFI CFHMT CFF)
+append using cie2007,keep(FRDM EN year INDTYPE REGTYPE GIOV_CR PERSENG TOIPT SI TWC NAR STOCK FA TA CL TL RND CWP FN IE CFS CFC CFL CFI CFHMT CFF)
 bys FRDM: egen EN_adj=mode(EN),maxmode
 bys FRDM: egen REGTYPE_adj=mode(REGTYPE),maxmode
 drop EN REGTYPE
@@ -599,13 +599,14 @@ save customs_matched_duration,replace
 * Check two-way traders
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
-keep FRDM year exp_imp
-duplicates drop
+collapse (sum) value_year, by(FRDM year exp_imp)
+gen export_sum=value_year if exp_imp=="exp"
+gen import_sum=value_year if exp_imp=="imp"
 gen exp=1 if exp_imp=="exp"
 replace exp=0 if exp==.
 gen imp=1 if exp_imp=="imp"
 replace imp=0 if imp==.
-collapse (sum) exp imp, by(FRDM year)
+collapse (sum) export_sum import_sum exp imp, by(FRDM year)
 gen twoway_trade=1 if exp==1 & imp==1
 replace twoway_trade=0 if twoway_trade==.
 save customs_twoway,replace
