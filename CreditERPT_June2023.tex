@@ -312,21 +312,21 @@ The import exchange rate pass-through results are shown in Table \ref{tab.baseli
 			\toprule
 			& (1)   & (2)   & (3)   & (4) \\
 			\midrule
-			& \multicolumn{4}{c}{Import} \\
+			& \multicolumn{4}{c}{Import Prices: $\Delta \ln P_{ijct}$} \\
 			& Whole & Matched & Top 50 & Top 20 \\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.361*** & 0.711*** & 0.700*** & 0.634***\\
-			& (0.011) & (0.061) & (0.061) & (0.063)\\
-			$\Delta \ln RGDR_{ct}$ & -0.180*** & 0.196 & 0.215 & 0.124\\
-			& (0.045) & (0.181) & (0.184) & (0.205)\\
+			$\Delta \ln RER_{ct}$ & 0.361*** & 0.722*** & 0.713*** & 0.646*** \\
+			& (0.011) & (0.063) & (0.063) & (0.065) \\
+			$\Delta \ln RGDR_{ct}$ & -0.180*** & 0.206 & 0.225 & 0.120 \\
+			& (0.183) & (0.186) & (0.208) \\
 			Year FE  & Yes   & Yes   & Yes   & Yes \\
 			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
-			Observations & 7054033 & 1449210 & 1439299 & 1343160 \\
+			Observations & 7054033 & 1449210 & 1439303 & 1343157 \\
 			\bottomrule
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Column (1) uses the whole sample from 2000 to 2011. Column (2) uses the matched sample from 2000 to 2007. Columns (3) and (4) use sub-samples with only the top 50 and top 20 partners ranked by total trade value. All regressions include firm-product-country fixed effects and year fixed effects. 
+			\item[Notes:] Robust standard errors clustered at firm level;  *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. Column (1) uses the whole customs data from 2000 to 2011. Column (2) uses the matched sample from 2000 to 2007. Columns (3) and (4) use sub-samples with only China's top 50 and top 20 partners ranked by total trade value. All regressions include firm-product-country fixed effects and year fixed effects. 
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.baseline}
@@ -366,18 +366,18 @@ Table \ref{tab.credit} presents differences in exchange rate pass-through into i
 			 & \multicolumn{4}{c}{Credit Constraints Measures} \\
 			& FPC   & External Finance & Tangibility & Inventory \\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.342*** & 0.478*** & 1.917*** & -0.925*** \\
-			& (0.074) & (0.064) & (0.249) & (0.416) \\
-			$\Delta \ln RGDR_{ct}$ & 0.145 & 0.143 & 0.168 & 0.182 \\
-			& (0.179) & (0.179) & (0.180) & (0.180) \\
-			$\Delta \ln RER_{ct}*FPC_{j}$ & 0.556*** &       &       &  \\
-			& (0.087) &       &       &  \\
-			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       & 1.703*** &       &  \\
-			&       & (0.261) &       &  \\
-			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       & -4.916*** &  \\
-			&       &       & (0.935) &  \\
-			$\Delta \ln RER_{ct}*Invent_{j}$ &       &       &       & 9.385*** \\
-			&       &       &       & (2.427) \\
+			$\Delta \ln RER_{ct}$ & 0.343*** & 0.483*** & 1.964*** & -0.929** \\
+			& (0.076) & (0.065) & (0.254) & (0.414) \\
+			$\Delta \ln RGDR_{ct}$ & 0.154 & 0.152 & 0.178 & 0.193 \\
+			& (0.182) & (0.181) & (0.182) & (0.183) \\
+			$\Delta \ln RER_{ct}*FPC_{j}$ & 0.571*** &       &       &  \\
+			& (0.088) &       &       &  \\
+			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       & 1.747*** &       &  \\
+			&       & (0.266) &       &  \\
+			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       & -5.063*** &  \\
+			&       &       & (0.951)  &  \\
+			$\Delta \ln RER_{ct}*Invent_{j}$ &       &       &       & 9.472***  \\
+			&       &       &       & (2.423)  \\
 			Year FE  & Yes   & Yes   & Yes   & Yes \\
 			Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
 			Observations & 1449210 & 1449210 & 1449210 & 1449210 \\
@@ -385,13 +385,13 @@ Table \ref{tab.credit} presents differences in exchange rate pass-through into i
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Robust standard errors clustered at firm level;  *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. Columns (1)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.credit}
 \end{table}
 
-Concerning our focus, a positive cross-term coefficient implies that the magnitude of this variable is positively related to the completeness of exchange rate pass-through. Using the first principal component of external finance dependence and asset tangibility $FPC_j$ to measure financial constraints $FC_j$, we see that import exchange rate pass-through is more complete in financially more vulnerable sectors, relative to those financially less vulnerable sectors. Columns (2) and (3) separately show the effects of external finance dependence and asset tangibility on importers' exchange rate pass-through. Consistent with the definition that higher external finance dependence implies tighter credit constraints faced by firms. In contrast, higher asset tangibility can alleviate them, we observe a positive coefficient for the former and a negative coefficient for the latter. With the auxiliary measure $Invent_j$, we further observe the positive effect on exchange rate pass-through in column (4). Overall, the coefficient $\beta^{Import}_2$ of the interaction term $\Delta \ln RER_{ct} \cdot FC_{j}$ is positive and significant at the 1\% level. Our evidence supports the hypothesis that exchange rate fluctuations are more likely to be reflected in unstable import costs for importers in more financially vulnerable industries because they have weak bargaining power in the international market. External financing dependence, internal collateral capacity, and inventory turnover act jointly and separately on the exchange rate pass-through of importers.
+Concerning our focus, a positive cross-term coefficient implies that the magnitude of this variable is positively related to the completeness of exchange rate pass-through. Using the first principal component of external finance dependence and asset tangibility $FPC_j$ to measure financial constraints $FC_j$, we see that import exchange rate pass-through is more complete in financially more vulnerable sectors than in financially less vulnerable sectors. Columns (2) and (3) separately show the effects of external finance dependence and asset tangibility on importers' exchange rate pass-through. Consistent with the definition that higher external finance dependence implies tighter credit constraints faced by firms. In contrast, higher asset tangibility can alleviate them. We observe a positive coefficient for the former and a negative coefficient for the latter. With the auxiliary measure $Invent_j$, we further observe the positive effect on exchange rate pass-through in column (4). Overall, the coefficient $\beta^{Import}_2$ of the interaction term $\Delta \ln RER_{ct} \cdot FC_{j}$ is positive and significant at the 1\% level. Our evidence supports the hypothesis that exchange rate fluctuations are more likely to be reflected in unstable import costs for importers in more financially vulnerable industries because they have weak bargaining power in the international market. External financing dependence, internal collateral capacity, and inventory turnover act jointly and separately on the exchange rate pass-through of importers.
 
 It is worth noting that the exchange rate pass-through here is estimated by the at-the-dock import price in our specification. This excludes any impact of credit constraints on post-landing costs, such as local distribution and logistics costs. In other words, credit constraints imposed on Chinese importers can affect home import costs by directly affecting the supplier's pricing behavior. Intuitively, firms in more credit-constrained industries may have weaker import bargaining power, and products are more likely to be pegged to the dollar or the currency of the exporting country (less pricing-to-market), so at-the-dock prices are more affected by exchange rate fluctuations regardless of any domestic market factor.
 
@@ -436,27 +436,27 @@ Following the literature, an importer's sourcing diversity could increase its ba
 			\midrule
 			 & \multicolumn{4}{c}{Current Sources} & \multicolumn{4}{c}{Initial Sources} \\
 			& \#Sources & \#Sources+ & \#Sources+ & \#Sources+	& \#Sources & \#Sources+ & \#Sources+ & \#Sources+ \\
-			&       & FPC &External & Tangibility &       & FPC &External & Tangibility\\
+			&       & FPC &External & Tangibility &  & FPC &External & Tangibility\\
 			&       & &Finance & &       & &Finance &			\\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.934*** & 0.538*** & 0.683*** & 2.342*** & 0.918*** & 0.542*** & 0.675*** & 2.247***\\
-			& (0.055) & (0.058) & (0.054) & (0.148) &(0.054) & (0.059) & (0.054) & (0.149)\\
-			$\Delta \ln RGDR_{ct}$ & 0.173 & 0.111 & 0.110 & 0.139 & 0.173 & 0.112 & 0.112 & 0.139\\
-			& (0.126) & (0.126) & (0.126) & (0.126) & (0.126) & (0.126) & (0.126) & (0.126) \\
-			$\#Source_{ijt}$ & -0.059*** & -0.058*** & -0.056*** & -0.084*** & -0.066*** & -0.071*** & -0.066*** & -0.078***\\
-			& (0.010) & (0.010) & (0.009) & (0.025) & (0.011) & (0.012) & (0.010) & (0.029) \\
-			$\Delta \ln RER_{ct}*FPC_{j}*\#Source_{ijt}$ &       & -0.015** &       & 	&       & -0.011 & &\\
-			&       & (0.008) &       &  &       & (0.009) &       &\\
-			$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.661*** &       &  &       & 0.627*** &       &\\
-			&       & (0.046) &       & &       & (0.047) &       & \\
-			$\Delta \ln RER_{ct}*ExtFin_{j}*\#Source_{ijt}$ &       &    &   -0.063*** &  &       &    &   -0.055** &\\
-			&       &       & (0.021) &  &       &       & (0.025) &\\
-			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 2.085*** &   &       &       & 1.993*** &\\
-			&       &       & (0.139) &  &       &       & (0.141) &\\
-			$\Delta \ln RER_{ct}*Tang_{j}*\#Source_{ijt}$ &       &       &       & 0.068 &       &       &       & 0.006\\
-			&       &       &       & (0.098) &       &       &       & (0.116)\\
-			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -5.606*** &       &       &       & -5.290***\\
-			&       &       &       & (0.539) &       &       &       & (0.552)\\
+			$\Delta \ln RER_{ct}$ & 0.926*** & 0.532*** & 0.676*** & 2.331*** & 0.905*** & 0.531*** & 0.663*** & 2.232*** \\
+			& (0.055) & (0.058) & (0.055) & (0.146) & (0.054) & (0.059) & (0.054) & (0.147)\\
+			$\Delta \ln RGDR_{ct}$ & 0.182 & 0.119 & 0.118 & 0.147 & 0.182 & 0.121 & 0.120 & 0.148 \\
+			& (0.127) & (0.127) & (0.127) & (0.127) & (0.127) & (0.127) & (0.127) & (0.127)  \\
+			$\#Source_{ijt}$ & -0.056*** & -0.056*** & -0.054*** & -0.076***  & -0.061*** & -0.068*** & -0.062*** & -0.068** \\
+			& (0.009) & (0.010) & (0.009) & (0.024) & (0.010) & (0.012) & (0.010) & (0.028) \\
+			$\Delta \ln RER_{ct}*FPC_{j}*\#Source_{ijt}$ &       & -0.014** &       & 	&       & -0.009 & &\\
+			&       & (0.007) &       &  &       & (0.009) &       &\\
+			$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.662*** &       &  &       & 0.627*** &       &\\
+			&       & (0.046) &       & &       & (0.046) &       & \\
+			$\Delta \ln RER_{ct}*ExtFin_{j}*\#Source_{ijt}$ &       &    &   -0.060*** &  &       &    &   -0.052** &\\
+			&       &       & (0.020) &  &       &       & (0.024) &\\
+			$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 2.092*** &   &       &       & 1.995*** &\\
+			&       &       & (0.136) &  &       &       & (0.139) &\\
+			$\Delta \ln RER_{ct}*Tang_{j}*\#Source_{ijt}$ &       &       &       & 0.047 &       &       &       & -0.016\\
+			&       &       &       & (0.095) &       &       &       & (0.113)\\
+			$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -5.588*** &       &       &       & -5.275***\\
+			&       &       &       & (0.534) &       &       &       & (0.547)\\
 			Year FE  & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
 			Firm-product-country FE & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
 			Observations & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210\\
@@ -464,14 +464,14 @@ Following the literature, an importer's sourcing diversity could increase its ba
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use the number of source countries in the current year, while columns (5)-(8) use the number of source countries in the initial year. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Robust standard errors clustered at firm-product level; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. Columns (1)-(4) use the number of source countries in the current year, while columns (5)-(8) use the number of source countries in the initial year. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	}
 	\label{tab.source}
 \end{sidewaystable}
 
-The estimates for intersection terms between import sources and real exchange rate changes are displayed in column (1). We find that an importer who imports a certain product from more sources will have a less complete pass-through. This is consistent with our hypothesis that importers with more alternative sourcing options will have less complete pass-through. In other words, the diversity of import sources for the same product can significantly enhance the stability of import prices. In columns (2)-(4), after adding interactions, we find the effects of credit constraints still exist while the triple interaction terms with the number of sources have the opposite while still significant coefficients. Columns (5)-(8) repeat the above test using the number of source countries in the initial year as the measure of sourcing diversity to deal with possible simultaneous endogeneity problems. In Appendix A, we will use lagged or average numbers of source countries (Table \ref{tab.source.lag}) and geographical distance (Table \ref{tab.source.distance}) as alternative measures of import sources.
+The estimates for intersection terms between import sources and real exchange rate changes are displayed in column (1). We find that an importer who imports a certain product from more sources will have a less complete pass-through. This is consistent with our hypothesis that importers with more alternative sourcing options will have less complete pass-through. In other words, the diversity of import sources for the same product can significantly enhance the stability of import prices. In columns (2)-(4), after adding interactions, we find the effects of credit constraints still exist while the triple interaction terms with the number of sources have the opposite while still significant coefficients. Columns (5)-(8) repeat the above test using the number of source countries in the initial year in our sample as the measure of sourcing diversity to deal with possible simultaneous endogeneity problems. In Appendix A, we will use geographical distances (Table \ref{tab.source.distance}) as alternative measures of import sources.
 
 The above results show that a wider sourcing base will mitigate the effects of credit constraints and their direct effect on pass-through. The opposing effects of credit constraints and sourcing diversity on exchange rate pass-through confirm our conjecture about the bargaining power of importers. We show that if a firm can import the same product from more sources, it has more flexibility in the face of bilateral exchange rate shocks in individual markets. Firms in financially constrained industries have more alternative options to escape the unfavorable exchange rate risk if they have more import sources. A firm with a more diverse sourcing network can either switch from one supplier to another to reduce its input costs (i.e., trade diversion effect) or make a more credible threat to negotiate a more stable price.
 
@@ -488,36 +488,40 @@ Although China's financial markets are less mature than the U.S., the relative r
 \begin{table}[htbp]
 	\centering
 	\caption{Robustness check: alternative credit constraints measures from Chinese data}
+        \resizebox{\columnwidth}{!}{
 	\begin{threeparttable}
-	\begin{tabular}{lcccc}
+	\begin{tabular}{lccccc}
 		\toprule
-		& (1)   & (2)   & (3)   & (4) \\
+		& (1)   & (2)   & (3)   & (4) & (5)\\
 		\midrule
-		& \multicolumn{4}{c}{Measures of Credit Constraints from Chinese Data} \\
-		& External Finance & Tangibility & Inventory & R\&D Intensity \\
+		& \multicolumn{5}{c}{Measures of Credit Constraints from Chinese Data} \\
+		& FPC & External Finance & Tangibility & Inventory & R\&D Intensity \\
 		\midrule
-		$\Delta \ln RER_{ct}$ & 0.908*** & 3.366*** & -0.905*** & 0.210** \\
-		& (0.110) & (0.382)	& (0.266) & (0.107)\\
-		$\Delta \ln RGDP_{ct}$ & 0.181 & 0.169 & 0.195 & 0.187\\
-		& (0.180) & (0.180) & (0.180) & (0.180) \\
-		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ & 0.307** &       &       &  \\
-		& (0.133) &       &       &  \\
-		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       & -9.184*** &       &  \\
-		&       & (1.249) &       &  \\
-		$\Delta \ln RER_{ct}*Invent_{j}$ &       &       & 14.196*** &  \\
-		&       &       & (2.417) &  \\
-		$\Delta \ln RER_{ct}*R\&D_{j}$ &       &       &       & 25.787*** \\
-		&       &       &       & (5.090) \\
-		Year FE  & Yes   & Yes   & Yes   & Yes \\
-		Firm-product-country FE & Yes   & Yes   & Yes   & Yes \\
-		Observations & 1449210 & 1449210 & 1449210 & 1449210 \\
+		$\Delta \ln RER_{ct}$ & 0.641*** & 0.931*** & 3.398*** & -0.958*** & 0.229** \\
+		& (0.069) & (0.112) & (0.391) & (0.269) & (0.110) \\
+		$\Delta \ln RGDP_{ct}$ & 0.210 & 0.190 & 0.179 & 0.205 & 0.197 \\
+		&  (0.183) & (0.183) & (0.182) & (0.183) & (0.182) \\
+            $\Delta \ln RER_{ct}$*$FPC_{j}$ & -0.192*** &       &       &       &  \\
+            & (0.074) &       &       &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ & & 0.326** &       &       &  \\
+		& &(0.134) &       &       &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ &  &  & -9.257*** &       &  \\
+		&       & &(1.279) &       &  \\
+		$\Delta \ln RER_{ct}*Invent_{j}$ &       &       & &14.763*** &  \\
+		&       &       &  &(2.445) &  \\
+		$\Delta \ln RER_{ct}*R\&D_{j}$ &       &       &   &    & 25.342*** \\
+		&       &       &       & & (5.221) \\
+		Year FE  & Yes   & Yes   & Yes   & Yes & Yes \\
+		Firm-product-country FE & Yes   & Yes   & Yes   & Yes & Yes\\
+		Observations & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 \\
 		\bottomrule
 	\end{tabular}
 	\begin{tablenotes}
 		\footnotesize
-		\item[Notes:]  Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using Chinese data. All regressions include firm-product-country fixed effects and year fixed effects.
+		\item[Notes:]  Robust standard errors clustered at firm level; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using Chinese data. All regressions include firm-product-country fixed effects and year fixed effects.
 	\end{tablenotes}
 	\end{threeparttable}
+        }
         \label{tab.robust.credit}
 \end{table}
 
@@ -540,24 +544,24 @@ We will perform robustness tests using an alternative sample to eliminate the co
 		& \multicolumn{4}{c}{Excluding US Dollar Peg} \\
 		& Baseline & FPC   & External Finance & Tangibility \\
 		\midrule
-		$\Delta \ln RER_{ct}$ & 0.382*** & 0.164*** & 0.256*** & 1.173*** \\
-		& (0.017) & (0.018) & (0.018) & (0.035) \\
-		$\Delta \ln RGDP_{ct}$ & 0.709*** & 0.778*** & 0.797*** & 0.730*** \\
-		& (0.106) & (0.106) & (0.106) & (0.106) \\
-		$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.362*** &       & \\
-		&       & (0.010) &       &  \\
-		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.103*** &  \\
-		&       &       & (0.030) &  \\
-		$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -3.186*** \\
-		&       &       &       & (0.121) \\
+		$\Delta \ln RER_{ct}$ & 0.835*** & 0.499*** & 0.629*** & 1.996*** \\
+		& (0.084) & (0.085) & (0.079) & (0.262) \\
+		$\Delta \ln RGDP_{ct}$ & 0.790*** & 0.699*** & 0.707*** & 0.731*** \\
+		& (0.248) & (0.244) & (0.244) & (0.246) \\
+		$\Delta \ln RER_{ct}$*$FPC_{j}$ & & 0.523*** &       &  \\
+            & &(0.085) &       &  \\
+		$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &  &     & 1.585*** &  \\
+		& &      & (0.255) &  \\
+		$\Delta \ln RER_{ct}$*$Tang_{j}$ & &       &       & -4.708*** \\
+		& &       &       & (0.924) \\
 		Year FE  &   Yes    & Yes   & Yes   & Yes \\
 		Firm-product-country FE &   Yes    & Yes   & Yes   & Yes \\
-		Observations & 1449210 & 1449210 & 1449210 & 1449210 \\
+		Observations & 1147027 & 1147027 & 1147027 & 1147027 \\
 		\bottomrule
 	\end{tabular}
 	\begin{tablenotes}
 		\footnotesize
-		\item[*] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and, 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. We do not include countries that use the U.S. dollar or currencies pegged to the U.S. dollar. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+		\item[*] Robust standard errors clustered at firm level; *, **, and *** indicate significance at 10\%, 5\%, and, 1\% levels. We do not include countries that use the U.S. dollar or currencies pegged to the U.S. dollar. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 	\end{tablenotes}
         \end{threeparttable}
         \label{tab.robust.nopeg}
@@ -654,7 +658,7 @@ With the estimates of markups, we can now analyze how markups participate in det
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\% and 1\%. The dependent variable is the price change $\Delta \ln P_{ijct}$. Firm markup is estimated using the method of \cite{dlw2012}. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Robust standard errors clustered at firm level; *, **, and *** indicate significance at 10\%, 5\% and 1\%. Firm markup is estimated using the method of \cite{dlw2012}. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
         \label{tab.markup}
@@ -706,7 +710,7 @@ Since we only have data from China Customs, our market share $S_{ijct}$ is relat
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\%. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Robust standard errors clustered at firm level; *, **, and *** indicate significance at 10\%, 5\%, and 1\%. Columns (2)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.share}
@@ -757,7 +761,7 @@ There are several directions for future improvement. First, we must explore the 
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Column (1) uses the long sample from 2000 to 2011. Column (2) uses the matched sample from 2000 to 2007. Columns (3) and (4) use sub-samples with only the top 50 and top 20 partners ranked by total trade value. All regressions include firm-product-country fixed effects and year fixed effects. 
+			\item[Notes:] Robust standard errors clustered at firm level;  *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. Column (1) uses the whole customs data from 2000 to 2011. Column (2) uses the matched sample from 2000 to 2007. Columns (3) and (4) use sub-samples with only China's top 50 and top 20 partners ranked by total trade value. All regressions include firm-product-country fixed effects and year fixed effects. 
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.baseline.exp}
@@ -793,58 +797,11 @@ There are several directions for future improvement. First, we must explore the 
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Robust standard errors clustered at firm level;; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. Columns (1)-(4) use different measures of credit constraints calculated using U.S. data. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.credit.exp}
 \end{table}
-
-\begin{sidewaystable}[htbp]
-	\centering
-	\caption{Import Sources, Credit Constraints, and Exchange Rate Pass-Through: Alternative Number of Sources}
-	\resizebox{\textwidth}{!}{
-		\begin{threeparttable}
-			\begin{tabular}{lcccccccc}
-				\toprule
-				& (1)   & (2)   & (3)   & (4) & (5)   & (6)   & (7)   & (8)   \\
-				\midrule
-				& \multicolumn{4}{c}{Lagged Number} & \multicolumn{4}{c}{Average Number} \\
-				& \#Sources & \#Sources+ & \#Sources+ & \#Sources+	& \#Sources & \#Sources+ & \#Sources+ & \#Sources+ \\
-				&       & FPC &External & Tangibility &       & FPC &External & Tangibility\\
-				&       & &Finance & &       & &Finance &			\\
-				\midrule
-				$\Delta \ln RER_{ct}$ & 0.927*** & 0.508*** & 0.675*** & 2.378*** & 0.912*** & 0.480*** & 0.642*** & 2.195***\\
-				& (0.038) & (0.044) & (0.041) & (0.095) & (0.038) & (0.043) & (0.040) & (0.083)\\
-				$\Delta \ln RGDR_{ct}$ & 0.161 & 0.096* & 0.095 & 0.124 & 0.160	& 0.097	& 0.096	& 0.124\\
-				& (0.115) & (0.115) & (0.115) & (0.115) & (0.115) & (0.115) & (0.115) & (0.115) \\
-				$\#Source_{ijt}$ & -0.055*** & -0.059*** & -0.056*** & -0.072*** & -0.061*** & -0.052*** & -0.054*** & -0.025***\\
-				& (0.005) & (0.008) & (0.007) & (0.015) & (0.007) & (0.008) & (0.008) & (0.011) \\
-				$\Delta \ln RER_{ct}*FPC_{j}*\#Source_{ijt}$ &       & -0.012*** &       & 	&       & -0.024*** & &\\
-				&       & (0.005) &       &  &       & (0.005) &       &\\
-				$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.680*** &       &  &       & 0.716*** &       &\\
-				&       & (0.029) &       & &       & (0.029) &       & \\
-				$\Delta \ln RER_{ct}*ExtFin_{j}*\#Source_{ijt}$ &       &    &   -0.056*** &  &       &    &   -0.086*** &\\
-				&       &       & (0.014) &  &       &       & (0.014) &\\
-				$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 2.145*** &   &       &       & 2.233*** &\\
-				&       &       & (0.089) &  &       &       & (0.089) &\\
-				$\Delta \ln RER_{ct}*Tang_{j}*\#Source_{ijt}$ &       &       &       & 0.026
-				 &       &       &       & -0.239***\\
-				&       &       &       & (0.066) &       &       &       & (0.045)\\
-				$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -5.761*** &       &       &       & -4.890***\\
-				&       &       &       & (0.359) &       &       &       & (0.307)\\
-				Year FE  & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
-				Firm-product-country FE & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
-				Observations & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210\\
-				\bottomrule
-			\end{tabular}
-			\begin{tablenotes}
-				\footnotesize
-				\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use the number of source countries in the previous (lagged) year while columns (5)-(8) use the average number of source countries i over the period from 2000-2007. All regressions include firm-product-country fixed effects and year fixed effects.
-			\end{tablenotes}
-		\end{threeparttable}
-	}
-	\label{tab.source.lag}
-\end{sidewaystable}
 
 \begin{sidewaystable}[htbp]
 	\centering
@@ -859,25 +816,25 @@ There are several directions for future improvement. First, we must explore the 
 				&       & FPC &External & Tangibility &       & FPC &External & Tangibility\\
 				&       & &Finance & &       & &Finance &			\\
 				\midrule
-				$\Delta \ln RER_{ct}$ & 1.104*** & 0.464***	& 0.670*** & 2.755*** & 1.102*** &	0.445*** & 0.656***	& 2.782***\\
-				& (0.041) & (0.048) & (0.044) & (0.107) & (0.043) & (0.050) & (0.045) & (0.111)\\
-				$\Delta \ln RGDR_{ct}$ & 0.052 & 0.017 & 0.003 & 0.042 & 0.064 & 0.028 & 0.014 & 0.054\\
-				& (0.116) & (0.116) & (0.116) & (0.116) & (0.116) & (0.116) & (0.116) & (0.116) \\
-				$ Distance_{ijt}$ & -0.091*** & -0.037*** & -0.055*** & -0.201*** & -0.091*** & -0.033*** & -0.052*** & -0.206***\\
-				& (0.006) & (0.007) & (0.006) & (0.019) & (0.007) & (0.008) & (0.007) & (0.021) \\
-				$\Delta \ln RER_{ct}*FPC_{j}*Distance_{ijt}$ &       & -0.068*** &       & 	&       & -0.073*** & &\\
-				&       & (0.006) &       &  &       & (0.007) &       &\\
-				$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.851*** &       &  &       & 0.873*** &       &\\
-				&       & (0.034) &       & &       & (0.036) &       & \\
-				$\Delta \ln RER_{ct}*ExtFin_{j}*Distance_{ijt}$ &       &    &   -0.237*** &  &       &    &   -0.258*** &\\
-				&       &       & (0.017) &  &       &       & (0.019) &\\
-				$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 2.793*** &   &       &       & 2.882*** &\\
-				&       &       & (0.103) &  &       &       & (0.108) &\\
-				$\Delta \ln RER_{ct}*Tang_{j}*Distance_{ijt}$ &       &       &       & 0.486***
-				&       &       &       & 0.510***\\
-				&       &       &       & (0.071) &       &       &       & (0.077)\\
-				$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -6.988*** &       &       &       & -7.115***\\
-				&       &       &       & (0.413) &       &       &       & (0.429)\\
+				$\Delta \ln RER_{ct}$ & 1.069*** & 0.462***	& 0.657*** & 2.629*** & 1.102*** &	0.445*** & 0.656***	& 2.782***\\
+				& (0.108) & (0.117) & (0.101) & (0.415) & (0.043) & (0.050) & (0.045) & (0.111)\\
+				$\Delta \ln RGDR_{ct}$ & 0.083 & 0.050 & 0.037 & 0.074 & 0.064 & 0.028 & 0.014 & 0.054\\
+				& (0.189) & (0.188) & (0.188) & (0.189) & (0.116) & (0.116) & (0.116) & (0.116) \\
+				$ Distance_{ijt}$ & -0.085*** & -0.034** & -0.050*** & -0.187*** & -0.085*** & -0.030* & -0.047*** & -0.192*** \\
+				& (0.018) & (0.015) & (0.015) & (0.063) & (0.019) & (0.016) & (0.016) & (0.068) \\
+				$\Delta \ln RER_{ct}*FPC_{j}*Distance_{ijt}$ &       & -0.063*** &       & 	&       & -0.068*** & &\\
+				&       & (0.021) &       &  &       & (0.022) &       &\\
+				$\Delta \ln RER_{ct}*FPC_{j}$ &       & 0.807*** &       &  &       & 0.829*** &       &\\
+				&       & (0.141) &       & &       & (0.146) &       & \\
+				$\Delta \ln RER_{ct}*ExtFin_{j}*Distance_{ijt}$ &       &    &   -0.221*** &  &       &    &   -0.242*** &\\
+				&       &       & (0.057) &  &       &       & (0.062) &\\
+				$\Delta \ln RER_{ct}*ExtFin_{j}$ &       &       & 2.654*** &   &       &       & 2.740*** &\\
+				&       &       & (0.421) &  &       &       & (0.437) &\\
+				$\Delta \ln RER_{ct}*Tang_{j}*Distance_{ijt}$ &       &       &       & 0.453**
+				&       &       &       & 0.478**\\
+				&       &       &       & (0.207) &       &       &       & (0.223)\\
+				$\Delta \ln RER_{ct}*Tang_{j}$ &       &       &       & -6.602*** &       &       &       & -6.733***\\
+				&       &       &       & (1.533) &       &       &       & (1.581)\\
 				Year FE  & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
 				Firm-product-country FE & Yes   & Yes   & Yes   & Yes & Yes   & Yes   & Yes   & Yes\\
 				Observations & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210 & 1449210\\
@@ -885,7 +842,7 @@ There are several directions for future improvement. First, we must explore the 
 			\end{tabular}
 			\begin{tablenotes}
 				\footnotesize
-				\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) use the simple distance between the most populated cities of the two countries while columns (5)-(8) use the population-weighted harmonic mean distance between the two countries. All regressions include firm-product-country fixed effects and year fixed effects.
+				\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. Columns (1)-(4) use the simple distance between the most populated cities of the two countries while columns (5)-(8) use the population-weighted harmonic mean distance between the two countries. All regressions include firm-product-country fixed effects and year fixed effects.
 			\end{tablenotes}
 		\end{threeparttable}
 	}
@@ -903,12 +860,12 @@ There are several directions for future improvement. First, we must explore the 
 			& \multicolumn{4}{c}{Registration type controls} & \multicolumn{4}{c}{Affiliation controls}\\
 			& Baseline & FPC   & External Finance & Tangibility & Baseline & FPC & External Finance & Tangibility\\
 			\midrule
-			$\Delta \ln RER_{ct}$ & 0.872*** & 0.614*** & 0.692*** & 1.601***& 0.711*** & 0.342*** & 0.478*** & 1.917***\\
-			& (0.026) & (0.028) & (0.027) & (0.054) & (0.034) & (0.037) & (0.035) & (0.077)\\
-			$\Delta \ln RGDP_{ct}$ & 0.631*** & 0.603*** & 0.593*** & 0.622***& 0.196* & 0.145 & 0.143 & 0.168\\
-			& (0.087) & (0.087) & (0.087) & (0.087) & (0.119) & (0.119) & (0.119) & (0.119)\\
-			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.395*** &       &  &  & 0.556*** &&\\
-			&       & (0.016) &       &  &  & (0.024) &&\\
+			$\Delta \ln RER_{ct}$ & 0.879*** & 0.616*** & 0.695*** & 1.626*** & 0.722*** & 0.343*** & 0.483*** & 1.964*** \\
+			& (0.035) & (0.044) & (0.037) & (0.153) & (0.034) & (0.037) & (0.035) & (0.077) \\
+			$\Delta \ln RGDP_{ct}$ & 0.622*** & 0.593*** & 0.583*** & 0.612*** & 0.206* & 0.154 & 0.152 & 0.178 \\
+			& (0.103) & (0.102) & (0.102) & (0.103) & (0.119) & (0.119) & (0.119) & (0.119) \\
+			$\Delta \ln RER_{ct}$*$FPC_{j}$ &       & 0.404*** &       &  &  & 0.571*** &&\\
+			&       & (0.053) &       &  &  & (0.024) &&\\
 			$\Delta \ln RER_{ct}$*$ExtFin_{j}$ &       &       & 1.337*** &  &&&1.703***&\\
 			&       &       & (0.049) &  &&&(0.071)&\\
 			$\Delta \ln RER_{ct}$*$Tang_{j}$ &       &       &       & -2.958*** &&&&-4.916***\\
@@ -924,7 +881,7 @@ There are several directions for future improvement. First, we must explore the 
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) include controls of registration type while columns (5)-(8) include controls of affiliation. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Robust standard errors clustered at firm level;; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. Columns (1)-(4) include controls of registration type while columns (5)-(8) include controls of affiliation. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.robust.ownership}
@@ -996,7 +953,7 @@ There are several directions for future improvement. First, we must explore the 
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) include controls of registration type, while columns (5)-(8) include controls of affiliation. All regressions include firm-product-country fixed effects and year fixed effects.
+			\item[Notes:] Robust standard errors clustered at firm level;; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. Columns (1)-(4) include controls of registration type, while columns (5)-(8) include controls of affiliation. All regressions include firm-product-country fixed effects and year fixed effects.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.robust.fe}
@@ -1029,7 +986,7 @@ There are several directions for future improvement. First, we must explore the 
 		\end{tabular}
 		\begin{tablenotes}
 			\footnotesize
-			\item[Notes:] Standard errors in parentheses; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. The dependent variable is the price change $\Delta \ln P_{ijct}$. Columns (1)-(4) report results using a one-year sample in 2007, while columns (5)-(8) report results using between estimators (average over 2000-2007). All regressions include firm-product fixed effect.
+			\item[Notes:] Robust standard errors clustered at firm level;; *, **, and *** indicate significance at 10\%, 5\%, and 1\% levels. Columns (1)-(4) report results using a one-year sample in 2007, while columns (5)-(8) report results using between estimators (average over 2000-2007). All regressions include firm-product fixed effect.
 		\end{tablenotes}
 	\end{threeparttable}
 	\label{tab.robust.crosec}
