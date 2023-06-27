@@ -441,9 +441,6 @@ gen rTOIPT=TOIPT/InputDefl*100
 gen rCWP=CWP/InputDefl*100
 gen rkap=FA/inv_deflator*100
 gen tc=rTOIPT+rCWP+0.15*rkap
-gen scratio=rSI/tc
-by FRDM: gen scratio_lag=scratio[_n-1] if year==year[_n-1]+1
-winsor2 scratio*, trim replace by(cic2)
 * Calculate firm-level financial constraints from CIE
 gen Tang=FA/TA
 gen Invent=STOCK/SI
@@ -623,7 +620,7 @@ gen assembly = 1 if shipment=="来料加工装配贸易" | shipment=="来料加�
 replace assembly=0 if assembly==.
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 process assembly)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
-merge n:1 FRDM year using "D:\Project C\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership affiliate)
+merge n:1 FRDM year using "D:\Project C\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc *_cic2 *_US ownership affiliate)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_destination,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
@@ -664,7 +661,7 @@ gen assembly = 1 if shipment=="来料加工装配贸易" | shipment=="来料加�
 replace assembly=0 if assembly==.
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 process assembly)
 merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
-merge n:1 FRDM year using ".\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc scratio scratio_lag *_cic2 *_US ownership affiliate)
+merge n:1 FRDM year using "D:\Project C\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc *_cic2 *_US ownership affiliate)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_source,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)

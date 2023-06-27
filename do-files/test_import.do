@@ -56,7 +56,7 @@ eststo imp_Invent_cic2: areg dlnprice_tr dlnRER x_Invent_cic2 dlnrgdp i.year, a(
 eststo imp_RDint_cic2: areg dlnprice_tr dlnRER x_RDint_cic2 dlnrgdp i.year, a(group_id) vce(cluster FRDM)
 
 estfe imp_FPC_cic2 imp_ExtFin_cic2 imp_Tang_cic2 imp_Invent_cic2 imp_RDint_cic2, labels(group_id "Firm-product-country FE")
-esttab imp_FPC_cic2 imp_ExtFin_cic2 imp_Tang_cic2 imp_Invent_cic2 imp_RDint_cic2 using "D:\Project C\tables\matched\table_imp_fin_CN.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles( "External Finance" "Tangibility" "Inventory" "R&D Intensity") order(dlnRER dlnrgdp x_*)
+esttab imp_FPC_cic2 imp_ExtFin_cic2 imp_Tang_cic2 imp_Invent_cic2 imp_RDint_cic2 using "D:\Project C\tables\matched\table_imp_fin_CN.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles( "FPC" "External Finance" "Tangibility" "Inventory") order(dlnRER dlnrgdp x_*)
 
 *-------------------------------------------------------------------------------
 * Import Sources
@@ -103,19 +103,6 @@ eststo imp_Tang_US_source_lag: areg dlnprice_tr dlnRER x_source_lag x_Tang_US_so
 
 estfe imp_source_lag imp_FPC_US_source_lag imp_ExtFin_US_source_lag imp_Tang_US_source_lag, labels(group_id "Firm-product-country FE")
 esttab imp_source_lag imp_FPC_US_source_lag imp_ExtFin_US_source_lag imp_Tang_US_source_lag using "D:\Project C\tables\matched\table_imp_source_lag.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
-
-gen x_source_mean=dlnRER*source_mean
-gen x_FPC_US_source_mean=x_FPC_US*source_mean
-gen x_ExtFin_US_source_mean=x_ExtFin_US*source_mean
-gen x_Tang_US_source_mean=x_Tang_US*source_mean
-
-eststo imp_source_mean: areg dlnprice_tr dlnRER x_source_mean dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
-eststo imp_FPC_US_source_mean: areg dlnprice_tr dlnRER x_source_mean x_FPC_US_source_mean x_FPC_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
-eststo imp_ExtFin_US_source_mean: areg dlnprice_tr dlnRER x_source_mean x_ExtFin_US_source_mean x_ExtFin_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
-eststo imp_Tang_US_source_mean: areg dlnprice_tr dlnRER x_source_mean x_Tang_US_source_mean x_Tang_US dlnrgdp i.year, a(group_id) vce(cluster group_id_fp)
-
-estfe imp_source_mean imp_FPC_US_source_mean imp_ExtFin_US_source_mean imp_Tang_US_source_mean, labels(group_id "Firm-product-country FE")
-esttab imp_source_mean imp_FPC_US_source_mean imp_ExtFin_US_source_mean imp_Tang_US_source_mean using "D:\Project C\tables\matched\table_imp_source_mean.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*)
 
 *-------------------------------------------------------------------------------
 * Distance
@@ -244,6 +231,21 @@ estfe imp_ownership_baseline imp_ownership_FPC_US imp_ownership_ExtFin_US imp_ow
 esttab imp_ownership_baseline imp_ownership_FPC_US imp_ownership_ExtFin_US imp_ownership_Tang_US using "D:\Project C\tables\matched\table_imp_ownership.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
 
 *-------------------------------------------------------------------------------
+* Affiliation
+use sample_matched_imp,clear
+
+egen group_id_pc=group(HS6 coun_aim)
+gen lnrSI=ln(rSI)
+
+eststo imp_affiliate_baseline: areg dlnprice_tr dlnRER dlnrgdp affiliate lnrSI i.year, a(group_id_pc) vce(cluster FRDM)
+eststo imp_affiliate_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp affiliate lnrSI i.year, a(group_id_pc) vce(cluster FRDM)
+eststo imp_affiliate_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp affiliate lnrSI i.year, a(group_id_pc) vce(cluster FRDM)
+eststo imp_affiliate_Tang_US: areg dlnprice_tr dlnRER dlnrgdp x_Tang_US affiliate lnrSI i.year, a(group_id_pc) vce(cluster FRDM)
+
+estfe imp_affiliate_baseline imp_affiliate_FPC_US imp_affiliate_ExtFin_US imp_affiliate_Tang_US, labels(group_id "Product-country FE")
+esttab imp_affiliate_baseline imp_affiliate_FPC_US imp_affiliate_ExtFin_US imp_affiliate_Tang_US using "D:\Project C\tables\matched\table_imp_affiliate.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" "Affiliate control =*affiliate" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
+
+*-------------------------------------------------------------------------------
 * Excluding USD Peg
 cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
@@ -330,16 +332,3 @@ eststo imp_between_Tang_US: areg dlnprice_tr dlnRER x_Tang_US dlnrgdp, a(group_i
 
 estfe imp_between_baseline imp_between_FPC_US imp_between_ExtFin_US imp_between_Tang_US, labels(group_id "Product FE")
 esttab imp_between_baseline imp_between_FPC_US imp_between_ExtFin_US imp_between_Tang_US using "D:\Project C\tables\matched\table_imp_between.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate( `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*_US)
-
-*-------------------------------------------------------------------------------
-* Affiliation
-use sample_matched_imp,clear
-gen x_affiliate=affiliate*dlnRER
-
-eststo imp_affiliate_baseline: areg dlnprice_tr dlnRER dlnrgdp affiliate i.year, a(group_id)
-eststo imp_affiliate_FPC_US: areg dlnprice_tr dlnRER x_FPC_US dlnrgdp affiliate i.year, a(group_id)
-eststo imp_affiliate_ExtFin_US: areg dlnprice_tr dlnRER x_ExtFin_US dlnrgdp affiliate i.year, a(group_id)
-eststo imp_affiliate_Tang_US: areg dlnprice_tr dlnRER dlnrgdp x_Tang_US affiliate i.year, a(group_id)
-
-estfe imp_affiliate_baseline imp_affiliate_FPC_US imp_affiliate_ExtFin_US imp_affiliate_Tang_US, labels(group_id "Firm-product-country FE")
-esttab imp_affiliate_baseline imp_affiliate_FPC_US imp_affiliate_ExtFin_US imp_affiliate_Tang_US using "D:\Project C\tables\matched\table_imp_affiliate.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" "Affiliate control =*affiliate" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp x_*)
