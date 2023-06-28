@@ -156,24 +156,34 @@ cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
 
 gen x_Markup_lag=dlnRER*Markup_lag
+gen x_FPC_US_Markup_lag=x_FPC_US*Markup_lag
+gen x_ExtFin_US_Markup_lag=x_ExtFin_US*Markup_lag
+gen x_Tang_US_Markup_lag=x_Tang_US*Markup_lag
+gen x_Invent_US_Markup_lag=x_Invent_US*Markup_lag
 
 eststo imp_markup: areg dlnprice_tr dlnRER x_Markup_lag dlnrgdp Markup_lag i.year, a(group_id) vce(cluster FRDM)
 eststo imp_FPC_US_markup: areg dlnprice_tr dlnRER x_FPC_US x_Markup_lag dlnrgdp Markup_lag i.year, a(group_id) vce(cluster FRDM)
 eststo imp_ExtFin_US_markup: areg dlnprice_tr dlnRER x_ExtFin_US x_Markup_lag dlnrgdp Markup_lag i.year, a(group_id) vce(cluster FRDM)
-eststo imp_Tang_US_markup: areg dlnprice_tr dlnRER x_Tang_US x_Markup_lag dlnrgdp Markup_lag i.year, a(group_id) vce(cluster FRDM)
+eststo imp_Tang_US_markup: areg dlnprice_tr dlnRER x_Tang_US x_Markup_lag Markup_lag dlnrgdp i.year, a(group_id) vce(cluster FRDM)
+eststo imp_Invent_US_markup: areg dlnprice_tr dlnRER x_Invent_US x_Markup_lag Markup_lag dlnrgdp i.year, a(group_id) vce(cluster FRDM)
 
-estfe imp_markup imp_FPC_US_markup imp_ExtFin_US_markup imp_Tang_US_markup, labels(group_id "Firm-product-country FE")
-esttab imp_markup imp_FPC_US_markup imp_ExtFin_US_markup imp_Tang_US_markup using "D:\Project C\tables\matched\table_imp_markup_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*_lag x_*_US)
+estfe imp_markup imp_FPC_US_markup imp_ExtFin_US_markup imp_Tang_US_markup imp_Invent_US_markup, labels(group_id "Firm-product-country FE")
+esttab imp_markup imp_FPC_US_markup imp_ExtFin_US_markup imp_Tang_US_markup imp_Invent_US_markup using "D:\Project C\tables\matched\table_imp_markup_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*_lag x_*_US)
 
 gen x_tfp_lag=dlnRER*tfp_lag
+gen x_FPC_US_tfp_lag=x_FPC_US*tfp_lag
+gen x_ExtFin_US_tfp_lag=x_ExtFin_US*tfp_lag
+gen x_Tang_US_tfp_lag=x_Tang_US*tfp_lag
+gen x_Invent_US_tfp_lag=x_Invent_US*tfp_lag
 
 eststo imp_tfp: areg dlnprice_tr dlnRER x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id) vce(cluster FRDM)
 eststo imp_FPC_US_tfp: areg dlnprice_tr dlnRER x_FPC_US x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id) vce(cluster FRDM)
 eststo imp_ExtFin_US_tfp: areg dlnprice_tr dlnRER x_ExtFin_US x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id) vce(cluster FRDM)
 eststo imp_Tang_US_tfp: areg dlnprice_tr dlnRER x_Tang_US x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id) vce(cluster FRDM)
+eststo imp_Invent_US_tfp: areg dlnprice_tr dlnRER x_Invent_US x_tfp_lag dlnrgdp tfp_lag i.year, a(group_id) vce(cluster FRDM)
 
-estfe imp_tfp imp_FPC_US_tfp imp_ExtFin_US_tfp imp_Tang_US_tfp, labels(group_id "Firm-product-country FE")
-esttab imp_tfp imp_FPC_US_tfp imp_ExtFin_US_tfp imp_Tang_US_tfp using "D:\Project C\tables\matched\table_imp_tfp_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*_lag x_*_US)
+estfe imp_tfp imp_FPC_US_tfp imp_ExtFin_US_tfp imp_Tang_US_tfp imp_Invent_US_tfp, labels(group_id "Firm-product-country FE")
+esttab imp_tfp imp_FPC_US_tfp imp_ExtFin_US_tfp imp_Tang_US_tfp imp_Invent_US_tfp using "D:\Project C\tables\matched\table_imp_tfp_US.csv", replace b(3) se(3) noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') order(dlnRER dlnrgdp x_*_lag x_*_US)
 
 *-------------------------------------------------------------------------------
 * Alternative FEs
