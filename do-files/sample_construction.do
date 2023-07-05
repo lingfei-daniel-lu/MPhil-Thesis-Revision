@@ -138,18 +138,14 @@ use ".\customs_00-11.dta",clear
 customs_country_clean
 save customs_country_name,replace
 
-import delimited "D:\Project C\customs data\ISO-3166.csv", stringcols(4 8 9) clear
-keep alpha3 countrycode
-rename (alpha3 countrycode) (countrycode country)
-replace country=substr("000"+country,-3,.) if country!=""
-save ISO3166_alpha,replace
-
 use customs_country_name,clear
+merge 1:1 coun_aim using country_code,nogen keep(matched master)
 drop coun_aim
-rename country_adj coun_aim
-duplicates drop
-merge 1:1 countrycode using ISO3166_alpha,nogen keep(matched master)
-save customs_country_code,replace
+rename (country_adj countrynumber) (coun_aim country)
+gsort countrycode coun_aim -country
+duplicates drop countrycode coun_aim,force
+drop if country==.
+save customs_country_namecode,replace
 
 cd "D:\Project C"
 use ".\customs data\customs_00-11.dta",clear
