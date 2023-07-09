@@ -1,4 +1,4 @@
-cd "D:\Project C\sample_matched\CIE"
+cd "D:\Project C\CIE"
 use cie_98_07,clear
 destring INDTYPE,replace
 gen type=floor(cic_adj/100)
