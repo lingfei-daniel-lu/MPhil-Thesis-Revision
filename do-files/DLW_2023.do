@@ -15,7 +15,7 @@ drop if y_output==. | l==. | k==.| m==.
 cd "D:\Project C\markup"
 save cie_98_07_newid,replace
 
-set processors 16
+set processors 12
 
 forvalues sec=1/29 {
 clear all
@@ -172,29 +172,26 @@ sum Markup_ols Markup_DLWTLD, detail
 keep year FRDM newid Markup_ols Markup_DLWTLD type sector betal1_tld betak1_tld betam1_tld betal2_tld betak2_tld betam2_tld betal1k1_tld betal1m1_tld betak1m1_tld  /// 
      betal3_tld betak3_tld betam3_tld betal2k1_tld betal2m1_tld betal1k2_tld betak2m1_tld betal1m2_tld betak1m2_tld betalkm_tld
 
-save cie_99_07_markup_sector_`sec'.dta, replace
+save cie9807.markup.trans3rd.sector_`sec'.dta, replace
 }
 
 
 clear all
 set more off
 
-use cie_99_07_markup_sector_1.dta, clear
+use cie9807.markup.trans3rd.sector_1.dta, clear
 forvalues sec=2/29 {
-append using cie_99_07_markup_sector_`sec'.dta
+append using cie9807.markup.trans3rd.sector_`sec'.dta
 }
 compress
-save cie_99_07_markup_beta.dta, replace
+save cie9807.markup.beta.trans3rd.dta, replace
 
-cd "D:\Project C\markup"
-use cie_99_07_markup_beta.dta, clear
-merge 1:1 newid year using cie_98_07_newid.dta,nogen keep(matched)
+use cie9807.markup.beta.trans3rd.dta, clear
+merge 1:1 newid year using cie_98_07_newid
+keep if _merge==3
+drop _merge
 tab year
 gen tfp_tld= y_output - betal1_tld*l- betak1_tld*k- betam1_tld*m -betal2_tld*l*l- betak2_tld*k*k- betam2_tld*m*m- betal1k1_tld*l*k- betal1m1_tld*l*m - betak1m1_tld*k*m ///
  - betal3_tld*l*l*l - betak3_tld*k*k*k - betam3_tld*m*m*m - betal2k1_tld*l*l*k - betal2m1_tld*l*l*m - betal1k2_tld*l*k*k - betak2m1_tld*k*k*m - betal1m2_tld*l*m*m - betak1m2_tld*k*m*m - betalkm_tld*l*k*m 
 compress
-keep FRDM year EN tfp_tld Markup_*
-sort FRDM year
-by FRDM: gen Markup_lag=Markup_DLWTLD[_n-1] if year==year[_n-1]+1
-by FRDM: gen tfp_lag=tfp_tld[_n-1] if year==year[_n-1]+1
-save cie_99_07_markup.dta, replace
+save cie9907markup.dta, replace
