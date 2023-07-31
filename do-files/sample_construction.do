@@ -602,7 +602,7 @@ replace imp=0 if imp==.
 collapse (sum) export_sum import_sum exp imp, by(FRDM year)
 gen twoway_trade=1 if exp==1 & imp==1
 replace twoway_trade=0 if twoway_trade==.
-save customs_twoway,replace
+save customs_matched_twoway,replace
 
 *-------------------------------------------------------------------------------
 * Merge customs data with CIE data to construct export sample
@@ -615,7 +615,7 @@ replace process=0 if process==.
 gen assembly = 1 if shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
 replace assembly=0 if assembly==.
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 process assembly)
-merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
+merge n:1 FRDM year using customs_matched_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using "D:\Project C\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc *_cic2 *_US ownership affiliate)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_destination,nogen keep(matched)
@@ -656,7 +656,7 @@ replace process=0 if process==.
 gen assembly = 1 if shipment=="来料加工装配贸易" | shipment=="来料加工装配进口的设备"
 replace assembly=0 if assembly==.
 collapse (sum) value_year quant_year, by(FRDM EN year coun_aim HS6 process assembly)
-merge n:1 FRDM year using customs_twoway,nogen keep(matched) keepus(twoway_trade)
+merge n:1 FRDM year using customs_matched_twoway,nogen keep(matched) keepus(twoway_trade)
 merge n:1 FRDM year using "D:\Project C\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc *_cic2 *_US ownership affiliate)
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 FRDM year HS6 using customs_matched_source,nogen keep(matched)
