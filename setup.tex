@@ -1,0 +1,97 @@
+\documentclass[12pt]{article}
+%\renewcommand{\baselinestretch}{1.15}
+\usepackage{natbib,amsmath,amsthm,booktabs,subfigure,anysize,hyperref,graphicx,float,bbm,epstopdf}
+\usepackage[margin=1in]{geometry}
+\bibliographystyle{aea}
+%\bibliographystyle{apalike}
+%\bibliographystyle{aernobold}
+%\bibliographystyle{economet}
+%\marginsize{2cm}{2cm}{2cm}{2cm}
+
+\usepackage{threeparttable}
+\usepackage{array} % for adding extra space between table columns
+\usepackage{booktabs} % for adding extra space between table columns
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{bm}
+\definecolor{dark-red}{rgb}{0.4,0.15,0.15}
+\definecolor{dark-blue}{rgb}{0.15,0.15,0.4}
+\definecolor{medium-blue}{rgb}{0,0,0.5}
+\definecolor{ChadBlue}{rgb}{.1,.1,.5}
+% Chad's colors:
+% See http://web.njit.edu/~kevin/rgb.txt.html for possibilities
+\definecolor{ChadDarkBlue}{rgb}{.1,0,.1}
+\definecolor{ChadBlue}{rgb}{.1,.1,.5}
+\definecolor{ChadRoyal}{rgb}{.2,.2,.8}
+%\definecolor{ChadGreen}{rgb}{0,.35,.1}
+%\definecolor{ChadGreen}{rgb}{0,.5,.25}  % Too bright
+%\definecolor{ChadGreen}{rgb}{0,.4,.2}    % Still too bright
+\definecolor{ChadGreen}{rgb}{0,.4,0}    % Dark Green
+%\definecolor{ChadRed}{rgb}{.8,.1,.2}    % Too bright
+\definecolor{ChadRed}{rgb}{.5,0,.5}  % purple
+\hypersetup{
+    colorlinks, linkcolor=ChadRed,
+    citecolor=ChadBlue, urlcolor=ChadBlue
+}
+\newcommand\posscite[1]{\citeauthor{#1}'s (\citeyear{#1})}
+\setlength{\parskip}{0.15cm}
+\newtheorem{proposition}{\color{ChadGreen} Proposition}
+\newtheorem{finding}{\color{ChadGreen} Finding}
+\newtheorem{SF}{\color{ChadGreen} Stylized fact}
+\newtheorem{hyp}{Hypothesis}
+\newtheorem{fact}{Fact}
+\newtheorem{prop}{Proposition}
+\usepackage{caption}
+%\usepackage[font=small,labelfont={color=ChadBlue,bf}]{caption}
+\usepackage[font=small,labelfont=bf]{caption}
+%\usepackage{subcaption}
+%\usepackage{subfloat}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{accents}
+\usepackage{color,soul}
+\usepackage{smartdiagram}
+\usepackage[figuresright]{rotating} % Rotating table
+\usepackage{lscape} % Rotating table
+\usepackage{diagbox}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{comment}
+\usepackage{float}
+
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{setspace}  %using this package conflicts with footnote hyperlink jump. Using this package makes the footnote links inactive.
+\usepackage[all]{hypcap}        % needed to help hyperlinks direct correctly;
+%\renewcommand{\sfdefault}{ptm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{cor}[theorem]{Corollary}
+\renewcommand{\proof}{\noindent \textbf{Proof.\ }}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{example}{Example}
+\newtheorem{defn}{Definition}
+\renewcommand{\qed}{\hfill\rule{2.1mm}{2.1mm}}
+%\newtheorem{proposition}{\color{ChadGreen} Proposition}
+%\newtheorem{finding}{\color{ChadGreen} Finding}
+%\newtheorem{SF}{\color{ChadGreen} Stylized fact}
+% Fix title, sections, etc.
+\newcommand\fnote[1]{\captionsetup{font=small}\caption*{#1}}
+
+\let\LaTeXtitle\title
+%\renewcommand{\title}[1]{\LaTeXtitle{\color{ChadBlue}{\LARGE #1}}}
+%\renewcommand{\abstractname}{\color{ChadBlue}Abstract}
+%\renewcommand{\figurename}{\color{ChadBlue}Figure}
+%\renewcommand{\tablename}{\color{ChadBlue}Table}
+\renewcommand{\arraystretch}{1.1} % space between rows
+
+\usepackage{sectsty}
+%\allsectionsfont{\color{blue}\itshape\underline}
+%\sectionfont{\color{ChadBlue}}
+%\subsectionfont{\color{ChadBlue}}
+%\subsubsectionfont{\color{ChadBlue}}
+\usepackage{lscape}
+\graphicspath{{figure/}}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+%\newcommand\YUGE{\fontsize{30}{40}\selectfont}
