@@ -616,6 +616,7 @@ save CIE\cie_size_cic4,replace
 * Merge customs data with CIE data to construct import sample
 cd "D:\Project C\sample_matched"
 use customs_matched,clear
+* keep only import observations
 keep if exp_imp =="imp"
 drop exp_imp
 * label processing and assembly trade
@@ -629,28 +630,34 @@ merge n:1 FRDM year using customs_matched_twoway,nogen keep(matched) keepus(twow
 merge n:1 FRDM year using "D:\Project C\CIE\cie_credit",nogen keep(matched) keepusing (FRDM year EN cic_adj cic2 Markup_* tfp_* rSI rTOIPT rCWP rkap tc *_cic2 *_US ownership affiliate)
 merge n:1 FRDM year using "D:\Project C\CIE\cie_int",nogen keep(matched) keepusing (*_int)
 merge n:1 FRDM year HS6 using customs_matched_source,nogen keep(matched)
-* merge with country-level variables
+* merge with country-level gravity variables
 merge n:1 coun_aim using customs_matched_top_partners,nogen keep(matched)
 merge n:1 coun_aim using "D:\Project C\gravity\distance_CHN",nogen keep(matched)
 replace dist=dist/1000
 replace distw=distw/1000
+* drop trading agents
 foreach key in 贸易 外贸 经贸 工贸 科贸 商贸 边贸 技贸 进出口 进口 出口 物流 仓储 采购 供应链 货运{
 	drop if strmatch(EN, "*`key'*") 
 }
+* calculate import market share
 bys HS6 coun_aim year: egen MS=pc(value_year),prop
+* merge with exchange rates and macro variables
 merge n:1 year using "D:\Project C\PWT10.0\US_NER_99_11",nogen keep(matched)
 merge n:1 year coun_aim using "D:\Project C\PWT10.0\RER_99_11.dta",nogen keep(matched) keepus(NER RER dlnRER dlnrgdp peg_USD)
 merge n:1 year using "D:\Project E\control\china\China_iva_annual.dta",nogen keep(matched) keepus(iva_china)
+* calculate unit values
 sort FRDM HS6 coun_aim year
 gen price_RMB=value_year*NER_US/quant_year
 by FRDM HS6 coun_aim: gen dlnprice=ln(price_RMB)-ln(price_RMB[_n-1]) if year==year[_n-1]+1
 by FRDM HS6 coun_aim: gen MS_lag=MS[_n-1] if year==year[_n-1]+1
 by FRDM HS6 coun_aim: egen year_count=count(year)
 drop if dlnRER==. | dlnprice==.
+* drop special sectors
 gen HS2=substr(HS6,1,2)
 drop if HS2=="93"|HS2=="97"|HS2=="98"|HS2=="99"
 egen group_id=group(FRDM HS6 coun_aim)
 winsor2 dlnprice, trim by(HS2 year)
+* generate interaction terms
 local varlist "FPC_US ExtFin_US Invent_US Tang_US FPC_cic2 ExtFin_cic2 Tang_cic2 Invent_cic2 RDint_cic2"
 foreach var of local varlist {
 	gen x_`var' = `var'*dlnRER
