@@ -612,9 +612,8 @@ replace imp_int=0 if imp_int==.
 replace trade_int=0 if trade_int==.
 replace exp_int=1 if exp_int>=1
 replace imp_int=1 if imp_int>=1
+keep FRDM year twoway_trade *_int export_sum import_sum cic_adj rSI
 sort FRDM year
-by FRDM: gen rinvestm=rkap-rkap[_n-1]+rdep[_n-1] if year==year[_n-1]+1
-keep FRDM year twoway_trade *_int export_sum import_sum cic_adj rinvestm
 by FRDM: replace cic_adj=cic_adj[_N]
 duplicates drop
 drop if year==1999
@@ -624,10 +623,10 @@ save CIE\cie_intensity,replace
 * Industry import and export size
 cd "D:\Project C"
 use CIE\cie_intensity,clear
-collapse (sum) export_cic=export_sum import_cic=export_sum (mean) export_firm=export_sum import_firm=import_sum, by (cic_adj year)
-local varlist "export_cic import_cic export_firm import_firm"
+collapse (sum) export_cic=export_sum import_cic=export_sum rSI_cic=rSI (mean) export_firm=export_sum import_firm=import_sum rSI_firm=rSI, by (cic_adj year)
+local varlist "export_cic import_cic export_firm import_firm rSI_cic rSI_firm"
 foreach var of local varlist {
-	gen ln_`var' = ln(`var')
+	gen ln_`var' = ln(`var'/1000)
 }
 save CIE\cie_size_cic4,replace
 
