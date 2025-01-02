@@ -601,8 +601,10 @@ save customs_matched_twoway,replace
 cd "D:\Project C"
 use CIE\cie_credit,clear
 * calculate trade intensity
-merge n:1 FRDM year using sample_matched\customs_matched_twoway,nogen keep(master matched) keepus(twoway_trade export_sum import_sum)
+merge 1:1 FRDM year using sample_matched\customs_matched_twoway,nogen keep(master matched) keepus(twoway_trade export_sum import_sum)
 replace twoway_trade=0 if twoway_trade==. 
+replace export_sum=0 if export_sum==.
+replace import_sum=0 if import_sum==.
 merge n:1 year using PWT10.0\US_NER_99_19,nogen keep(matched) keepus(NER_US)
 gen exp_int=export_sum*NER_US/(SI*1000)
 gen imp_int=import_sum*NER_US/(TOIPT*1000)
@@ -618,6 +620,13 @@ by FRDM: replace cic_adj=cic_adj[_N]
 duplicates drop
 drop if year==1999
 save CIE\cie_intensity,replace
+
+cd "D:\Project C"
+use CIE\cie_intensity,clear
+merge 1:1 FRDM year using CIE\cie_credit,nogen keep(matched) keepus(rSI PERSENG rkap rTOIPT rCWP)
+collapse (mean) *_int export_sum import_sum rSI PERSENG rkap rTOIPT rCWP, by(FRDM)
+drop if import_sum==0
+save CIE\cie_importer_list,replace
 
 *-------------------------------------------------------------------------------
 * Industry import and export size

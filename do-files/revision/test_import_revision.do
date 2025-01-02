@@ -270,6 +270,19 @@ estfe imp_rSI_cic_* imp_rSI_firm_*, labels(group_id "Firm-product-country FE")
 esttab imp_rSI_cic_* imp_rSI_firm_* using "D:\Project C\tables\revision\table_imp_size.csv", replace b(3) se(3) nogap noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp c.*)
 
 *-------------------------------------------------------------------------------
+* Import intensity
+cd "D:\Project C\sample_matched"
+use sample_matched_imp_new,clear
+
+eststo imp_int_baseline: areg dlnprice_tr dlnRER c.imp_int#c.dlnRER dlnrgdp i.year, a(group_id) vce(cluster FRDM)
+eststo imp_int_FPC_US: areg dlnprice_tr dlnRER c.imp_int#c.dlnRER c.FPC_US#c.dlnRER dlnrgdp i.year, a(group_id) vce(cluster FRDM)
+eststo imp_int_ExtFin_US: areg dlnprice_tr dlnRER c.imp_int#c.dlnRER c.ExtFin_US#c.dlnRER dlnrgdp i.year, a(group_id) vce(cluster FRDM)
+eststo imp_int_Tang_US: areg dlnprice_tr dlnRER c.imp_int#c.dlnRER c.Tang_US#c.dlnRER dlnrgdp i.year, a(group_id) vce(cluster FRDM)
+
+estfe imp_int_*, labels(group_id "Firm-product-country FE")
+esttab imp_int_* using "D:\Project C\tables\revision\table_imp_intensity.csv", replace b(3) se(3) nogap noconstant starlevels(* 0.1 ** 0.05 *** 0.01) indicate("Year FE =*.year" `r(indicate_fe)') mtitles("Baseline" "FPC" "External Finance" "Tangibility") order(dlnRER dlnrgdp c.*)
+
+*-------------------------------------------------------------------------------
 * One-year sample (2007)
 cd "D:\Project C\sample_matched"
 use sample_matched_imp,clear
